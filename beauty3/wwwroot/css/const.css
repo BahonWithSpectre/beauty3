@@ -129,9 +129,10 @@
 .swipe-menu > a{
    color: var(--white-color);
    text-decoration: none;
-   margin-bottom: 15px;
+   padding: 10px 0;
 }
 .swipe-login > *{
+   font-size: 16px;
    color: var(--white-color);
 }
 .close{
@@ -145,6 +146,7 @@
 }
 .burger, .close{
    padding: 7px;
+   margin-right: -7px;
 }
 .burger > i, .close > i{
    font-size: 22px;
@@ -203,7 +205,7 @@
       display: flex;
    }
    .swipe-login > *{
-      font-size: 20px !important;
+      font-size: 16px !important;
    }
    /* .burger{
       display: block;

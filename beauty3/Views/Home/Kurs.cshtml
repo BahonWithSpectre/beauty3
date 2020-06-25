@@ -6,9 +6,20 @@
 <link href="~/css/courseView.css" rel="stylesheet">
 
 
-
-
 <div class="wrap">
+    <div class="swipe-menu">
+        <div class="close">
+            <i class="fa fa-close"></i>
+        </div>
+        <a href="#" class="main-nav fix-active">Басты бет</a>
+        <a href="#" class="teacher-nav">Спикер жайлы</a>
+        <a href="#" class="about-nav">Курс жайлы</a>
+        <a href="#" class="more-nav">Қосымша</a>
+        <a href="/Account/Login" class="swipe-login">
+            <span>Жеке кабинет</span>
+            <i class="fa fa-user-o"></i>
+        </a>
+    </div>
     <div class="header">
         <div class="go-back">
             <i class="fa fa-arrow-left"></i>
@@ -27,7 +38,10 @@
             <i class="fa fa-user-o"></i>
             <!-- <a href="#">Кіру / Тіркелу</a> -->
         </a>
-        <!-- <div class="menu"></div> -->
+        <div class="burger">
+            <i class="fa fa-bars"></i>
+            <!-- <i class="fa fa-close"></i> -->
+        </div>
     </div>
     <div class="content">
         <div id="main" class="main">
@@ -43,8 +57,10 @@
             <div class="teacher-text">
                 <h2>Курсты кім жүргізеді?</h2>
                 <p>
-                    <span>*******</span> - ******* университетінің,
-                    «Идеал күн» методикасының авторы, 2 жылда 10 ресторан ашып,
+                    <span>Пәленшеева Түгенше</span> - BEAUTY ONLINE ффывтлотфы негізін қалаушысы,
+                    «лоф тфытв» методикасының авторы, 2 жылда 10 ресторан ашып,
+                    HBh nasdn желісін құрушы, «лтф ывлфыв»,
+                    «оұр үфұрыр үұәірк» бестселлерлерінің авторы.
                 </p>
             </div>
             <div class="teacher-img">
@@ -100,6 +116,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.burger').hover(function () {
+            $('.swipe-menu').toggleClass('active-menu')
+        })
+        $('.close').click(function () {
+            $('.swipe-menu').removeClass('active-menu')
+        })
         $(window).on('scroll', function () {
             if ($(window).scrollTop() > 90) {
                 $('.header').addClass('fix-header');
