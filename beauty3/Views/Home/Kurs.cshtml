@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewData["Title"] = "Kurs";
+}
+
+<link href="~/css/courseView.css" rel="stylesheet">
+
+
+
+
+<div class="wrap">
+    <div class="header">
+        <div class="go-back">
+            <i class="fa fa-arrow-left"></i>
+            <a class="go-back" href="/Home/Visitor#courses">Курстар</a>
+            <!-- <img src="img/logo.png" alt="BeautyOnline"> -->
+            <!-- Beauty Online -->
+        </div>
+        <div class="nav">
+            <a href="#" class="main-nav fix-active">Басты бет</a>
+            <a href="#" class="teacher-nav">Спикер жайлы</a>
+            <a href="#" class="about-nav">Курс жайлы</a>
+            <a href="#" class="more-nav">Қосымша</a>
+        </div>
+        <a href="/Account/Login" class="login">
+            <span>Жеке кабинет</span>
+            <i class="fa fa-user-o"></i>
+            <!-- <a href="#">Кіру / Тіркелу</a> -->
+        </a>
+        <!-- <div class="menu"></div> -->
+    </div>
+    <div class="content">
+        <div id="main" class="main">
+            <div class="main-text">
+                <h2>Cұлулық сырлары</h2>
+                <p>Научитесь самостоятельно создавать макияж любой сложности за 7 уроков</p>
+                <a href="#" class="btn">Үйрену</a>
+            </div>
+            <div class="main-bg" style="background-image: url(/img/course-main.png);"></div>
+        </div>
+        <div id="teacher" class="teacher">
+            <div class="teacher-bg"></div>
+            <div class="teacher-text">
+                <h2>Курсты кім жүргізеді?</h2>
+                <p>
+                    <span>*******</span> - ******* университетінің,
+                    «Идеал күн» методикасының авторы, 2 жылда 10 ресторан ашып,
+                </p>
+            </div>
+            <div class="teacher-img">
+                <img src="~/img/teacher.jpg" alt="">
+            </div>
+        </div>
+        <div id="about" class="about">
+            <div class="about-course">
+                <div class="course-block">
+                    <div class="icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h2>КУРС КІМДЕРГЕ АРНАЛАДЫ?</h2>
+                    <ul>
+                        <li>15 минутта өзін бояндырып үйренгісі келетін кез-келген қыз-келіншектерге;</li>
+                        <li>Кез-келген жаста әдемі болып, бет күтіміне ерекше мән беретін жандарға;</li>
+                        <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>
+                        <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>
+                    </ul>
+                </div>
+                <div class="course-block">
+                    <div class="icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <h2>БҰЛ КУРСТА НЕ ҮЙРЕНЕСІЗ?</h2>
+                    <ul>
+                        <li>Жабық инстаграм парақшада сторис, пост, видео, IGTV-толық форматында 30-40 минуттық видео-сабақтар салынады.</li>
+                        <li>Арнайы Тапсырмалар беріліп тексеріледі</li>
+                        <li>Бонус кітапша "Сұлулық Сырлары" беріледі</li>
+                        <li>Cоңғы күні Тікелей эфирде сұрақ-жауап болады</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subject">
+                <h2>Курс тақырыптары<span></span><p></p></h2>
+                <ul>
+                    <li>Тақырып 1</li>
+                    <li>Тақырып 2</li>
+                    <li>Тақырып 3</li>
+                    <li>Тақырып 4</li>
+                    <li>Тақырып 5</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        FOOTER
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() > 90) {
+                $('.header').addClass('fix-header');
+            } else {
+                $('.header').removeClass('fix-header');
+            }
+        });
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() >= $('#main').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.main-nav').addClass('fix-active');
+            }
+            if ($(window).scrollTop() >= $('#teacher').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.teacher-nav').addClass('fix-active');
+            }
+            if ($(window).scrollTop() >= $('#about').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.about-nav').addClass('fix-active');
+            }
+        });
+
+        $('.main-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.main-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#main').offset().top
+            }, 1000);
+            return false;
+        });
+        $('.teacher-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.teacher-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#teacher').offset().top
+            }, 1000);
+            return false;
+        });
+        $('.about-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.about-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#about').offset().top
+            }, 1000);
+            return false;
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() > 90) {
+                $('.header').addClass('fix-header');
+            } else {
+                $('.header').removeClass('fix-header');
+            }
+        });
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() >= $('#teacher').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.teacher-nav').addClass('fix-active');
+            }
+            if ($(window).scrollTop() >= $('#about').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.about-nav').addClass('fix-active');
+            }
+        });
+
+        $('.teacher-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.teacher-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#teacher').offset().top
+            }, 1000);
+            return false;
+        });
+        $('.about-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.about-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#about').offset().top
+            }, 1000);
+            return false;
+        });
+    });
+</script>

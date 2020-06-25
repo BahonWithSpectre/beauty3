@@ -1,0 +1,238 @@
+@import url("const.css");
+
+/* ----------------CONTENT------------------ */
+
+.main{
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   /* padding-top: 250px; */
+   background-color: #fff;
+   /* background-color: var(--pink-color); */
+   position: relative;
+}
+.main-text{
+   width: 50%;
+   height: 100%;
+   position: relative;
+   z-index: 2;
+}
+.main-bg{
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 1;
+   background-size: contain;
+   background-position: 145% 0;
+   background-repeat: no-repeat;
+}
+.main-text{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+}
+.main-text > h2{
+   font-size: 42px;
+   font-weight: normal;
+   margin-bottom: 30px;
+}
+.main-text > p{
+   /* width: 40%; */
+   font-size: 20px;
+   letter-spacing: 1px;
+   margin-bottom: 50px;
+}
+.main-text > .btn{
+   background-color: var(--brown-color);
+   color: var(--white-color);
+   padding: 15px 60px;
+   text-decoration: none;
+   border-radius: 2px;
+   box-shadow: 0 0 10px var(--brown-color);
+   transition: 0.3s;
+}
+.main-text > .btn:hover{
+   background-color: var(--main-color);
+}
+
+
+
+/* ––––––––––––––––––– */
+.teacher{
+   width: 100%;
+   height: 100vh;
+   background-color: var(--white-color);
+   /* background-color: #fff; */
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   /* border-bottom-left-radius: 35%; */
+   /* border-bottom-right-radius: 25%; */
+   position: relative;
+}
+.teacher-bg{
+   width: 120%;
+   height: 130%;
+   position: absolute;
+   top: -15%;
+   left: 0;
+   background-image: url(../img/main-bottom.svg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   z-index: 1;
+}
+.teacher > *{
+   z-index: 2;
+}
+.teacher-text, .teacher-img{
+   width: 50%;
+}
+.teacher-img{
+   width: 40%;
+   /* height: 80%; */
+}
+.teacher-text > h2{
+   font-size: 42px;
+   margin-bottom: 15px;
+}
+.teacher-text > p{
+   line-height: 24px;
+   color: var(--brown-color);
+}
+.teacher-img > img{
+   width: 100%;
+   /* height: 100%; */
+}
+/* --------------------––––––––––– */
+.about{
+   width: 100%;
+   padding-top: 150px;
+   padding-bottom: 150px;
+   background-color: var(--white-color);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.about-course{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+.course-block{
+   width: 45%;
+   background-color: #fff;
+   padding: 25px 40px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-shadow: 0 0 10px var(--grey-color);
+}
+.icon{
+   width: 70px;
+   height: 70px;
+   line-height: 70px;
+   /* padding: 15px; */
+   text-align: center;
+   border: 2px solid var(--pink-color);
+   border-radius: 50%;
+}
+.icon > i{
+   font-size: 24px;
+   color: var(--red-color);
+}
+.course-block > h2{
+   margin: 25px 0;
+   font-size: 26px;
+   font-weight: normal;
+}
+.course-block > ul > li{
+   list-style-position: inside;
+   line-height: 24px;
+   margin-bottom: 10px;
+   letter-spacing: 0.5px;
+}
+.subject{
+   width: 100%;
+   margin-top: 100px;
+}
+.subject > h2{
+   color: var(--brown-color);
+   font-size: 50px;
+   font-weight: normal;
+   text-align: center;
+   padding: 25px 0;
+   position: relative;
+   margin-bottom: 20px;
+}
+.subject > h2 > span, .subject > h2 > p{
+   /* content: ""; */
+   display: block;
+   width: 40%;
+   height: 2px;
+   position: absolute;
+   top: 49%;
+   right: -13%;
+   background-color: var(--brown-color);
+   transition: 0.3s;
+}
+.subject > h2 > span{
+   left: -13%;
+}
+.subject > ul{
+   width: 100%;
+   background-color: #fff;
+   padding: 0 30px;
+   box-shadow: 0 5px 10px var(--grey-color);
+}
+.subject > ul > li{
+   /* list-style-type: decimal;
+   list-style-position: inside; */
+   list-style: none;
+   padding: 30px;
+   font-size: 20px;
+   border-bottom: 1px solid var(--pink-color);
+}
+
+/* –––––––––––MEDIA–––––––––––– */
+
+@media  (max-width: 1024px){
+   .main-text > h2{
+      font-size: 36px;
+      margin-bottom: 20px;
+   }
+   .main-text > p{
+      font-size: 16px;
+      margin-bottom: 30px;
+   }
+   .main-bg {
+      background-position: 20vw 0;
+   }
+   .teacher-text > h2{
+      font-size: 32px;
+   }
+   .course-block{
+      width: 46%;
+      padding: 25px;
+   }
+   .course-block > h2{
+      font-size: 22px;
+   }
+   .course-block > ul > li{
+      font-size: 15px;
+   }
+}
+@media  (max-width: 768px){
+}
+@media  (max-width: 640px){
+}
+@media  (max-width: 425px){
+}
+@media  (max-width: 375px){
+}
+@media  (max-width: 320px){
+}

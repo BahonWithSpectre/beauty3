@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using beauty3.DbFolder;
 using beauty3.ViewModels.AccountViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,14 +46,14 @@ namespace beauty3.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
+                User user = new User { UserName = model.Email, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber };
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     // установка куки
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Profil", "Account");
                 }
                 else
                 {
@@ -69,6 +70,11 @@ namespace beauty3.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
+            if(User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Profil");
+            }
+
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
@@ -90,7 +96,7 @@ namespace beauty3.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Profil", "Account");
                     }
                 }
                 else
@@ -107,6 +113,23 @@ namespace beauty3.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+
+
+
+
+
+
+        [Authorize]
+        public IActionResult Profil()
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Login");
         }
     }
 }

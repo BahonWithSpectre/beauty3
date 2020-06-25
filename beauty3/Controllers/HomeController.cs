@@ -18,10 +18,36 @@ namespace beauty3.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Visitor()
         {
             return View();
         }
+
+
+
+        public IActionResult Kurs(int? Id)
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public IActionResult Privacy()
         {

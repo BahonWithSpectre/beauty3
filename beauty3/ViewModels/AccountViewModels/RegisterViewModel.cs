@@ -12,9 +12,6 @@ namespace beauty3.ViewModels.AccountViewModels
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "Фамилия")]
-        public string LastName { get; set; }
 
         [Required]
         [Display(Name = "Номер телефона")]
