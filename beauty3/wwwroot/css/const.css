@@ -61,7 +61,7 @@
    color: #fff;
 }
 .logo{
-   width: 200px;
+   width: 175px;
 }
 .logo > img{
    width: 100%;
@@ -107,6 +107,10 @@
 .login{
    text-decoration: none;
 }
+.login:hover > span{
+   transition: 0.3s;
+   color: var(--brown-color);
+}
 
 /* ---------MOB-MENU------- */
 .swipe-menu{
@@ -119,12 +123,14 @@
    top: 0;
    bottom: 0;
    z-index: 1000;
-   background-color: var(--main-color);
+   background-color: transparent;
    transform: translateX(100vw);
-   transition: 0.3s;
+   /* transform: translateX(0); */
+   transition: 0.3s transform, 0.5s background-color;
 }
 .active-menu{
    transform: translateX(0);
+   background-color: var(--main-color);
 }
 .swipe-menu > a{
    color: var(--white-color);
@@ -137,23 +143,66 @@
 }
 .close{
    /* display: none; */
-   position: absolute;
+   position: absolute !important;
    right: 7%;
-   top: 16px;
+   top: 25px;
 }
 .swipe-menu, .burger{
    display: none;
 }
-.burger, .close{
+/* .burger,
+.close{
    padding: 7px;
    margin-right: -7px;
-}
-.burger > i, .close > i{
+} */
+/* .burger > i, .close > i{
    font-size: 22px;
+} */
+.burger, .close{
+   width: 25px;
+   height: 20px;
+   position: relative;
+}
+.burger > span, .burger > span::after, .burger > span::before,
+.close > span, .close > span::after{
+   width: 100%;
+   height: 2px;
+   content: "";
+   position: absolute;
+   right: 0;
+   background-color: var(--main-color);
+   transition: 0.2s;
+}
+.burger > span{
+   top: 0;
+}
+.burger > span::before{
+   width: 75%;
+   top: 8px;
+}
+.burger > span::after{
+   width: 50%;
+   top: 16px;
+}
+.burger:hover > ::after,.burger:hover > ::before{
+   width: 100%;
+}
+.close > span, .close > span::after{
+   top: 50%;
+   margin-top: -1px;
+}
+.close > span{
+   transform: rotateZ(45deg);
+}.close > span::after{
+   transform: rotateZ(90deg);
 }
 
-.fix-header > .burger > i, .close > i{
-   color: var(--white-color);
+/* .fix-header > .burger > i, .close > i, */
+.close > span, .close > span::after,
+.fix-header > .burger > span, .fix-header > .burger > span::after, .fix-header > .burger > span::before{
+   /* color: var(--white-color); */
+   background-color: var(--white-color) !important;
+   /* z-index: 1000; */
 }
 /* ------------------- */
 

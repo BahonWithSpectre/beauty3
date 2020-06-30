@@ -25,4 +25,7 @@
 
 
 
+  <ItemGroup>
+    <Content Remove="wwwroot\css\courseView.css" />
+  </ItemGroup>
 </Project>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace beauty3.DbFolder
 {
     public class KursVideo
@@ -13,11 +9,6 @@ namespace beauty3.DbFolder
         public string Info { get; set; }
         public string VideoUrl { get; set; }
         public string PhotoUrl { get; set; }
-
-
-
-
-
 
 
         public int KursId { get; set; }

@@ -2,17 +2,13 @@
 @{
     ViewData["Title"] = "Visitor";
 }
-
-
 <link href="~/css/index.css" rel="stylesheet">
-
-
-
 
 <div class="wrap">
     <div class="swipe-menu">
         <div class="close">
-            <i class="fa fa-close"></i>
+            <span></span>
+            <!--<i class="fa fa-close"></i>-->
         </div>
         <a href="#" class="main-nav fix-active">Басты бет</a>
         <a href="#" class="about-nav">Біз жайлы</a>
@@ -39,11 +35,11 @@
             <i class="fa fa-user-o"></i>
         </a>
         <div class="burger">
-            <i class="fa fa-bars"></i>
+            <span></span>
+            <!--<i class="fa fa-bars"></i>-->
             <!-- <i class="fa fa-close"></i> -->
         </div>
     </div>
-
     <div class="content">
         <div id="main" class="main">
             MAIN SCREEN
@@ -125,13 +121,9 @@
     $(document).ready(function () {
         $('.burger').hover(function () {
             $('.swipe-menu').toggleClass('active-menu')
-            // $(this).css('display', 'none')
-            // $('.close').css('display', 'block')
         })
         $('.close').click(function () {
             $('.swipe-menu').removeClass('active-menu')
-            // $('.burger').css('display', 'block')
-            // $(this).css('display', 'none')
         })
         $(window).on('scroll', function () {
             if ($(window).scrollTop() > 90) {

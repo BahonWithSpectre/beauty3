@@ -67,13 +67,10 @@
    width: 100%;
    height: 100vh;
    background-color: var(--white-color);
-   /* background-color: #fff; */
+   position: relative;
    display: flex;
    justify-content: space-between;
    align-items: center;
-   /* border-bottom-left-radius: 35%; */
-   /* border-bottom-right-radius: 25%; */
-   position: relative;
 }
 .teacher-bg{
    width: 100%;
@@ -89,12 +86,14 @@
 .teacher > *{
    z-index: 2;
 }
-.teacher-text, .teacher-img{
+.teacher-text{
    width: 50%;
 }
 .teacher-img{
    width: 40%;
-   /* height: 80%; */
+}
+.teacher-img > img{
+   width: 100%;
 }
 .teacher-text > h2{
    font-size: 42px;
@@ -104,10 +103,7 @@
    line-height: 24px;
    color: var(--brown-color);
 }
-.teacher-img > img{
-   width: 100%;
-   /* height: 100%; */
-}
+
 /* --------------------––––––––––– */
 .about{
    width: 100%;
@@ -156,6 +152,58 @@
    margin-bottom: 10px;
    letter-spacing: 0.5px;
 }
+
+
+/* ----------------------------- */
+.learn{
+   width: 100%;
+   padding-top: 100px;
+}
+.learn > h2{
+   font-size: 32px;
+   font-weight: normal;
+   letter-spacing: 1px;
+   margin-bottom: 25px;
+}
+.learn-blocks{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+.learn-block{
+   width: 31%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background-color: #fff;
+   padding: 20px;
+   box-shadow: 0 5px 15px #ccc;
+}
+.img-block{
+   width: 60px;
+   height: 60px;
+   padding: 10px;
+   padding-right: 0;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: var(--pink-color);
+}
+.img-block > img{
+   width: 100%;
+   filter: invert(40%);
+}
+.learn-block > p{
+   width: 75%;
+   line-height: 18px;
+   font-size: 13px;
+   letter-spacing: 1px;
+   color: var(--brown-color);
+}
+
+
+/* ----------------------------- */
 .subject{
    width: 100%;
    margin-top: 100px;
@@ -231,6 +279,14 @@
    .course-block > ul > li{
       font-size: 15px;
    }
+   .learn-block{
+      padding: 15px;
+   }
+   .img-block{
+      width: 40px;
+      height: 40px;
+   }
+
    .subject{
       margin-top: 70px;
    }
@@ -265,7 +321,30 @@
    }
    .course-block > h2{
       font-size: 17px;
+      margin: 20px 0;
    }
+   .course-block > ul > li{
+      font-size: 13px;
+      line-height: 20px;
+   }
+   .learn-blocks{
+      flex-direction: column;
+   }
+   .learn-blocks > *{
+      width: 60%;
+      margin-bottom: 20px;
+   }
+   .learn-block > p{
+      width: 85%;
+      font-size: 12px;
+   }
+   .learn-block:nth-child(2){
+      margin-left: 20%;
+   }
+   .learn-block:nth-child(3){
+      margin-left: 40%;
+   }
+
    .subject{
       margin-top: 50px;
    }
@@ -302,6 +381,18 @@
       line-height: 20px;
       margin-bottom: 7px;
    }
+   .learn-block{
+      width: 70%;
+   }
+   .learn-block:nth-child(2){
+      margin-left: 15%;
+   }
+   .learn-block:nth-child(3){
+      margin-left: 30%;
+   }
+   .learn-block > p{
+      width: 80%;
+   }
    .subject > h2{
       font-size: 32px;
    }
@@ -323,7 +414,7 @@
       height: auto;
       padding-top: 100px;
       padding-bottom: 70px;
-      flex-direction: column;
+      flex-direction: column-reverse;
       justify-content: center;
    }
    .teacher > *, .about-course > *{
@@ -338,6 +429,13 @@
    }
    .about-course > *:first-child{
       margin-bottom: 40px;
+   }
+   .learn-block:nth-child(2), .learn-block:nth-child(3){
+      margin: 0;
+   }
+   .learn-block{
+      width: 100%;
+      margin-bottom: 20px !important;
    }
    .subject > h2{
       font-size: 28px;

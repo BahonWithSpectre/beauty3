@@ -1,10 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Profil";
+    ViewData["Title"] = "Video";
 }
+<link href="~/css/video.css" rel="stylesheet">
 
-
-<link href="~/css/cabinet.css" rel="stylesheet">
 
 <div class="wrap">
     <div class="swipe-menu">
@@ -15,7 +14,7 @@
         <a href="#" class="main-nav fix-active">Басты бет</a>
         <a href="#" class="course-nav">Менің курстарым</a>
         <a href="#" class="more-nav">Жаңалықтар</a>
-        <a href="login.html" class="swipe-login">
+        <a href="/Account/Profil" class="swipe-login">
             <span>Аккаунт</span>
             <i class="fa fa-user-o"></i>
         </a>
@@ -41,40 +40,46 @@
         </div>
     </div>
     <div class="content">
-        <div id="courses" class="courses">
-            <h2>Менің курстарым</h2>
-            <div class="course-items">
-                <div class="course-item">
-                    <div class="course-img">
-                        <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
+        <div class="main">
+            <div class="video-block">
+                <div class="video">
+                    <iframe src="https://www.youtube.com/embed/ll31SdNrieQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-text">
+                    <h1>VideoName</h1>
+                    <p>1634 көрсетілім</p>
+                    <p>DataTimeVideo</p>
+                </div>
+            </div>
+            <div class="video-titles">
+                <div class="video-title">
+                    <div class="baner">
+                        <img src="~/img/course-item.jpg">
                     </div>
-                    <div class="course-text">
-                        <h2>Course Name</h2>
-                        <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                        <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                        <a href="/Account/Video">Бастау</a>
+                    <div class="title-text">
+                        <h3>VideoName</h3>
+                        <p>About Lorem ipsum dolor sit amet.</p>
+                        <span>1634 көрсетілім</span>
                     </div>
                 </div>
-                <div class="course-item">
-                    <div class="course-img">
-                        <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
+                <div class="video-title">
+                    <div class="baner">
+                        <img src="~/img/course-item.jpg">
                     </div>
-                    <div class="course-text">
-                        <h2>Course Name</h2>
-                        <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                        <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                        <a href="/Account/Video">Бастау</a>
+                    <div class="title-text">
+                        <h3>VideoName</h3>
+                        <p>About Lorem ipsum dolor sit amet.</p>
+                        <span>1634 көрсетілім</span>
                     </div>
                 </div>
-                <div class="course-item">
-                    <div class="course-img">
-                        <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
+                <div class="video-title">
+                    <div class="baner">
+                        <img src="~/img/course-item.jpg">
                     </div>
-                    <div class="course-text">
-                        <h2>Course Name Course Name Course Name</h2>
-                        <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                        <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                        <a href="/Account/Video">Бастау</a>
+                    <div class="title-text">
+                        <h3>VideoName</h3>
+                        <p>About Lorem ipsum dolor sit amet.</p>
+                        <span>1634 көрсетілім</span>
                     </div>
                 </div>
             </div>

@@ -12,23 +12,17 @@ namespace beauty3.Controllers
 {
     public class AccountController : Controller
     {
-
-        private readonly AppDb db;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        readonly AppDb db;
+        UserManager<User> _userManager;
+        SignInManager<User> _signInManager;
 
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, AppDb _db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            this.db = _db;
+            db = _db;
         }
-
-
-
-
-
         public IActionResult Index()
         {
             return View();
@@ -128,7 +122,15 @@ namespace beauty3.Controllers
             {
                 return View();
             }
-
+            return RedirectToAction("Login");
+        }
+        [Authorize]
+        public IActionResult Video()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
             return RedirectToAction("Login");
         }
     }
