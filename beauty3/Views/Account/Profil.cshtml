@@ -6,39 +6,44 @@
 
 <link href="~/css/cabinet.css" rel="stylesheet">
 
+
 <div class="wrap">
     <div class="swipe-menu">
         <div class="close">
             <span></span>
             <!-- <i class="fa fa-close"></i> -->
         </div>
-        <a href="#" class="main-nav fix-active">Басты бет</a>
-        <a href="#" class="course-nav">Менің курстарым</a>
+        <a href="#" class="main-nav">Басты бет</a>
+        <a href="#" class="course-nav fix-active">Менің курстарым</a>
         <a href="#" class="more-nav">Жаңалықтар</a>
-        <a href="login.html" class="swipe-login">
+        <a href="/Account/Profil" class="swipe-login">
             <span>Аккаунт</span>
             <i class="fa fa-user-o"></i>
         </a>
     </div>
     <div class="header">
-        <a class="logo" href="index.html">
+        <div class="burger">
+            <span></span>
+        </div>
+        <a class="logo" href="/Home/Visitor">
             <img src="~/img/logo.png" alt="BeautyOnline">
             <!-- Beauty Online -->
         </a>
-        <div class="nav">
-            <a href="#">Басты бет</a>
-            <a href="#" class="fix-active">Менің курстарым</a>
-            <a href="#">Жаңалықтар</a>
-        </div>
-        <a href="login.html" class="login">
+        <div class="login">
             <span>UserName</span>
             <i class="fa fa-user-o"></i>
-        </a>
-        <div class="burger">
-            <span></span>
-            <!-- <i class="fa fa-bars"></i> -->
-            <!-- <i class="fa fa-close"></i> -->
+            <div class="user-menu">
+                <i class="fa fa-caret-up"></i>
+                <a href="#" class="cart-show"><i class="fa fa-bars"></i>Менің курстарым</a>
+                <a href="#"><i class="fa fa-cog"></i>Баптаулар</a>
+                <a href="~/Account/Logout"><i class="fa fa-sign-out"></i>Шығу</a>
+            </div>
         </div>
+    </div>
+    <div class="sidebar">
+        <a href="#">Басты бет</a>
+        <a href="#" class="fix-active">Менің курстарым</a>
+        <a href="#">Жаңалықтар</a>
     </div>
     <div class="content">
         <div id="courses" class="courses">
@@ -82,22 +87,20 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.burger').hover(function () {
+	$(document).ready(function() {
+        $('.login').click(function () {
+            $('.user-menu').slideToggle(300);
+        });
+        $('.content').click(function () {
+            $('.user-menu').slideUp(300);
+        });
+
+        $('.burger').hover(function(){
             $('.swipe-menu').toggleClass('active-menu')
         })
-        $('.close').click(function () {
+        $('.close').click(function(){
             $('.swipe-menu').removeClass('active-menu')
         })
-
-        $(window).on('scroll', function () {
-            if ($(window).scrollTop() > 90) {
-                $('.header').addClass('fix-header');
-            } else {
-                $('.header').removeClass('fix-header');
-            }
-        });
-    });
+	});
 </script>

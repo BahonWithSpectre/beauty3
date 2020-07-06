@@ -5,17 +5,16 @@
 
 <link href="~/css/courseView.css" rel="stylesheet">
 
-
 <div class="wrap">
     <div class="swipe-menu">
         <div class="close">
-            <i class="fa fa-close"></i>
+            <span></span>
         </div>
         <a href="#" class="main-nav fix-active">Басты бет</a>
         <a href="#" class="teacher-nav">Спикер жайлы</a>
         <a href="#" class="about-nav">Курс жайлы</a>
         <a href="#" class="more-nav">Қосымша</a>
-        <a href="/Account/Login" class="swipe-login">
+        <a href="/Account/Profil" class="swipe-login">
             <span>Жеке кабинет</span>
             <i class="fa fa-user-o"></i>
         </a>
@@ -33,14 +32,13 @@
             <a href="#" class="about-nav">Курс жайлы</a>
             <a href="#" class="more-nav">Қосымша</a>
         </div>
-        <a href="/Account/Login" class="login">
+        <a href="/Account/Profil" class="login">
             <span>Жеке кабинет</span>
             <i class="fa fa-user-o"></i>
             <!-- <a href="#">Кіру / Тіркелу</a> -->
         </a>
         <div class="burger">
-            <i class="fa fa-bars"></i>
-            <!-- <i class="fa fa-close"></i> -->
+            <span></span>
         </div>
     </div>
     <div class="content">
@@ -54,19 +52,21 @@
         </div>
         <div id="teacher" class="teacher">
             <div class="teacher-bg"></div>
+            <div class="teacher-img">
+                <img src="~/img/teacher.jpg">
+            </div>
             <div class="teacher-text">
-                <h2>Курсты кім жүргізеді?</h2>
+                <h2>Пәленшеева Түгенше</h2>
                 <p>
-                    <span>Пәленшеева Түгенше</span> - BEAUTY ONLINE ффывтлотфы негізін қалаушысы,
-                    «лоф тфытв» методикасының авторы, 2 жылда 10 ресторан ашып,
-                    HBh nasdn желісін құрушы, «лтф ывлфыв»,
-                    «оұр үфұрыр үұәірк» бестселлерлерінің авторы.
+                    Online обучение - это ключ к успеху в современном мире.
+                    Именно поэтому я предлагаю уникальный и, пожалуй,
+                    самый удобный формат обучения в сфере beauty.
+                    Получайте новые знания и достигайте своих целей находясь
+                    в любой точке мира в комфортной для вас обстановке.
                 </p>
             </div>
-            <div class="teacher-img">
-                <img src="~/img/teacher.jpg" alt="">
-            </div>
         </div>
+
         <div id="about" class="about">
             <div class="about-course">
                 <div class="course-block">
@@ -85,7 +85,7 @@
                     <div class="icon">
                         <i class="fa fa-book"></i>
                     </div>
-                    <h2>БҰЛ КУРСТА НЕ ҮЙРЕНЕСІЗ?</h2>
+                    <h2>КУРС ҚАЛАЙ ӨТЕДІ?</h2>
                     <ul>
                         <li>Жабық инстаграм парақшада сторис, пост, видео, IGTV-толық форматында 30-40 минуттық видео-сабақтар салынады.</li>
                         <li>Арнайы Тапсырмалар беріліп тексеріледі</li>
@@ -99,7 +99,7 @@
                 <div class="learn-blocks">
                     <div class="learn-block">
                         <div class="img-block">
-                            <img src="img/check-icon.png">
+                            <img src="~/img/check-icon.png">
                         </div>
                         <p>
                             Узнаете все о самых актуальных и востребованных техниках в
@@ -109,7 +109,7 @@
                     </div>
                     <div class="learn-block">
                         <div class="img-block">
-                            <img src="img/check-icon.png">
+                            <img src="~/img/check-icon.png">
                         </div>
                         <p>
                             Благодаря обширному блоку самой актуальной теоретической
@@ -119,7 +119,7 @@
                     </div>
                     <div class="learn-block">
                         <div class="img-block">
-                            <img src="img/check-icon.png">
+                            <img src="~/img/check-icon.png">
                         </div>
                         <p>Приобретете новую профессию и расширите до максимума свои знания и навыки в мире макияжа</p>
                     </div>
@@ -142,107 +142,62 @@
     </div>
 </div>
 
-
-
-
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.burger').hover(function () {
+	$(document).ready(function() {
+        $('.burger').hover(function(){
             $('.swipe-menu').toggleClass('active-menu')
         })
-        $('.close').click(function () {
+        $('.close').click(function(){
             $('.swipe-menu').removeClass('active-menu')
         })
-        $(window).on('scroll', function () {
-            if ($(window).scrollTop() > 90) {
+		$(window).on('scroll', function() {
+			if($(window).scrollTop() > 90){
                 $('.header').addClass('fix-header');
-            } else {
-                $('.header').removeClass('fix-header');
+			} else{
+				$('.header').removeClass('fix-header');
+			}
+        });
+        $(window).on('scroll', function() {
+            if($(window).scrollTop() >= $('#main').offset().top){
+			    $('a.fix-active').removeClass('fix-active');
+			    $('.main-nav').addClass('fix-active');
+            }
+            if($(window).scrollTop() >= $('#teacher').offset().top){
+			    $('a.fix-active').removeClass('fix-active');
+			    $('.teacher-nav').addClass('fix-active');
+            }
+            if($(window).scrollTop() >= $('#about').offset().top){
+			    $('a.fix-active').removeClass('fix-active');
+			    $('.about-nav').addClass('fix-active');
             }
         });
-        $(window).on('scroll', function () {
-            if ($(window).scrollTop() >= $('#main').offset().top) {
-                $('a.fix-active').removeClass('fix-active');
-                $('.main-nav').addClass('fix-active');
-            }
-            if ($(window).scrollTop() >= $('#teacher').offset().top) {
-                $('a.fix-active').removeClass('fix-active');
-                $('.teacher-nav').addClass('fix-active');
-            }
-            if ($(window).scrollTop() >= $('#about').offset().top) {
-                $('a.fix-active').removeClass('fix-active');
-                $('.about-nav').addClass('fix-active');
-            }
-        });
-
-        $('.main-nav').click(function () {
-            var offset = 0;
-            $('a.fix-active').removeClass('fix-active');
-            $('.main-nav').addClass('fix-active');
-            $('html, body').animate({
-                scrollTop: $('#main').offset().top
-            }, 1000);
-            return false;
-        });
-        $('.teacher-nav').click(function () {
-            var offset = 0;
-            $('a.fix-active').removeClass('fix-active');
-            $('.teacher-nav').addClass('fix-active');
-            $('html, body').animate({
-                scrollTop: $('#teacher').offset().top
-            }, 1000);
-            return false;
-        });
-        $('.about-nav').click(function () {
-            var offset = 0;
-            $('a.fix-active').removeClass('fix-active');
-            $('.about-nav').addClass('fix-active');
-            $('html, body').animate({
-                scrollTop: $('#about').offset().top
-            }, 1000);
-            return false;
-        });
-    });
-</script>
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(window).on('scroll', function () {
-            if ($(window).scrollTop() > 90) {
-                $('.header').addClass('fix-header');
-            } else {
-                $('.header').removeClass('fix-header');
-            }
-        });
-        $(window).on('scroll', function () {
-            if ($(window).scrollTop() >= $('#teacher').offset().top) {
-                $('a.fix-active').removeClass('fix-active');
-                $('.teacher-nav').addClass('fix-active');
-            }
-            if ($(window).scrollTop() >= $('#about').offset().top) {
-                $('a.fix-active').removeClass('fix-active');
-                $('.about-nav').addClass('fix-active');
-            }
-        });
-
-        $('.teacher-nav').click(function () {
-            var offset = 0;
-            $('a.fix-active').removeClass('fix-active');
-            $('.teacher-nav').addClass('fix-active');
-            $('html, body').animate({
-                scrollTop: $('#teacher').offset().top
-            }, 1000);
-            return false;
-        });
-        $('.about-nav').click(function () {
-            var offset = 0;
-            $('a.fix-active').removeClass('fix-active');
-            $('.about-nav').addClass('fix-active');
-            $('html, body').animate({
-                scrollTop: $('#about').offset().top
-            }, 1000);
-            return false;
-        });
-    });
+         
+		$('.main-nav').click(function() {
+			var offset = 0;
+			$('a.fix-active').removeClass('fix-active');
+			$('.main-nav').addClass('fix-active');
+			$('html, body').animate({
+				scrollTop: $('#main').offset().top
+			}, 1000);
+			return false;
+		});
+		$('.teacher-nav').click(function() {
+			var offset = 0;
+			$('a.fix-active').removeClass('fix-active');
+			$('.teacher-nav').addClass('fix-active');
+			$('html, body').animate({
+				scrollTop: $('#teacher').offset().top
+			}, 1000);
+			return false;
+		});
+		$('.about-nav').click(function() {
+			var offset = 0;
+			$('a.fix-active').removeClass('fix-active');
+			$('.about-nav').addClass('fix-active');
+			$('html, body').animate({
+				scrollTop: $('#about').offset().top
+			}, 1000);
+			return false;
+		});
+	});
 </script>

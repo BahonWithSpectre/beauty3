@@ -11,8 +11,8 @@
             <span></span>
             <!-- <i class="fa fa-close"></i> -->
         </div>
-        <a href="#" class="main-nav fix-active">Басты бет</a>
-        <a href="#" class="course-nav">Менің курстарым</a>
+        <a href="#" class="main-nav">Басты бет</a>
+        <a href="#" class="course-nav fix-active">Менің курстарым</a>
         <a href="#" class="more-nav">Жаңалықтар</a>
         <a href="/Account/Profil" class="swipe-login">
             <span>Аккаунт</span>
@@ -20,38 +20,44 @@
         </a>
     </div>
     <div class="header">
-        <a class="logo" href="index.html">
+        <div class="burger">
+            <span></span>
+        </div>
+        <a class="logo" href="/Home/Visitor">
             <img src="~/img/logo.png" alt="BeautyOnline">
             <!-- Beauty Online -->
         </a>
-        <div class="nav">
-            <a href="#">Басты бет</a>
-            <a href="#" class="fix-active">Менің курстарым</a>
-            <a href="#">Жаңалықтар</a>
-        </div>
-        <a href="login.html" class="login">
+        <div class="login">
             <span>UserName</span>
             <i class="fa fa-user-o"></i>
-        </a>
-        <div class="burger">
-            <span></span>
-            <!-- <i class="fa fa-bars"></i> -->
-            <!-- <i class="fa fa-close"></i> -->
+            <div class="user-menu">
+                <i class="fa fa-caret-up"></i>
+                <a href="#" class="cart-show"><i class="fa fa-bars"></i>Менің курстарым</a>
+                <a href="#"><i class="fa fa-cog"></i>Баптаулар</a>
+                <a href="~/Account/Logout"><i class="fa fa-sign-out"></i>Шығу</a>
+            </div>
         </div>
+    </div>
+    <div class="sidebar">
+        <a href="#">Басты бет</a>
+        <a href="#" class="fix-active">Менің курстарым</a>
+        <a href="#">Жаңалықтар</a>
     </div>
     <div class="content">
         <div class="main">
             <div class="video-block">
                 <div class="video">
-                    @*<iframe src="https://www.youtube.com/embed/ll31SdNrieQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>*@
-
                     <iframe src="https://player.vimeo.com/video/432060648" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
                 </div>
                 <div class="video-text">
                     <h1>VideoName</h1>
-                    <p>1634 көрсетілім</p>
-                    <p>DataTimeVideo</p>
+                    <p><i class="fa fa-eye"></i> 1634</p>
+                    <p>20.06.2020</p>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Corporis iusto, earum cum quasi possimus eum architecto harum culpa excepturi distinctio!
+                        Blanditiis sed tempora nostrum? Commodi.
+                    </p>
                 </div>
             </div>
             <div class="video-titles">
@@ -62,7 +68,7 @@
                     <div class="title-text">
                         <h3>VideoName</h3>
                         <p>About Lorem ipsum dolor sit amet.</p>
-                        <span>1634 көрсетілім</span>
+                        <span><i class="fa fa-eye"></i> 1634</span>
                     </div>
                 </div>
                 <div class="video-title">
@@ -72,7 +78,7 @@
                     <div class="title-text">
                         <h3>VideoName</h3>
                         <p>About Lorem ipsum dolor sit amet.</p>
-                        <span>1634 көрсетілім</span>
+                        <span><i class="fa fa-eye"></i> 1634</span>
                     </div>
                 </div>
                 <div class="video-title">
@@ -82,30 +88,47 @@
                     <div class="title-text">
                         <h3>VideoName</h3>
                         <p>About Lorem ipsum dolor sit amet.</p>
-                        <span>1634 көрсетілім</span>
+                        <span><i class="fa fa-eye"></i> 1634</span>
+                    </div>
+                </div>
+                <div class="video-title">
+                    <div class="baner">
+                        <img src="~/img/course-item.jpg">
+                    </div>
+                    <div class="title-text">
+                        <h3>VideoName</h3>
+                        <p>About Lorem ipsum dolor sit amet.</p>
+                        <span><i class="fa fa-eye"></i> 1634</span>
+                    </div>
+                </div>
+                <div class="video-title">
+                    <div class="baner">
+                        <img src="~/img/course-item.jpg">
+                    </div>
+                    <div class="title-text">
+                        <h3>VideoName</h3>
+                        <p>About Lorem ipsum dolor sit amet.</p>
+                        <span><i class="fa fa-eye"></i> 1634</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.login').click(function () {
+            $('.user-menu').slideToggle(300);
+        });
+        $('.content').click(function () {
+            $('.user-menu').slideUp(300);
+        });
+
         $('.burger').hover(function () {
             $('.swipe-menu').toggleClass('active-menu')
         })
         $('.close').click(function () {
             $('.swipe-menu').removeClass('active-menu')
         })
-
-        $(window).on('scroll', function () {
-            if ($(window).scrollTop() > 90) {
-                $('.header').addClass('fix-header');
-            } else {
-                $('.header').removeClass('fix-header');
-            }
-        });
     });
 </script>

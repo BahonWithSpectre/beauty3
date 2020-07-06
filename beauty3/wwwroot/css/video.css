@@ -1,12 +1,12 @@
-@import url('const.css');
+@import url('const3.css');
 
 /* ----------------CONTENT------------------ */
 
 .main{
    width: 100%;
-   padding-top: 100px;
+   padding-top: 15px;
    padding-bottom: 100px;
-   background-color: var(--pink-color);
+   /* background-color: var(--pink-color); */
    display: flex;
    justify-content: space-between;
 }
@@ -15,7 +15,7 @@
 }
 .video{
    width: 100%;
-   height: 450px;
+   height: 460px;
    margin-bottom: 15px;
    border-radius: 3px;
    overflow: hidden;
@@ -32,9 +32,6 @@
 .video-text > h1{
    font-size: 32px;
 }
-
-
-
 
 
 
@@ -75,9 +72,9 @@
    font-size: 14px;
    color: var(--brown-color);
 }
-.title-text > span{
+.title-text > span, .title-text > span > i{
    font-size: 14px;
-   color: var(--brown-color);
+   color: var(--grey-color);
 }
 
 
@@ -86,108 +83,113 @@
 
 @media  (max-width: 1024px){
    .video{
-      height: 350px;
+      height: 285px;
+   }
+   .video-text > h1 {
+      font-size: 26px;
+   }
+   .video-block{
+      width: 65%;
+   }
+   .video-titles{
+      width: 35%;
+   }
+   .title-text > h3{
+      font-size: 14px;
+   }
+   .title-text > p, .title-text > span, .title-text > span > i{
+      font-size: 12px;
    }
 }
 @media  (max-width: 768px){
-   /* *{
-      font-size: 14px;
-   } */
-   .courses > h2{
-      font-size: 40px;
+   .main{
+      flex-direction: column;
    }
-   .course-img{
-      height: 135px;
+   .main > *{
+      width: 100%;
    }
-   .course-text{
-      padding: 15px;
+   .video {
+      height: 330px;
    }
-   .course-text > h2{
-      font-size: 19px;
-      height: 38px;
-      line-height: 22px;
+   .video-text > h1 {
+      font-size: 24px;
    }
-   .course-text > p > i{
+   .video-titles{
+      padding: 0;
+      margin-top: 20px;
+   }
+   .baner{
+      width: 25%;
+   }
+   .title-text{
+      width: 75%;
+      justify-content: space-around;
+   }
+   .title-text > h3 {
+      font-size: 20px;
+   }
+   .title-text > p, .title-text > span, .title-text > span > i {
       font-size: 16px;
-   }
-   .course-text > a{
-      padding: 10px;
    }
 }
 @media  (max-width: 640px){
-   /* *{
-      font-size: 13px;
-   } */
-   .courses > h2{
-      font-size: 34px;
+   .video {
+      height: 340px;
    }
-   .course-img{
-      height: 115px;
-   }
-   .course-text{
-      padding: 10px;
-   }
-   .course-text > h2{
+   .title-text > p, .title-text > span, .title-text > span > i {
       font-size: 15px;
-      height: 30px;
-      line-height: 15px;
    }
-   .course-text > *{
-      font-size: 12px;
+}
+@media  (max-width: 550px){
+   .video {
+      height: 265px;
    }
-   .course-text > p > i{
+   .video-text > h1 {
+      font-size: 20px;
+   }
+   .title-text > h3 {
+      font-size: 18px;
+   }
+   .video-text > p, .title-text > p, .title-text > span, .title-text > span > i {
       font-size: 14px;
-   }
-   .course-text > a{
-      padding: 10px;
    }
 }
 @media  (max-width: 425px){
-   .course-items{
-      flex-direction: column;
+   .video {
+      height: 205px;
    }
-   .course-item:nth-child(3n+2){
-      margin: 0;
-      margin-bottom: 30px;
+   .video-text > h1 {
+      font-size: 18px;
    }
-   .course-items > *{
-      width: 100%;
-      margin-bottom: 30px;
+   .baner {
+      width: 35%;
    }
-   .courses > h2 {
-      font-size: 40px;
+   .title-text{
+      width: 65%;
    }
-   .course-img {
-      height: 230px;
+   .title-text > h3 {
+      font-size: 18px;
    }
-   .course-text{
-     padding: 25px;
-   }
-   .course-text > h2{
-     font-size: 22px;
-     height: 52px;
-     line-height: 26px;
-   }
-   .course-text > *{
-     font-size: 16px;
+   .video-text > p, .title-text > p, .title-text > span, .title-text > span > i {
+      font-size: 13px;
    }
 }
 @media  (max-width: 375px){
-   .courses > h2 {
-      font-size: 32px;
+   .video {
+      height: 180px;
    }
-   .course-img{
-      height: 200px;
+   .video-text > h1 {
+      font-size: 16px;
    }
-   .course-text > *{
-      font-size: 15px;
+   .title-text > h3 {
+      font-size: 16px;
+   }
+   .video-text > p, .title-text > p, .title-text > span, .title-text > span > i {
+      font-size: 12px;
    }
 }
 @media  (max-width: 320px){
-   .course-text{
-      padding: 20px;
-   }
-   .course-text > *{
-      font-size: 14px;
+   .video {
+      height: 155px;
    }
 }

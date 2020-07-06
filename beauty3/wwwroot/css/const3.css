@@ -1,0 +1,354 @@
+
+:root{
+   --main-color: #222;
+   --white-color: #fdf5f5;
+   --brown-color: #4c3d36;
+   --grey-color: #968c88;
+   /* --pink-color: #f3e1e4; */
+   /* --pink-color: #f4e2e6; */
+   --pink-color: #fae2e5;
+   
+}
+@font-face{
+   font-family: MyOpenSans;
+   src: url('OpenSans-Regular.ttf');
+}
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   color: var(--main-color);
+   font-family: MyOpenSans, Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+   font-size: 16px;
+}
+.wrap{
+   width: 100%;
+   background-color: #fff;
+   user-select: none;
+   position: relative;
+   background-color: var(--white-color);
+}
+.header, .content > *, .footer {
+   padding: 0 2%;
+}
+ /* --------------HEADER------------ */
+
+ .header {
+   width: 100%;
+   height: 70px;
+   position: fixed;
+   top: 0;
+   z-index: 100;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background-color: var(--main-color);
+   box-shadow: 0 1px 10px var(--brown-color);
+   transition: 0.3s;
+}
+.logo{
+   width: 170px;
+}
+.logo > img{
+   width: 100%;
+   filter: invert(100);
+}
+.login{
+   text-decoration: none;
+   cursor: pointer;
+}
+.login > *{
+   color: #fff;
+}
+/* ------------User-Menu------------ */
+.user-menu {
+   display: none;
+   position: absolute;
+   background-color: var(--pink-color);
+   box-shadow: 0 1px 5px var(--grey-color);
+   top: 70px;
+   right: 2%;
+   border-radius: 2px;
+}
+.user-menu > a{
+  display: block;
+  text-decoration: none;
+  padding: 9px 15px;
+  transition: 0.3s;
+}
+.user-menu > a > i{
+  margin-right: 8px;
+  transition: 0.3s;
+}
+.user-menu > a:hover, .user-menu > a:hover > i{
+  background-color: var(--white-color);
+}
+.user-menu > a:first-child :hover{
+   color: var(--white-color);
+}
+.user-menu > a:last-child{
+  border-bottom: none;
+}
+.user-menu > p > span{
+  font-size: 12px;
+  color: #90A8D1;
+}
+.user-menu > i{
+  font-size: 30px;
+  position: absolute;
+  top: -20px;
+  right: 12%;
+  color: var(--pink-color);
+}
+/* ---------MOB-MENU------- */
+.swipe-menu{
+   width: 100vw;
+   display: flex;
+   flex-direction: column;
+   padding: 70px 7%;
+   position: fixed;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   z-index: 1000;
+   background-color: transparent;
+   transform: translateX(-100vw);
+   /* transform: translateX(0); */
+   transition: 0.3s transform, 0.5s background-color;
+}
+.active-menu{
+   transform: translateX(0);
+   background-color: var(--main-color);
+}
+.swipe-menu > a{
+   color: var(--white-color);
+   text-decoration: none;
+   padding: 10px 0;
+}
+.swipe-login > *{
+   font-size: 16px;
+   color: var(--white-color);
+}
+.close{
+   /* display: none; */
+   position: absolute !important;
+   right: 7%;
+   top: 25px;
+}
+.swipe-menu, .burger{
+   display: none;
+}
+.burger, .close{
+   width: 25px;
+   height: 20px;
+   position: relative;
+}
+.burger > span, .burger > span::after, .burger > span::before,
+.close > span, .close > span::after{
+   width: 100%;
+   height: 2px;
+   content: "";
+   position: absolute;
+   left: 0;
+   background-color: var(--white-color);
+   transition: 0.2s;
+}
+.burger > span{
+   top: 0;
+}
+.burger > span::before{
+   width: 75%;
+   top: 8px;
+}
+.burger > span::after{
+   width: 50%;
+   top: 16px;
+}
+.burger:hover > ::after,.burger:hover > ::before{
+   width: 100%;
+}
+.close > span, .close > span::after{
+   top: 50%;
+   margin-top: -1px;
+}
+.close > span{
+   transform: rotateZ(45deg);
+}
+.close > span::after{
+   transform: rotateZ(90deg);
+}
+
+/* .fix-header > .burger > i, .close > i, */
+.close > span, .close > span::after,
+.fix-header > .burger > span, .fix-header > .burger > span::after, .fix-header > .burger > span::before{
+   /* color: var(--white-color); */
+   background-color: var(--white-color) !important;
+   /* z-index: 1000; */
+}
+
+/* ----------------CONTENT------------------ */
+
+.content, .sidebar{
+   height: 100vh;
+   position: fixed;
+   top: 70px;
+}
+.content{
+   width: 85%;
+   right: 0;
+   overflow-y: scroll;
+   background-color: var(--white-color);
+}
+.sidebar{
+   width: 15%;
+   left: 0;
+   z-index: 99;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   padding: 15px 2%;
+   background-color: var(--pink-color);
+   box-shadow: 1px 0 10px var(--grey-color);
+}
+.sidebar > a{
+   text-decoration: none;
+   padding: 5px 0;
+   margin-bottom: 5px;
+   transition: 0.3s;
+   position: relative;
+   color: var(--brown-color);
+}
+.sidebar > a:hover{
+   color: var(--main-color);
+}
+.sidebar > a:before{
+   content: "";
+   display: block;
+   width: 0;
+   height: 2px;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   background-color: var(--brown-color);
+   transition: 0.3s;
+}
+.sidebar > a:hover:before{
+   width: 100%;
+   left: 0;
+}
+.fix-active{
+   font-weight: bolder;
+   text-shadow: 0 0 1px var(--grey-color);
+   color: var(--main-color) !important;
+}
+.fix-active:hover{
+   cursor: default;
+}
+.fix-active:hover:before{
+   width: 0 !important;
+}
+
+/* ----------------------------- */
+.footer{
+   width: 100%;
+   padding-top: 100px;
+   padding-bottom: 100px;
+   background-color: var(--main-color);
+   color: var(--white-color);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+/* –––––––––––MEDIA–––––––––––– */
+
+@media  (max-width: 1024px){
+   .content{
+      width: 80%;
+   }
+   .sidebar{
+      width: 20%;
+   }
+   .logo{
+      width: 160px;
+   }
+}
+@media  (max-width: 768px){
+   .content{
+      width: 80%;
+   }
+   .sidebar{
+      width: 20%;
+   }
+   .sidebar > a{
+      font-size: 13px;
+   }
+   .logo{
+      width: 120px;
+   }
+   .login > i{
+      font-size: 18px;
+   }
+   .login > span{
+      font-size: 14px;
+   }
+   .user-menu > a{
+      font-size: 14px;
+      padding: 10px;
+   }
+   .user-menu > a > i{
+      margin-right: 5px;
+   }
+}
+@media  (max-width: 640px){
+   .content{
+      width: 100%;
+   }
+   .sidebar{
+      display: none;
+   }
+   .fix-active{
+      font-weight: bolder;
+      text-shadow: 0 0 1px var(--white-color);
+      color: #fff !important;
+   }
+   .fix-active:hover{
+      cursor: default;
+   }
+   .fix-active:hover:before{
+      width: 0 !important;
+   }
+   .logo{
+      width: 140px;
+   }
+   .swipe-menu, .burger{
+      display: flex;
+   }
+   .swipe-login > *{
+      font-size: 16px !important;
+   }
+   .login > span{
+      display: none;
+   }
+   .login > i{
+      font-size: 20px;
+   }
+   /* .burger{
+      display: block;
+   } */
+}
+
+@media  (max-width: 550px){
+   .header, .content > *, .footer {
+      padding: 0 7%;
+   }
+   .logo{
+      width: 135px;
+   }
+}
+@media  (max-width: 425px){
+}
+@media  (max-width: 375px){
+}
+@media  (max-width: 320px){
+}
