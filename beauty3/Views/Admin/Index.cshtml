@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewData["Title"] = "AdminIndex";
+}
+
+<link href="~/css/admin.css" rel="stylesheet">
+
+<div class="content">
+    <div class="main">
+        <div class="main-head">
+            <form class="search">
+                <input type="text" placeholder="Тел. номер" required>
+                <button><i class="fa fa-search"></i></button>
+            </form>
+            <div class="pager">
+                <a href="#"><i class="fa fa-angle-double-left"></i></a>
+                <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                <!-- <a href="#"><i class="fa fa-angle-double-left"></i><span>Артқа</span></a>
+                <a href="#"><span>Келесі</span><i class="fa fa-angle-double-right"></i></a> -->
+            </div>
+        </div>
+        <div class="students">
+            <div class="student">
+                <div class="stud-data">
+                    <p>
+                        <span>FirstName</span>
+                        <span>LastNameName</span>
+                    </p>
+                    <p>87087087878</p>
+                </div>
+                <a href="/Admin/AboutStud" class="stud-more">Оқушы туралы</a>
+            </div>
+            <div class="student">
+                <div class="stud-data">
+                    <p>
+                        <span>FirstName</span>
+                        <span>LastName</span>
+                    </p>
+                    <p>87087087878</p>
+                </div>
+                <a href="/Admin/AboutStud" class="stud-more">Оқушы туралы</a>
+            </div>
+            <div class="student">
+                <div class="stud-data">
+                    <p>
+                        <span>FirstName</span>
+                        <span></span>
+                    </p>
+                    <p>87087087878</p>
+                </div>
+                <a href="/Admin/AboutStud" class="stud-more">Оқушы туралы</a>
+            </div>
+        </div>
+        <div class="pager">
+            <a href="#"><i class="fa fa-angle-double-left"></i><span>Артқа</span></a>
+            <a href="#"><span>Келесі</span><i class="fa fa-angle-double-right"></i></a>
+        </div>
+    </div>
+</div>
