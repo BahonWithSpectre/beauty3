@@ -236,6 +236,8 @@
    background-color: #fff;
    padding: 0 30px;
    box-shadow: 0 5px 10px var(--grey-color);
+   position: relative;
+   z-index: 2;
 }
 .subject > ul > li{
    /* list-style-type: decimal;
@@ -248,6 +250,135 @@
 .subject > ul > li:last-child{
    border-bottom: none;
 }
+/* ----------PACKAGES---------- */
+.packages{
+   width: 100%;
+   padding-top: 20px;
+   padding-bottom: 50px;
+   position: relative;
+   background-color: var(--pink-color);
+}
+.packages > *{
+   position: relative;
+   z-index: 2;
+}
+.packages-bg{
+   width: 100%;
+   height: 120%;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   z-index: 1;
+   background-image: url('../img/main-bottom.svg');
+   background-repeat: no-repeat;
+   /* background-size: cover; */
+}
+.packages > h1{
+   text-align: center;
+   font-size: 36px;
+   margin-bottom: 30px;
+}
+.packs{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: start;
+}
+.pack{
+   width: 47%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-color: #fff;
+   border-radius: 2px;
+   overflow: hidden;
+   box-shadow: 0 0 10px var(--grey-color);
+   padding-bottom: 30px;
+}
+.pack-head{
+   width: 100%;
+   padding: 25px;
+   background-color: var(--white-color);
+}
+.pack-head > h3, .pack-head > p{
+   text-align: center;
+   letter-spacing: 1px;
+}
+.pack-head > h3{
+   font-weight: bold;
+   font-size: 22px;
+   margin-bottom: 5px;
+}
+.pack-head > p{
+   font-size: 13px;
+}
+.pack-body, .plus-body{
+   width: 100%;
+   padding: 35px;
+   padding-bottom: 10px;
+}
+.pack-body > p, .plus-body > p{
+   width: 100%;
+   display: flex;
+   align-items: center;
+   margin-bottom: 15px;
+}
+.pack-body > p > i, .plus-body > p > i{
+   margin-right: 20px;
+   color: var(--brown-color);
+}
+.pack-body > p > span, .plus-body > p > span{
+   font-size: 13px;
+   line-height: 22px;
+   color: var(--brown-color);
+   letter-spacing: 1px;
+}
+.plus-body{
+   margin-bottom: 15px;
+   background-color: var(--brown-color);
+}
+.plus-body > p > i, .plus-body > p > span{
+   color: var(--white-color);
+}
+/* --- */
+.pack-price{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.old-price{
+   color: var(--red-color);
+   font-size: 20px;
+   text-decoration: line-through;
+}
+.new-price{
+   font-weight: bold;
+   font-size: 24px;
+   color: var(--main-color);
+}
+/* --- */
+.start-btn{
+   color: var(--white-color);
+   background-color: var(--main-color);
+   text-decoration: none;
+   letter-spacing: 1px;
+   font-size: 14px;
+   border-radius: 25px;
+   padding: 15px 60px;
+   margin: 15px 0;
+   transition: 0.3s;
+}
+.start-btn:hover{
+   box-shadow: 0 0 12px var(--brown-color);
+}
+/* -- */
+.sale-text{
+   font-size: 12px;
+   letter-spacing: 0.5px;
+   color: var(--brown-color);
+}
+
+
 
 /* –––––––––––MEDIA–––––––––––– */
 
@@ -298,6 +429,40 @@
    }
    .subject > h2 > p{
       right: -8%;
+   }
+   .packages > h1{
+      font-size: 32px;
+   }
+   .pack{
+      width: 49%;
+      padding-bottom: 25px;
+   }
+   .pack-head{
+      padding: 20px;
+   }
+   .pack-head > h3{
+      font-size: 20px;
+   }
+   .pack-head > h3, .pack-head > p{
+      letter-spacing: 0.5px;
+   }
+   .pack-body, .plus-body{
+      padding: 25px;
+      padding-bottom: 10px;
+   }
+   .pack-body > p > i, .plus-body > p > i{
+      margin-right: 10px;
+      font-size: 13px;
+   }
+   .pack-body > p > span, .plus-body > p > span{
+      line-height: 18px;
+      letter-spacing: 0.5px;
+   }
+   .old-price{
+      font-size: 18px;
+   }
+   .new-price{
+      font-size: 22px;
    }
 }
 @media  (max-width: 768px){
@@ -357,6 +522,43 @@
    .subject > ul > li{
       padding: 20px;
    }
+
+   .packages > h1{
+      font-size: 28px;
+   }
+   .pack{
+      padding-bottom: 15px;
+   }
+   .pack-head{
+      padding: 15px;
+   }
+   .pack-head > h3{
+      font-size: 18px;
+      margin-bottom: 2px;
+   }
+   .pack-head > p{
+      font-size: 12px;
+   }
+   .pack-body, .plus-body{
+      padding: 15px;
+      padding-bottom: 5px;
+   }
+   .pack-body > p, .plus-body > p{
+      margin-bottom: 10px;
+   }
+   .pack-body > p > i, .plus-body > p > i{
+      font-size: 12px;
+   }
+   .pack-body > p > span, .plus-body > p > span{
+      font-size: 12px;
+   }
+   .start-btn{
+      padding: 10px 50px;
+      margin: 10px 0;
+   }
+   .sale-text{
+      font-size: 11px;
+   }
 }
 @media  (max-width: 640px){
    .main, .teacher{
@@ -395,6 +597,30 @@
    }
    .subject > h2{
       font-size: 32px;
+   }
+   .packs{
+      flex-direction: column;
+      align-items: center;
+   }
+   .pack{
+      width: 80%;
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+   }
+   .pack-head {
+      padding: 20px;
+   }
+   .pack-body, .plus-body{
+      padding: 25px;
+      padding-bottom: 10px;
+   }
+   .start-btn{
+      margin: 12px 0;
+   }
+}
+@media  (max-width: 550px){
+   .pack{
+      width: 100%;
    }
 }
 @media  (max-width: 425px){
@@ -451,6 +677,19 @@
       padding-top: 120px;
       padding-bottom: 75px;
    }
+   .pack{
+      padding-bottom: 15px;
+   }
+   .pack-head{
+      padding: 15px;
+   }
+   .pack-body, .plus-body {
+      padding: 15px;
+      padding-bottom: 5px;
+   }
+   .start-btn{
+      margin: 8px 0;
+   }
 }
 @media  (max-width: 375px){
    .main-text > p{
@@ -491,5 +730,8 @@
    }
    .course-block > ul > li{
       font-size: 12px;
+   }
+   .pack-head{
+      padding: 15px 10px;
    }
 }

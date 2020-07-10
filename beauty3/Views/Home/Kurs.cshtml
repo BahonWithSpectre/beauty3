@@ -136,68 +136,175 @@
                 </ul>
             </div>
         </div>
+
+        <div class="packages">
+            <div class="packages-bg"></div>
+            <h1>Варианты обучения</h1>
+            <div class="packs">
+                <div class="pack">
+                    <div class="pack-head">
+                        <h3>Пакет «Selfmade»</h3>
+                        <p>для тех, кто хочет обучиться самостоятельно</p>
+                    </div>
+                    <div class="pack-body">
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Учебные материалы в формате видеоуроков FullHD</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Личный кабинет с постоянным доступом к материалам обучения</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Раздаточный материал со списком косметики и инструментами</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Рабочая тетрадь для конспектирования и записей</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Возможность занятий в любое удобное время и месте</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Выдача сертификата после завершения обучения</span>
+                        </p>
+                    </div>
+                    <div class="pack-price">
+                        <span class="old-price">6 990 тг</span>
+                        <span class="new-price">4 490 тг</span>
+                    </div>
+                    <a class="start-btn" href="#">Бастау</a>
+                    <p class="sale-text">действует скидка 30% до 12 июля</p>
+                </div>
+                <div class="pack">
+                    <div class="pack-head">
+                        <h3>Пакет «Хочу Результат!»</h3>
+                        <p>с ежедневной поддержкой куратора</p>
+                    </div>
+                    <div class="pack-body">
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Учебные материалы в формате видеоуроков FullHD</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Личный кабинет с постоянным доступом к материалам обучения</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Раздаточный материал со списком косметики и инструментами</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Рабочая тетрадь для конспектирования и записей</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Возможность занятий в любое удобное время и месте</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-check"></i>
+                            <span>Выдача сертификата после завершения обучения</span>
+                        </p>
+                    </div>
+                    <div class="plus-body">
+                        <p>
+                            <i class="fa fa-plus"></i>
+                            <span>Индивидуальная поддержка куратора до результата</span>
+                        </p>
+                        <p>
+                            <i class="fa fa-plus"></i>
+                            <span>Уникальные условия для обучения в других курсах</span>
+                        </p>
+                    </div>
+                    <div class="pack-price">
+                        <span class="old-price">8 990 тг</span>
+                        <span class="new-price">5 990 тг</span>
+                    </div>
+                    <a class="start-btn" href="#">Бастау</a>
+                    <p class="sale-text">действует скидка 30% до 12 июля</p>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="footer">
         FOOTER
     </div>
 </div>
 
+
 <script type="text/javascript">
-	$(document).ready(function() {
-        $('.burger').hover(function(){
+    $(document).ready(function () {
+        $('.burger').hover(function () {
             $('.swipe-menu').toggleClass('active-menu')
         })
-        $('.close').click(function(){
+        $('.close').click(function () {
             $('.swipe-menu').removeClass('active-menu')
         })
-		$(window).on('scroll', function() {
-			if($(window).scrollTop() > 90){
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() > 90) {
                 $('.header').addClass('fix-header');
-			} else{
-				$('.header').removeClass('fix-header');
-			}
-        });
-        $(window).on('scroll', function() {
-            if($(window).scrollTop() >= $('#main').offset().top){
-			    $('a.fix-active').removeClass('fix-active');
-			    $('.main-nav').addClass('fix-active');
-            }
-            if($(window).scrollTop() >= $('#teacher').offset().top){
-			    $('a.fix-active').removeClass('fix-active');
-			    $('.teacher-nav').addClass('fix-active');
-            }
-            if($(window).scrollTop() >= $('#about').offset().top){
-			    $('a.fix-active').removeClass('fix-active');
-			    $('.about-nav').addClass('fix-active');
+            } else {
+                $('.header').removeClass('fix-header');
             }
         });
-         
-		$('.main-nav').click(function() {
-			var offset = 0;
-			$('a.fix-active').removeClass('fix-active');
-			$('.main-nav').addClass('fix-active');
-			$('html, body').animate({
-				scrollTop: $('#main').offset().top
-			}, 1000);
-			return false;
-		});
-		$('.teacher-nav').click(function() {
-			var offset = 0;
-			$('a.fix-active').removeClass('fix-active');
-			$('.teacher-nav').addClass('fix-active');
-			$('html, body').animate({
-				scrollTop: $('#teacher').offset().top
-			}, 1000);
-			return false;
-		});
-		$('.about-nav').click(function() {
-			var offset = 0;
-			$('a.fix-active').removeClass('fix-active');
-			$('.about-nav').addClass('fix-active');
-			$('html, body').animate({
-				scrollTop: $('#about').offset().top
-			}, 1000);
-			return false;
-		});
-	});
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() >= $('#main').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.main-nav').addClass('fix-active');
+            }
+            if ($(window).scrollTop() >= $('#teacher').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.teacher-nav').addClass('fix-active');
+            }
+            if ($(window).scrollTop() >= $('#about').offset().top) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.about-nav').addClass('fix-active');
+            }
+            if ($(window).scrollTop() >= $('.packages').offset().top - 100) {
+                $('a.fix-active').removeClass('fix-active');
+                $('.packages-nav').addClass('fix-active');
+            }
+        });
+
+        $('.main-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.main-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#main').offset().top
+            }, 1000);
+            return false;
+        });
+        $('.teacher-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.teacher-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#teacher').offset().top
+            }, 1000);
+            return false;
+        });
+        $('.about-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.about-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#about').offset().top
+            }, 1000);
+            return false;
+        });
+        $('.packages-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.packages-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('.packages').offset().top - 100
+            }, 1000);
+            return false;
+        });
+    });
 </script>

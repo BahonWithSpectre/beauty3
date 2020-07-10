@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\font-awesome\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
 
 
