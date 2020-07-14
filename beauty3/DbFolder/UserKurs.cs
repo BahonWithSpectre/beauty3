@@ -11,7 +11,7 @@ namespace beauty3.DbFolder
         public User User { get; set; }
 
 
-        public int VideoKursId { get; set; }
+        public int KursId { get; set; }
         public Kurs Kurs { get; set; }
 
 

@@ -4,23 +4,36 @@
     ViewData["Title"] = "KursCreate";
 }
 
-<h1>KursCreate</h1>
 
-<h4>Kurs</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="KursCreate">
+        <form asp-action="KursCreate" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="AvtorName" class="control-label"></label>
+                <input asp-for="AvtorName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AvtorInfo" class="control-label"></label>
+                <input asp-for="AvtorInfo" class="form-control" style="height:80px;" />
+            </div>
+
+            <hr />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label class="control-label">Курс аты</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PhotoUrl" class="control-label"></label>
-                <input asp-for="PhotoUrl" class="form-control" />
-                <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+                <label class="control-label">Курс бағасы</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Фон Видеокурса</label>
+                <input type="file" name="file" class="btn" />
             </div>
             <div class="form-group">
                 <label asp-for="Info" class="control-label"></label>
@@ -28,13 +41,9 @@
                 <span asp-validation-for="Info" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Добавить" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 

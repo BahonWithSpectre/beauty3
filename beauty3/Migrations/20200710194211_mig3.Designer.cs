@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using beauty3.DbFolder;
 
 namespace beauty3.Migrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20200710194211_mig3")]
+    partial class mig3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,7 +321,7 @@ namespace beauty3.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("KursId")
+                    b.Property<int?>("KursId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("PayDate")
@@ -330,6 +332,9 @@ namespace beauty3.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("VideoKursId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -439,9 +444,7 @@ namespace beauty3.Migrations
                 {
                     b.HasOne("beauty3.DbFolder.Kurs", "Kurs")
                         .WithMany()
-                        .HasForeignKey("KursId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KursId");
 
                     b.HasOne("beauty3.DbFolder.User", "User")
                         .WithMany()

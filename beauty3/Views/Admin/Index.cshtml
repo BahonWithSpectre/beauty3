@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<beauty3.DbFolder.Kurs>
+
 @{
     Layout = "~/Views/Shared/_Layout2.cshtml";
     ViewData["Title"] = "AdminIndex";
@@ -21,36 +22,19 @@
             </div>
         </div>
         <div class="students">
-            <div class="student">
-                <div class="stud-data">
-                    <p>
-                        <span>FirstName</span>
-                        <span>LastNameName</span>
-                    </p>
-                    <p>87087087878</p>
+            @foreach (var v in Model)
+            {
+                <div class="student">
+                    <div class="stud-data">
+                        <p>
+                            <span>@v.Name</span>
+                        </p>
+                        <p>@v.AvtorInfo</p>
+                    </div>
+                    <a href="/Admin/AboutStud" class="stud-more">Курс туралы</a>
                 </div>
-                <a href="/Admin/AboutStud" class="stud-more">Оқушы туралы</a>
-            </div>
-            <div class="student">
-                <div class="stud-data">
-                    <p>
-                        <span>FirstName</span>
-                        <span>LastName</span>
-                    </p>
-                    <p>87087087878</p>
-                </div>
-                <a href="/Admin/AboutStud" class="stud-more">Оқушы туралы</a>
-            </div>
-            <div class="student">
-                <div class="stud-data">
-                    <p>
-                        <span>FirstName</span>
-                        <span></span>
-                    </p>
-                    <p>87087087878</p>
-                </div>
-                <a href="/Admin/AboutStud" class="stud-more">Оқушы туралы</a>
-            </div>
+            }
+
         </div>
         <div class="pager">
             <a href="#"><i class="fa fa-angle-double-left"></i><span>Артқа</span></a>
