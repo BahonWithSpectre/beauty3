@@ -1,0 +1,59 @@
+﻿@model beauty3.DbFolder.Kurs
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewData["Title"] = "KursEdit";
+}
+
+<link href="~/css/kursEdit.css" rel="stylesheet">
+
+<div class="content">
+    <form asp-action="KursEdit" class="create" enctype="multipart/form-data">
+        <div class="form-blocks">
+            <div class="form-block">
+                <input name="kursId" type="hidden" value="@Model.Id">
+                <label for="avtor">Курс авторы:</label>
+                <input asp-for="AvtorName" id="avtor" type="text" value="@Model.AvtorName" required>
+
+                <label for="avtor-info">Автор туралы инфо:</label>
+                <textarea asp-for="AvtorInfo" id="avtor-info" rows="5" value="@Model.AvtorInfo" required></textarea>
+            </div>
+            <div class="form-block">
+                <label for="kursname">Курс аты:</label>
+                <input asp-for="Name" id="kursname" type="text" value="@Model.Name" required>
+
+                <label for="price">Курс бағасы:</label>
+                <input asp-for="Price" id="price" type="number" value="@Model.Price" required>
+
+                <label for="kurs-info">Курс туралы инфо:</label>
+                <textarea asp-for="Info" id="kurs-info" rows="5" value="@Model.Info" required></textarea>
+            </div>
+            <div class="form-block">
+                <label for="photo">Курс баннері(фото, jpg, png => 350 x 230):</label>
+                <input id="photo" onchange="readURL(this);" name="file" type="file" value="@Model.PhotoUrl" accept="jpg/png">
+                <div class="img-block">
+                    <img id="banner" src="~/kurs/@Model.PhotoUrl">
+                </div>
+            </div>
+        </div>
+        <div class="btn-block">
+            <a href="/Admin/KursList">Болдырмау</a>
+            <button type="submit">Сақтау</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#banner')
+                    .attr('src', e.target.result)
+                    .width('300px')
+                    .height('200px');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+

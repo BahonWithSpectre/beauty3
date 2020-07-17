@@ -23,11 +23,6 @@ namespace beauty3
 
         public IConfiguration Configuration { get; }
 
-
-
-
-
-
         public void ConfigureServices(IServiceCollection services)
         {
 

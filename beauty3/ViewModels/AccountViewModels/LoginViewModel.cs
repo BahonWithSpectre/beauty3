@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace beauty3.ViewModels.AccountViewModels
 {
     public class LoginViewModel
     {
+        //[Required]
+        //[Display(Name = "Email")]
+        //public string Email { get; set; }
+
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Номер телефона")]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

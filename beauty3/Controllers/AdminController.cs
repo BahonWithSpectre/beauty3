@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,10 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace beauty3.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public readonly AppDb db;
@@ -25,15 +25,40 @@ namespace beauty3.Controllers
             env = _env;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> UserList(int? page = 1)
+        {
+            ViewBag.Count = db.Users.Where(x => x.UserName != "BeautyAdmin").Count();
+            ViewBag.Page = page;
+
+            var pager = new Pager(ViewBag.Count, page);
+
+            UsersView uv = new UsersView
+            {
+                Users = await db.Users.Where(x => x.UserName != "BeautyAdmin").Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                Pager = pager
+            };
+
+            return View(uv);
+        }
+
+        public IActionResult AboutUser(string id)
+        {
+            var user = db.Users.FirstOrDefault(x => x.Id == id);
+            ViewBag.UserKurses = db.UserKurs.Where(x => x.UserId == id);
+
+            return View(user);
+        }
+
+
+
+
+
+        public IActionResult KursList()
         {
             var kurs = db.Kurs.ToList();
 
             return View(kurs);
         }
-
-
-
 
         public IActionResult KursCreate()
         {
@@ -42,24 +67,23 @@ namespace beauty3.Controllers
         [HttpPost]
         public async Task<IActionResult> KursCreate(Kurs kurs, IFormFile file)
         {
-            if (file == null || file.Length == 0) return Content("file not found");
+            if (file == null || file.Length == 0) return Content("Файл не найден!");
 
             var imgname = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
-            string path_Root = env.WebRootPath;
 
-            string path_to_Images = path_Root + "\\kurs\\" + imgname;
-            using (var stream = new FileStream(path_to_Images, FileMode.Create))
+            string kursImg = "/kurs/" + imgname;
+            using (var stream = new FileStream(env.WebRootPath + kursImg, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
-            kurs.PhotoUrl = "/kurs/" + imgname;
+            kurs.PhotoUrl = imgname;
             kurs.CreatDate = DateTime.Now;
 
             db.Kurs.Add(kurs);
             db.SaveChanges();
 
-            return RedirectToAction("Index","Admin");
+            return RedirectToAction("KursList", "Admin");
         }
 
 
@@ -69,39 +93,47 @@ namespace beauty3.Controllers
         {
             var kurs = db.Kurs.FirstOrDefault(p => p.Id == Id);
 
-
-
             return View(kurs);
         }
         [HttpPost]
-        public async Task<IActionResult> KursEdit(Kurs kurs, IFormFile file)
+        public async Task<IActionResult> KursEdit(int? kursId, Kurs kurs, IFormFile file)
         {
-            if (file == null || file.Length == 0)
+            if (kursId != null)
             {
-                
-            }
-            else
-            {
-                var imgname = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
-                string path_Root = env.WebRootPath;
-
-                string path_to_Images = path_Root + "\\kurs\\" + imgname;
-                using (var stream = new FileStream(path_to_Images, FileMode.Create))
+                var thisKurs = db.Kurs.FirstOrDefault(x => x.Id == kursId);
+                if (file == null || file.Length == 0)
                 {
-                    await file.CopyToAsync(stream);
+                    kurs.PhotoUrl = thisKurs.PhotoUrl;
+                }
+                else
+                {
+                    var imgname = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
+
+                    string kursImg = "/kurs/" + imgname;
+                    using (var stream = new FileStream(env.WebRootPath + kursImg, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    kurs.PhotoUrl = imgname;
+
                 }
 
-                kurs.PhotoUrl = "/kurs/" + imgname;
+                thisKurs.Name = kurs.Name;
+                thisKurs.Info = kurs.Info;
+                thisKurs.AvtorName = kurs.AvtorName;
+                thisKurs.AvtorInfo = kurs.AvtorInfo;
+                thisKurs.Price = kurs.Price;
+                thisKurs.CreatDate = thisKurs.CreatDate;
+                thisKurs.PhotoUrl = kurs.PhotoUrl;
+
+                //db.Kurs.Update(kurs);
+                await db.SaveChangesAsync();
             }
 
-            db.Kurs.Update(kurs);
-            await db.SaveChangesAsync();
-
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("KursList", "Admin");
             
         }
-
-
 
 
         public IActionResult DeleteKurs(int Id)
@@ -139,7 +171,7 @@ namespace beauty3.Controllers
 
             if (PhotoUrl == null || PhotoUrl.Length == 0)
             {
-
+                return Content("Картинка для видео не найдена!");
             }
             else
             {

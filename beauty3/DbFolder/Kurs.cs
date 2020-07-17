@@ -12,9 +12,6 @@ namespace beauty3.DbFolder
         public DateTime? CreatDate { get; set; }
         public string Info { get; set; }
 
-
-
-
         public string AvtorName { get; set; }
         public string AvtorInfo { get; set; }
     }

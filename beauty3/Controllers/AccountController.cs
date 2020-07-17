@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using beauty3.DbFolder;
 using beauty3.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +9,7 @@ namespace beauty3.Controllers
 {
     public class AccountController : Controller
     {
-        readonly AppDb db;
+        AppDb db;
         UserManager<User> _userManager;
         SignInManager<User> _signInManager;
 
@@ -40,7 +37,7 @@ namespace beauty3.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { UserName = model.Email, FirstName = model.FirstName, PhoneNumber = model.PhoneNumber };
+                User user = new User { UserName = model.PhoneNumber, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -66,9 +63,16 @@ namespace beauty3.Controllers
         {
             if(User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Profil");
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("UserList", "Admin");
+                    //return RedirectToAction("UserList", "Admin", new { page = 1 });
+                }
+                else
+                {
+                    return RedirectToAction("Profil", "Account");
+                }
             }
-
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
@@ -80,7 +84,7 @@ namespace beauty3.Controllers
             if (ModelState.IsValid)
             {
                 var result =
-                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                    await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
                     // проверяем, принадлежит ли URL приложению
@@ -106,12 +110,8 @@ namespace beauty3.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Visitor", "Home");
         }
-
-
-
-
 
 
 
@@ -120,7 +120,15 @@ namespace beauty3.Controllers
         {
             if(User.Identity.IsAuthenticated)
             {
-                return View();
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("UserList", "Admin");
+                    //return RedirectToAction("UserList", "Admin", new { page = 1 });
+                }
+                else
+                {
+                    return View();
+                }
             }
             return RedirectToAction("Login");
         }
@@ -129,7 +137,15 @@ namespace beauty3.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View();
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("UserList", "Admin");
+                    //return RedirectToAction("UserList", "Admin", new { page = 1 });
+                }
+                else
+                {
+                    return View();
+                }
             }
             return RedirectToAction("Login");
         }

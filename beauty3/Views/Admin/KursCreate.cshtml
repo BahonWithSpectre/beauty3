@@ -1,49 +1,55 @@
 ﻿@model beauty3.DbFolder.Kurs
-
 @{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
     ViewData["Title"] = "KursCreate";
 }
 
+<link href="~/css/kursCreate.css" rel="stylesheet">
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="KursCreate" enctype="multipart/form-data">
-            <div class="form-group">
-                <label asp-for="AvtorName" class="control-label"></label>
-                <input asp-for="AvtorName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="AvtorInfo" class="control-label"></label>
-                <input asp-for="AvtorInfo" class="form-control" style="height:80px;" />
-            </div>
+<div class="content">
+    <form asp-action="KursCreate" class="create" enctype="multipart/form-data">
+        <div class="form-blocks">
+            <div class="form-block">
+                <label for="avtor">Курс авторы:</label>
+                <input asp-for="AvtorName" id="avtor" type="text" required>
 
-            <hr />
+                <label for="avtor-info">Автор туралы инфо:</label>
+                <textarea asp-for="AvtorInfo" id="avtor-info" rows="5" required></textarea>
+            </div>
+            <div class="form-block">
+                <label for="kursname">Курс аты:</label>
+                <input asp-for="Name" id="kursname" type="text" required>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Курс аты</label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label for="price">Курс бағасы:</label>
+                <input asp-for="Price" id="price" type="number" required>
+
+                <label for="kurs-info">Курс туралы инфо:</label>
+                <textarea asp-for="Info" id="kurs-info" rows="5" required></textarea>
             </div>
-            <div class="form-group">
-                <label class="control-label">Курс бағасы</label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="form-block">
+                <label for="photo">Курс баннері(фото, jpg, png => 350 x 230):</label>
+                <input id="photo" onchange="readURL(this);" name="file" type="file" required accept="jpg/png">
+                <div class="img-block">
+                    <img id="banner" src="">
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Фон Видеокурса</label>
-                <input type="file" name="file" class="btn" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Info" class="control-label"></label>
-                <input asp-for="Info" class="form-control" />
-                <span asp-validation-for="Info" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Добавить" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+        <button type="submit">Сақтау</button>
+    </form>
 </div>
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#banner')
+                    .attr('src', e.target.result)
+                    .width('300px')
+                    .height('200px');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 

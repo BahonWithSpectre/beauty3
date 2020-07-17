@@ -74,6 +74,12 @@
    transition: 0.2s;
 }
 
+.pager > .page-act:hover {
+    cursor: default;
+    box-shadow: 0 0 3px var(--grey-color) !important;
+}
+
+
 .student{
    width: 350px;
    display: flex;

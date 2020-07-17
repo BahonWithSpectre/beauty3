@@ -1,13 +1,13 @@
 
-:root{
-   --main-color: #222;
-   --white-color: #fdf5f5;
-   --brown-color: #4c3d36;
-   --grey-color: #968c88;
-   /* --pink-color: #f3e1e4; */
-   /* --pink-color: #f4e2e6; */
-   --pink-color: #fae2e5;
-   
+:root {
+    --main-color: #222;
+    --white-color: #fdf5f5;
+    --brown-color: #4c3d36;
+    --grey-color: #968c88;
+    /* --pink-color: #f3e1e4; */
+    /* --pink-color: #f4e2e6; */
+    --pink-color: #fae2e5;
+    --red-color: #bb6054;
 }
 @font-face{
    font-family: MyOpenSans;
@@ -120,10 +120,34 @@
    transform: translateX(0);
    background-color: var(--main-color);
 }
-.swipe-menu > a{
+.swipe-menu a{
    color: var(--white-color);
    text-decoration: none;
    padding: 10px 0;
+   position: relative;
+}
+.swipe-menu a > i{
+   font-size: 18px;
+   margin-left: 10px;
+   position: absolute;
+   top: 30%;
+   color: var(--white-color) !important;
+}
+.swipe-menu a:hover, .swipe-menu > a:hover > i{
+   color: var(--white-color);
+   text-shadow: 0 0 20px var(--white-color);
+}
+.swipe-menu > .kurs-down-menu > a{
+   display: block;
+   color: var(--white-color);
+}
+.swipe-menu > .act-kurs-down{
+   color: var(--white-color) !important;
+   text-shadow: 0 0 20px var(--white-color) !important;
+}
+.act-down-icon{
+   transform: rotateZ(90deg);
+   color: var(--main-color) !important;
 }
 .swipe-login > *{
    font-size: 16px;
@@ -205,48 +229,43 @@
    z-index: 99;
    display: flex;
    flex-direction: column;
-   align-items: start;
    padding: 15px 2%;
    background-color: var(--pink-color);
    box-shadow: 1px 0 10px var(--grey-color);
 }
-.sidebar > a{
+.sidebar a{
+   display: block;
    text-decoration: none;
    padding: 5px 0;
-   margin-bottom: 5px;
-   transition: 0.3s;
+   transition: 0.1s;
    position: relative;
    color: var(--brown-color);
 }
-.sidebar > a:hover{
-   color: var(--main-color);
-}
-.sidebar > a:before{
-   content: "";
-   display: block;
-   width: 0;
-   height: 2px;
+.sidebar a > i{
+   font-size: 18px;
+   margin-left: 10px;
    position: absolute;
-   bottom: 0;
-   left: 0;
-   background-color: var(--brown-color);
-   transition: 0.3s;
+   top: 25%;
+   color: var(--brown-color);
 }
-.sidebar > a:hover:before{
-   width: 100%;
-   left: 0;
+.sidebar a:hover, .sidebar a:hover > i{
+   color: var(--main-color);
+   text-shadow: 0 0 20px var(--grey-color);
 }
-.fix-active{
-   font-weight: bolder;
-   text-shadow: 0 0 1px var(--grey-color);
+.kurs-down-menu{
+   padding-left: 25px;
+   display: none;
+}
+/* --- actives --- */
+.act-kurs-down{
+   color: var(--main-color) !important;
+   text-shadow: 0 0 20px var(--grey-color) !important;
+}
+.act-down-icon{
+   transform: rotateZ(90deg);
    color: var(--main-color) !important;
 }
-.fix-active:hover{
-   cursor: default;
-}
-.fix-active:hover:before{
-   width: 0 !important;
-}
+
 
 /* ----------------------------- */
 .footer{

@@ -30,5 +30,6 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\courseView.css" />
+    <Content Remove="wwwroot\css\index.css" />
   </ItemGroup>
 </Project>

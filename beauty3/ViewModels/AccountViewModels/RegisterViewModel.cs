@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace beauty3.ViewModels.AccountViewModels
 {
@@ -12,6 +8,9 @@ namespace beauty3.ViewModels.AccountViewModels
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
 
+        [Required]
+        [Display(Name = "Фамилия")]
+        public string LastName { get; set; }
 
         [Required]
         [Display(Name = "Номер телефона")]
@@ -20,7 +19,6 @@ namespace beauty3.ViewModels.AccountViewModels
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
 
         [Required]
         [DataType(DataType.Password)]
