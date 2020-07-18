@@ -26,12 +26,14 @@
    border-radius: 2px;
    overflow: hidden;
    box-shadow: 0 0 20px var(--grey-color);
+   margin-bottom: 20px;
 }
 .course-item:hover > .course-img > img{
    transform: scale(1.05);
 }
 .course-item:nth-child(3n+2){
    margin: 0 2%;
+   margin-bottom: 20px;
 }
 .course-img{
    width: 100%;

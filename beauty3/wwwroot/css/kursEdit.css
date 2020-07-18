@@ -68,7 +68,9 @@
     background-color: var(--red-color);
     margin-right: 10px;
 }
-
+.btn-block > a:first-child {
+    background-color: var(--grey-color);
+}
 
 @media  (max-width: 1024px){
    .form-blocks{
@@ -91,7 +93,10 @@
 }
 @media  (max-width: 640px){
 }
-@media  (max-width: 550px){
+@media  (max-width: 580px){
+    .btn-block > a, .btn-block > button {
+        padding: 7px 15px;
+    }
 }
 @media  (max-width: 425px){
 }

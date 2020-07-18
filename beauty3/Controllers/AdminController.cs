@@ -52,7 +52,6 @@ namespace beauty3.Controllers
 
 
 
-
         public IActionResult KursList()
         {
             var kurs = db.Kurs.ToList();
@@ -77,17 +76,14 @@ namespace beauty3.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            kurs.PhotoUrl = imgname;
             kurs.CreatDate = DateTime.Now;
+            kurs.PhotoUrl = imgname;
 
             db.Kurs.Add(kurs);
             db.SaveChanges();
 
             return RedirectToAction("KursList", "Admin");
         }
-
-
-
 
         public IActionResult KursEdit(int Id)
         {
@@ -116,7 +112,6 @@ namespace beauty3.Controllers
                     }
 
                     kurs.PhotoUrl = imgname;
-
                 }
 
                 thisKurs.Name = kurs.Name;
@@ -130,28 +125,22 @@ namespace beauty3.Controllers
                 //db.Kurs.Update(kurs);
                 await db.SaveChangesAsync();
             }
+            return RedirectToAction("KursList", "Admin");
+        }
+
+        public IActionResult DeleteKurs(int? Id)
+        {
+            if (Id != null)
+            {
+                var kurs = db.Kurs.FirstOrDefault(x => x.Id == Id);
+
+                db.Kurs.Remove(kurs);
+                db.SaveChanges();
+            }
 
             return RedirectToAction("KursList", "Admin");
-            
         }
 
-
-        public IActionResult DeleteKurs(int Id)
-        {
-            var kurs = db.Kurs.FirstOrDefault(p => p.Id == Id);
-
-
-            return View(kurs);
-        }
-        [HttpPost]
-        public IActionResult DeleteKurs(Kurs kurs)
-        {
-            db.Kurs.Remove(kurs);
-
-            db.SaveChanges();
-
-            return RedirectToAction("Index","Admin");
-        }
 
 
         public IActionResult InKurs(int Id)
@@ -178,13 +167,13 @@ namespace beauty3.Controllers
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
                 string path_Root = env.WebRootPath;
 
-                string path_to_Images = path_Root + "\\kurs\\" + imgname;
+                string path_to_Images = path_Root + "/kurs/" + imgname;
                 using (var stream = new FileStream(path_to_Images, FileMode.Create))
                 {
                     await PhotoUrl.CopyToAsync(stream);
                 }
 
-                kv.PhotoUrl = "/kurs/" + imgname;
+                kv.PhotoUrl = imgname;
             }
 
             db.KursVideos.Add(kv);
@@ -192,9 +181,6 @@ namespace beauty3.Controllers
 
             return RedirectToAction("InKurs", new { Id = kv.KursId });
         }
-
-
-
 
         public IActionResult EditVideo(int Id)
         {
@@ -211,17 +197,16 @@ namespace beauty3.Controllers
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
                 string path_Root = env.WebRootPath;
 
-                string path_to_Images = path_Root + "\\kursvideo\\" + imgname;
+                string path_to_Images = path_Root + "/kursvideo/" + imgname;
                 using (var stream = new FileStream(path_to_Images, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
 
-                video.PhotoUrl = "/kursvideo/" + imgname;
+                video.PhotoUrl = imgname;
             }
 
             db.KursVideos.Update(video);
-
             db.SaveChanges();
 
             return RedirectToAction("InKurs", new { Id = video.KursId });
