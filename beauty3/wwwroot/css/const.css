@@ -215,24 +215,110 @@
 
 .footer{
    width: 100%;
-   padding-top: 100px;
-   padding-bottom: 100px;
-   background-color: var(--main-color);
-   color: var(--white-color);
+   padding-top: 50px;
+   padding-bottom: 50px;
+   background-color: var(--white-color);
+}
+.footer-items{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+.footer-items > *{
+   display: flex;
+   flex-direction: column;
+}
+
+/* -----fLeft----- */
+.fleft{
+   width: 25%;
+}
+.contact, .contact-phone{
    display: flex;
    align-items: center;
-   justify-content: center;
 }
+.contact > *{
+   margin-bottom: 7px;
+}
+.contact > i{
+   font-size: 45px;
+}
+.contact-phone{
+   display: flex;
+   flex-direction: column;
+   margin-left: 10px;
+}
+.contact-phone > a{
+   font-size: 14px;
+   text-decoration: none;
+}
+.contact-phone > a:hover{
+   text-decoration: underline;
+}
+.social > a{
+   text-decoration: none;
+   text-align: center;
+   margin-right: 5px;
+   transition: 0.3s;
+}
+.social > a i{
+   width: 32px;
+   height: 32px;
+   line-height: 32px;
+   font-size: 18px;
+   background: transparent;
+   color: var(--grey-color);
+   border: 1px solid var(--grey-color);
+   border-radius: 50%;
+   transition: 0.3s;
+}
+.social > a:hover i{
+   color: var(--white-color);
+}
+.social > a:first-child:hover i{
+   border-color: #24ce61;
+   background-color: #24ce61;
+}
+.social > a:last-child:hover i{
+   border-color: #fdf497;
+   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%) !important;
+}
+
+/* -----fCenter----- */
+.fcenter{
+   width: 33%;
+}
+.fcenter > h3{
+   font-size: 18px;
+   margin-bottom: 7px;
+}
+.fcenter > span{
+   font-size: 14px;
+   margin-bottom: 2px;
+}
+
+/* -----fRight----- */
+
+.fright > a{
+   font-size: 14px;
+   margin-bottom: 2px;
+}
+.fright > a:hover{
+   text-decoration: none;
+}
+
+.copyright{
+   margin-top: 50px;
+   font-size: 13px;
+   text-align: center;
+}
+
 
 /* –––––––––––MEDIA–––––––––––– */
 
 @media  (max-width: 1024px){
    .header, .content > *, .footer {
       padding: 0 7%;
-   }
-   .footer{
-      padding-top: 100px;
-      padding-bottom: 100px;
    }
 }
 @media  (max-width: 768px){
@@ -251,6 +337,22 @@
    }
    .login > i{
       font-size: 18px;
+   }
+   .footer{
+      padding-top: 25px;
+      padding-bottom: 25px;
+   }
+   .footer-items{
+      display: flex;
+      flex-direction: column;
+   }
+   .footer-items > *{
+      width: 100%;
+      margin-bottom: 25px;
+   }
+   .copyright{
+      margin-top: 0;
+      text-align: left;
    }
 }
 @media  (max-width: 640px){
