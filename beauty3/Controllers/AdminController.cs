@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,21 @@ namespace beauty3.Controllers
         {
             var user = db.Users.FirstOrDefault(x => x.Id == id);
             ViewBag.UserKurses = db.UserKurs.Where(x => x.UserId == id);
+
+            var list = db.Kurs.ToList();
+
+            foreach(var d in list)
+            {
+                foreach(var f in ViewBag.UserKurses)
+                {
+                    if(d.Id == f.KursId)
+                    {
+                        list.Remove(d);
+                    }
+                }
+            }
+
+            ViewBag.Kurs = list;
 
             return View(user);
         }
