@@ -1,134 +1,70 @@
-﻿
+﻿@model beauty3.DbFolder.KursVideo
 @{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
     ViewData["Title"] = "Video";
 }
 <link href="~/css/video.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
 
 
-<div class="wrap">
-    <div class="swipe-menu">
-        <div class="close">
-            <span></span>
-            <!-- <i class="fa fa-close"></i> -->
-        </div>
-        <a href="#" class="main-nav">Басты бет</a>
-        <a href="#" class="course-nav fix-active">Менің курстарым</a>
-        <a href="#" class="more-nav">Жаңалықтар</a>
-        <a href="/Account/Profil" class="swipe-login">
-            <span>Аккаунт</span>
-            <i class="fa fa-user-o"></i>
-        </a>
-    </div>
-    <div class="header">
-        <div class="burger">
-            <span></span>
-        </div>
-        <a class="logo" href="/Home/Visitor">
-            <img src="~/img/logo.png" alt="BeautyOnline">
-            <!-- Beauty Online -->
-        </a>
-        <div class="login">
-            <span>UserName</span>
-            <i class="fa fa-user-o"></i>
-            <div class="user-menu">
-                <i class="fa fa-caret-up"></i>
-                <a href="#" class="cart-show"><i class="fa fa-bars"></i>Менің курстарым</a>
-                <a href="#"><i class="fa fa-cog"></i>Баптаулар</a>
-                <a href="~/Account/Logout"><i class="fa fa-sign-out"></i>Шығу</a>
-            </div>
-        </div>
-    </div>
-    <div class="sidebar">
-        <a href="#">Басты бет</a>
-        <a href="#" class="fix-active">Менің курстарым</a>
-        <a href="#">Жаңалықтар</a>
-    </div>
-    <div class="content">
-        <div class="main">
-            <div class="video-block">
-                <div class="video">
-                    <iframe src="https://player.vimeo.com/video/432060648" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-                <div class="video-text">
-                    <h1>VideoName</h1>
-                    <p><i class="fa fa-eye"></i> 1634</p>
-                    <p>20.06.2020</p>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Corporis iusto, earum cum quasi possimus eum architecto harum culpa excepturi distinctio!
-                        Blanditiis sed tempora nostrum? Commodi.
-                    </p>
+
+<div class="content">
+    <div class="main">
+        <div class="video-block">
+            <div class="video">
+                <div class="plyr__video-embed" id="player">
+                    <iframe src="@Model.VideoUrl"
+                            encrypted-media;
+                            gyroscope;
+                            allowfullscreen
+                            allow="autoplay"
+                            controls></iframe>
                 </div>
             </div>
-            <div class="video-titles">
-                <div class="video-title">
-                    <div class="baner">
-                        <img src="~/img/course-item.jpg">
-                    </div>
-                    <div class="title-text">
-                        <h3>VideoName</h3>
-                        <p>About Lorem ipsum dolor sit amet.</p>
-                        <span><i class="fa fa-eye"></i> 1634</span>
-                    </div>
-                </div>
-                <div class="video-title">
-                    <div class="baner">
-                        <img src="~/img/course-item.jpg">
-                    </div>
-                    <div class="title-text">
-                        <h3>VideoName</h3>
-                        <p>About Lorem ipsum dolor sit amet.</p>
-                        <span><i class="fa fa-eye"></i> 1634</span>
-                    </div>
-                </div>
-                <div class="video-title">
-                    <div class="baner">
-                        <img src="~/img/course-item.jpg">
-                    </div>
-                    <div class="title-text">
-                        <h3>VideoName</h3>
-                        <p>About Lorem ipsum dolor sit amet.</p>
-                        <span><i class="fa fa-eye"></i> 1634</span>
-                    </div>
-                </div>
-                <div class="video-title">
-                    <div class="baner">
-                        <img src="~/img/course-item.jpg">
-                    </div>
-                    <div class="title-text">
-                        <h3>VideoName</h3>
-                        <p>About Lorem ipsum dolor sit amet.</p>
-                        <span><i class="fa fa-eye"></i> 1634</span>
-                    </div>
-                </div>
-                <div class="video-title">
-                    <div class="baner">
-                        <img src="~/img/course-item.jpg">
-                    </div>
-                    <div class="title-text">
-                        <h3>VideoName</h3>
-                        <p>About Lorem ipsum dolor sit amet.</p>
-                        <span><i class="fa fa-eye"></i> 1634</span>
-                    </div>
-                </div>
+            <div class="video-text">
+                <h1>@Model.VideoName</h1>
+                <p><i class="fa fa-user"></i> @Model.Kurs.AvtorName</p>
+                <p class="vinfo">
+                    @Model.Info
+                </p>
+
             </div>
         </div>
+        <div class="video-titles">
+            @foreach (var c in ViewBag.OtherVideos)
+            {
+                <a href="/Account/Video/@c.Kurs.Id?videoId=@c.Id" class="video-title">
+                    <div class="baner">
+                        <img src="~/kursvideo/@c.PhotoUrl">
+                    </div>
+                    <div class="title-text">
+                        <h3>@c.VideoName</h3>
+                        <p>@c.Info</p>
+                    </div>
+                </a>
+            }
+        </div>
     </div>
+
+
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.login').click(function () {
-            $('.user-menu').slideToggle(300);
-        });
-        $('.content').click(function () {
-            $('.user-menu').slideUp(300);
-        });
 
-        $('.burger').hover(function () {
-            $('.swipe-menu').toggleClass('active-menu')
-        })
-        $('.close').click(function () {
-            $('.swipe-menu').removeClass('active-menu')
-        })
-    });
+
+<script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
+<script>
+    const player = new Plyr('#player');
+
+    @*alert($('.vinfo').text());*@
+
+    $(window).load(function () {
+        var element = $('.vinfo').text();
+        var maxLength = 10;
+
+        if (element.length > maxLength) {
+            element = element.substr(0, maxLength) + '...';
+        }
+        $('.vinfo').text() = element;
+        @*return element;*@
+    })
+
 </script>

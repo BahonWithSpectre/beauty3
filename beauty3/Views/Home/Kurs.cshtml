@@ -1,6 +1,7 @@
-﻿
+﻿@model beauty3.DbFolder.Kurs
 @{
     ViewData["Title"] = "Kurs";
+    int counter = 0;
 }
 
 <link href="~/css/courseView.css" rel="stylesheet">
@@ -29,7 +30,7 @@
         <a href="#" class="main-nav fix-active">Басты бет</a>
         <a href="#" class="teacher-nav">Спикер жайлы</a>
         <a href="#" class="about-nav">Курс жайлы</a>
-        <a href="#" class="more-nav">Қосымша</a>
+        <a href="#" class="packages-nav">Пакеттер</a>
     </div>
     <a href="/Account/Profil" class="login">
         <span>Жеке кабинет</span>
@@ -40,29 +41,34 @@
         <span></span>
     </div>
 </div>
+
 <div class="content">
     <div id="main" class="main">
         <div class="main-text">
-            <h2>Cұлулық сырлары</h2>
-            <p>Научитесь самостоятельно создавать макияж любой сложности за 7 уроков</p>
+            <h2>@Model.Name</h2>
+            <p>@Model.Info</p>
+            @*<h2>Cұлулық сырлары</h2>
+        <p>Научитесь самостоятельно создавать макияж любой сложности за 7 уроков</p>*@
             <a href="#" class="btn">Үйрену</a>
         </div>
-        <div class="main-bg" style="background-image: url(/img/course-main.png);"></div>
+        <div class="main-bg" style="background-image: url(/kurs/@Model.BannerUrl);"></div>
     </div>
     <div id="teacher" class="teacher">
         <div class="teacher-bg"></div>
         <div class="teacher-img">
-            <img src="~/img/teacher.jpg">
+            <img src="~/kurs/@Model.AvtorImgUrl">
         </div>
         <div class="teacher-text">
-            <h2>Пәленшеева Түгенше</h2>
-            <p>
-                Online обучение - это ключ к успеху в современном мире.
-                Именно поэтому я предлагаю уникальный и, пожалуй,
-                самый удобный формат обучения в сфере beauty.
-                Получайте новые знания и достигайте своих целей находясь
-                в любой точке мира в комфортной для вас обстановке.
-            </p>
+            <h2>@Model.AvtorName</h2>
+            <p>@Model.AvtorInfo</p>
+            @*<h2>Пәленшеева Түгенше</h2>*@
+            @*<p>
+            Online обучение - это ключ к успеху в современном мире.
+            Именно поэтому я предлагаю уникальный и, пожалуй,
+            самый удобный формат обучения в сфере beauty.
+            Получайте новые знания и достигайте своих целей находясь
+            в любой точке мира в комфортной для вас обстановке.
+        </p>*@
         </div>
     </div>
 
@@ -74,10 +80,30 @@
                 </div>
                 <h2>КУРС КІМДЕРГЕ АРНАЛАДЫ?</h2>
                 <ul>
-                    <li>15 минутта өзін бояндырып үйренгісі келетін кез-келген қыз-келіншектерге;</li>
+                    @if (@Model.Kimge1 != null)
+                    {
+                        <li>@Model.Kimge1</li>
+                    }
+                    @if (@Model.Kimge2 != null)
+                    {
+                        <li>@Model.Kimge2</li>
+                    }
+                    @if (@Model.Kimge3 != null)
+                    {
+                        <li>@Model.Kimge3</li>
+                    }
+                    @if (@Model.Kimge4 != null)
+                    {
+                        <li>@Model.Kimge4</li>
+                    }
+                    @if (@Model.Kimge5 != null)
+                    {
+                        <li>@Model.Kimge5</li>
+                    }
+                    @*<li>15 минутта өзін бояндырып үйренгісі келетін кез-келген қыз-келіншектерге;</li>
                     <li>Кез-келген жаста әдемі болып, бет күтіміне ерекше мән беретін жандарға;</li>
                     <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>
-                    <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>
+                    <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>*@
                 </ul>
             </div>
             <div class="course-block">
@@ -100,38 +126,45 @@
                     <div class="img-block">
                         <img src="~/img/check-icon.png">
                     </div>
-                    <p>
+                    <p>@Model.What1</p>
+                    @*<p>
                         Узнаете все о самых актуальных и востребованных техниках в
                         макияже и научитесь работать с различными особенностями:
                         нависшее веко, проблемная кожа, лифтинг макияж
-                    </p>
+                    </p>*@
                 </div>
                 <div class="learn-block">
                     <div class="img-block">
                         <img src="~/img/check-icon.png">
                     </div>
-                    <p>
+                    <p>@Model.What2</p>
+                    @*<p>
                         Благодаря обширному блоку самой актуальной теоретической
                         информации научитесь на профессиональном уровне разбираться
                         в многообразии косметических продуктов
-                    </p>
+                    </p>*@
                 </div>
                 <div class="learn-block">
                     <div class="img-block">
                         <img src="~/img/check-icon.png">
                     </div>
-                    <p>Приобретете новую профессию и расширите до максимума свои знания и навыки в мире макияжа</p>
+                    <p>@Model.What3</p>
+                    @*<p>Приобретете новую профессию и расширите до максимума свои знания и навыки в мире макияжа</p>*@
                 </div>
             </div>
         </div>
         <div class="subject">
             <h2>Курс тақырыптары<span></span><p></p></h2>
             <ul>
-                <li>Тақырып 1</li>
-                <li>Тақырып 2</li>
+                @foreach (var c in ViewBag.Videos)
+                {
+                    counter++;
+                    <li>@counter. @c.VideoName</li>
+                }
+                @*<li>Тақырып 2</li>
                 <li>Тақырып 3</li>
                 <li>Тақырып 4</li>
-                <li>Тақырып 5</li>
+                <li>Тақырып 5</li>*@
             </ul>
         </div>
     </div>

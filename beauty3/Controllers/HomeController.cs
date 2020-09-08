@@ -1,46 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using beauty3.Models;
 using beauty3.DbFolder;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace beauty3.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private AppDb db;
 
-        public HomeController(ILogger<HomeController> logger, AppDb _db)
+        public HomeController(AppDb _db)
         {
-            _logger = logger;
             db = _db;
         }
 
+
+
         public IActionResult Visitor()
         {
-            var kurs = db.Kurs.ToList();
+            var kurs = db.Kurs.Take(3);
 
             return View(kurs);
         }
 
 
 
-        public IActionResult Kurs(int? Id)
+        public async Task<IActionResult> Kurs(int? Id)
         {
             if(Id != null)
             {
-                var kurs = db.Kurs.FirstOrDefault(p => p.Id == Id);
+                var kurs = await db.Kurs.FirstOrDefaultAsync(p => p.Id == Id);
+                ViewBag.Videos = await db.KursVideos.Where(x => x.KursId == Id).ToListAsync();
 
                 return View(kurs);
             }
             return View();
         }
 
+
+
+        public async Task<IActionResult> AllKurs()
+        {
+            var kurs = await db.Kurs.ToListAsync();
+
+            return View(kurs);
+        }
 
 
 

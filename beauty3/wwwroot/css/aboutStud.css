@@ -53,6 +53,31 @@
 }
 
 
+.red-btn, .green-btn{
+    cursor: pointer;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 3px;
+    box-shadow: 0 0 3px #aaa;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+}
+.red-btn:focus, .green-btn:focus {
+    border: none;
+    outline: none;
+}
+.red-btn {
+    background-color: red;
+}
+.green-btn {
+    background-color: green;
+}
+.red-btn:hover, .green-btn:hover {
+    filter: brightness(0.8);
+}
+
+
 
 
 @media  (max-width: 1024px){

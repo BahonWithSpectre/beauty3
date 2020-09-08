@@ -4,6 +4,7 @@
     ViewData["Title"] = "Visitor";
 }
 <link href="~/css/index.css" rel="stylesheet">
+<link href="~/css/slider.css" rel="stylesheet">
 
 <div class="swipe-menu">
     <div class="close">
@@ -42,12 +43,34 @@
 </div>
 <div class="content">
     <div id="main" class="main">
-        <div class="main-text">
-            <h1>Школа <br> макияжа</h1>
-            <p>Профессиональные make-up курсы от 3990 руб</p>
-            <span class="select-btn">Выбрать курс</span>
+        <div class="slider" id="slider">
+            <div class="slItems">
+                <div class="slItem">
+                    <div class="main-text">
+                        <h1>Школа <br> макияжа</h1>
+                        <p>Профессиональные make-up курсы от 3990 руб</p>
+                        <span class="select-btn">Выбрать курс</span>
+                    </div>
+                    <div class="main-bg" style="background-image: url(/img/main-bg.png);"></div>
+                </div>
+                <div class="slItem">
+                    <div class="main-text">
+                        <h1>Школа <br> макияжа</h1>
+                        <p>Профессиональные make-up курсы от 3990 руб</p>
+                        <span class="select-btn">Выбрать курс</span>
+                    </div>
+                    <div class="main-bg" style="background-image: url(/img/main-bg.png);"></div>
+                </div>
+                <div class="slItem">
+                    <div class="main-text">
+                        <h1>Школа <br> макияжа</h1>
+                        <p>Профессиональные make-up курсы от 3990 руб</p>
+                        <span class="select-btn">Выбрать курс</span>
+                    </div>
+                    <div class="main-bg" style="background-image: url(/img/main-bg.png);"></div>
+                </div>
+            </div>
         </div>
-        <div class="main-bg" style="background-image: url(/img/main-bg.png);"></div>
     </div>
     <div id="about" class="about">
         <div class="about-bg"></div>
@@ -113,57 +136,63 @@
         </div>
     </div>
     <div class="about-bottom">
-        <div class="about-bottom-bg"></div>
-        <div class="about-left">
-            <h2>2018</h2>
-            <p>жылы ашылды</p>
-        </div>
-        <div class="about-center"><span>BEAUTY ONLINE</span><br> жайлы ақпараттар</div>
-        <div class="about-right">
-            <h2>62130</h2>
-            <p>студент тіркелген</p>
+        <span class="why">Неге бізбен тиімді?</span>
+        <h2><span>BEAUTY ONLINE</span> артықшылықтары</h2>
+        <!-- Beauty Online -->
+        <div class="about-list-block">
+            <div class="about-list">
+                <div>
+                    <img src="~/img/icon6/111.svg">
+                    <span>Удобная платформа для занятий онлайн</span>
+                </div>
+                <div>
+                    <img src="~/img/icon6/222.svg">
+                    <span>Авторы курсов — ТОП-эксперты России и мира</span>
+                </div>
+                <div>
+                    <img src="~/img/icon6/333.svg">
+                    <span>Возможность заниматься по курсам в любом <br> месте в любое время (нужен только Интернет)</span>
+                </div>
+            </div>
+            <div class="about-list">
+                <div>
+                    <img src="~/img/icon6/444.svg">
+                    <span>Поддержка экспертов 24/7</span>
+                </div>
+                <div>
+                    <img src="~/img/icon6/555.svg">
+                    <span>Поэтапное прохождение курса</span>
+                </div>
+                <div>
+                    <img src="~/img/icon6/666.svg">
+                    <span>Домашние задания для контроля эффективности занятий</span>
+                </div>
+            </div>
         </div>
     </div>
     <div id="courses" class="courses">
         <h2>Біздің курстар</h2>
         <div class="course-items">
-            <div class="course-item">
-                <div class="course-img">
-                    <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
+            @foreach (var c in Model)
+            {
+                <div class="course-item">
+                    <div class="course-img">
+                        <img src="~/kurs/@c.PhotoUrl">
+                    </div>
+                    <div class="course-text">
+                        <h2>@c.Name</h2>
+                        <p><i class="fa fa-user"></i>@c.AvtorName</p>
+                        <span>@c.Info</span>
+                        <a href="/Home/Kurs/@c.Id">Курс жайлы толығырақ</a>
+                    </div>
                 </div>
-                <div class="course-text">
-                    <h2>Course Name</h2>
-                    <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                    <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                    <a href="/Home/Kurs">Курс жайлы толығырақ</a>
-                </div>
-            </div>
-            <div class="course-item">
-                <div class="course-img">
-                    <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
-                </div>
-                <div class="course-text">
-                    <h2>Course Name</h2>
-                    <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                    <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                    <a href="/Home/Kurs">Курс жайлы толығырақ</a>
-                </div>
-            </div>
-            <div class="course-item">
-                <div class="course-img">
-                    <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
-                </div>
-                <div class="course-text">
-                    <h2>Course Name Course Name Course Name</h2>
-                    <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                    <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                    <a href="/Home/Kurs">Курс жайлы толығырақ</a>
-                </div>
-            </div>
+            }
         </div>
+        <a class="all-course-btn" href="/Home/AllKurs">Барлық курстар</a>
     </div>
 </div>
 
+<script src="~/js/slider.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.burger').hover(function () {
@@ -219,6 +248,15 @@
                 scrollTop: $('#courses').offset().top
             }, 1000);
             return false;
+        });
+
+        $(function () {
+            $('.slider').rbtSlider({
+                'height': '100%',
+                'dots': true,
+                'arrows': false,
+                'auto': true,
+            });
         });
     });
 </script>

@@ -1,5 +1,6 @@
 @import url('const3.css');
 
+
 /* –––––––––––––––STUDENTS–––––––––––––– */
 
 .main{
@@ -151,7 +152,9 @@
    
 }
 @media  (max-width: 375px){
-   
+    .stud-more{
+        padding: 7px;
+    }
 }
 @media  (max-width: 320px){
    .search > button, .pager > a{

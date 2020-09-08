@@ -1,12 +1,14 @@
 @import url('const2.css');
 
 /* ----------------CONTENT------------------ */
-
-.content{
-   width: 100%;
-   padding-top: 150px;
-   padding-bottom: 150px;
-   background-color: var(--pink-color);
+.valid *{
+	color: red;
+}
+.content {
+	width: 100%;
+	padding-top: 150px;
+	padding-bottom: 150px;
+	background-color: var(--pink-color);
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;

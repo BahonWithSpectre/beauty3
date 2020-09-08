@@ -1,5 +1,6 @@
-﻿
+﻿@model IEnumerable<beauty3.DbFolder.UserKurs>
 @{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
     ViewData["Title"] = "Profil";
 }
 
@@ -7,100 +8,52 @@
 <link href="~/css/cabinet.css" rel="stylesheet">
 
 
-<div class="wrap">
-    <div class="swipe-menu">
-        <div class="close">
-            <span></span>
-            <!-- <i class="fa fa-close"></i> -->
-        </div>
-        <a href="#" class="main-nav">Басты бет</a>
-        <a href="#" class="course-nav fix-active">Менің курстарым</a>
-        <a href="#" class="more-nav">Жаңалықтар</a>
-        <a href="/Account/Profil" class="swipe-login">
-            <span>Аккаунт</span>
-            <i class="fa fa-user-o"></i>
-        </a>
-    </div>
-    <div class="header">
-        <div class="burger">
-            <span></span>
-        </div>
-        <a class="logo" href="/Home/Visitor">
-            <img src="~/img/logo.png" alt="BeautyOnline">
-            <!-- Beauty Online -->
-        </a>
-        <div class="login">
-            <span>UserName</span>
-            <i class="fa fa-user-o"></i>
-            <div class="user-menu">
-                <i class="fa fa-caret-up"></i>
-                <a href="#" class="cart-show"><i class="fa fa-bars"></i>Менің курстарым</a>
-                <a href="#"><i class="fa fa-cog"></i>Баптаулар</a>
-                <a href="~/Account/Logout"><i class="fa fa-sign-out"></i>Шығу</a>
-            </div>
-        </div>
-    </div>
-    <div class="sidebar">
-        <a href="#">Басты бет</a>
-        <a href="#" class="fix-active">Менің курстарым</a>
-        <a href="#">Жаңалықтар</a>
-    </div>
-    <div class="content">
-        <div id="courses" class="courses">
-            <h2>Менің курстарым</h2>
-            <div class="course-items">
-                <div class="course-item">
-                    <div class="course-img">
-                        <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
-                    </div>
-                    <div class="course-text">
-                        <h2>Course Name</h2>
-                        <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                        <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                        <a href="/Account/Video">Бастау</a>
-                    </div>
-                </div>
-                <div class="course-item">
-                    <div class="course-img">
-                        <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
-                    </div>
-                    <div class="course-text">
-                        <h2>Course Name</h2>
-                        <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                        <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                        <a href="/Account/Video">Бастау</a>
-                    </div>
-                </div>
-                <div class="course-item">
-                    <div class="course-img">
-                        <img src="~/img/course-item.jpg" style="background-image: url(/img/course-item.jpg)">
-                    </div>
-                    <div class="course-text">
-                        <h2>Course Name Course Name Course Name</h2>
-                        <p><i class="fa fa-user"></i>Лена Кыдыралина</p>
-                        <span>Үйрену арқылы кез келген жетістікті бағындыр!</span>
-                        <a href="/Account/Video">Бастау</a>
-                    </div>
-                </div>
-            </div>
+
+<div class="content">
+    <div id="courses" class="courses">
+        <h2>Менің курстарым</h2>
+        <div class="course-items">
+            @if (Model != null)
+            {
+                @foreach (var x in Model)
+                {
+                    foreach (var c in ViewBag.kurses)
+                    {
+                        if (x.KursId == c.Id)
+                        {
+                            <div class="course-item">
+                                <div class="course-img">
+                                    <img src="~/kurs/@c.BannerUrl">
+                                </div>
+                                <div class="course-text">
+                                    <h2>@c.Name</h2>
+                                    <p><i class="fa fa-user"></i>@c.AvtorName</p>
+                                    <span>@c.Info</span>
+                                    <a href="/Account/Video/@c.Id?videoId">Бастау</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            }
         </div>
     </div>
 </div>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-        $('.login').click(function () {
-            $('.user-menu').slideToggle(300);
-        });
-        $('.content').click(function () {
-            $('.user-menu').slideUp(300);
-        });
-
-        $('.burger').hover(function(){
-            $('.swipe-menu').toggleClass('active-menu')
-        })
-        $('.close').click(function(){
-            $('.swipe-menu').removeClass('active-menu')
-        })
-	});
+<script>
+    $(document).ready(function () {
+        @*if ($('.course-items').is(':empty')) {*@
+        if ($('.course-item').length === 0) {
+            $('.course-items').html(
+                '<div>' +
+                    '<h1 style="margin: 25px 0; color: var(--red-color);">' +
+                        'Ешқандай курс сатып алынбаған!' +
+                    '</h1 >' +
+                    '<a href="/Home/Visitor#courses">' +
+                        'Курстарды көру' +
+                    '</a > ' +
+                '</div > '
+            );
+        }
+    });
 </script>

@@ -13,7 +13,7 @@
         <img src="~/img/logo.png" alt="BeautyOnline">
         <!-- Beauty Online -->
     </a>
-    <a href="login.html" class="login">
+    <a href="/Account/Profil" class="login">
         <span>Жеке кабинет</span>
         <i class="fa fa-user-o"></i>
         <!-- <a href="#">Кіру / Тіркелу</a> -->
@@ -25,11 +25,21 @@
         <h2>Жүйеге тіркелу</h2>
         <input type="text" asp-for="FirstName" placeholder="Аты" required>
         <input type="text" asp-for="LastName" placeholder="Тегі" required>
+
         <input type="text" asp-for="Email" placeholder="Email" required>
+        <span asp-validation-for="Email" style="color: red"></span>
+
         <input type="text" asp-for="PhoneNumber" placeholder="Телефон" required>
+        <span asp-validation-for="PhoneNumber" style="color: red"></span>
+
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
+        <span asp-validation-for="Password" style="color: red"></span>
+
         <input type="password" asp-for="PasswordConfirm" placeholder="Құпиясөзді қайталау" required>
-        <p>Құпиясөз 8 символдан кем болмауы тиіс!</p>
+        <span asp-validation-for="PasswordConfirm" style="color: red"></span>
+
+        <div asp-validation-summary="ModelOnly" style="color: red"></div>
+
         <button type="submit">Тіркелу</button>
     </form>
 </div>

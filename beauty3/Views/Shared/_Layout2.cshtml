@@ -11,23 +11,42 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="swipe-menu">
-            <div class="close">
-                <span></span>
-                <!-- <i class="fa fa-close"></i> -->
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="swipe-menu">
+                <div class="close">
+                    <span></span>
+                    <!-- <i class="fa fa-close"></i> -->
+                </div>
+                <a href="#">Басты бет</a>
+                <a href="/Admin/UserList" class="fix-active">Оқушылар</a>
+                <a href="#" class="kurs-down">Курстар <i class="fa fa-angle-right"></i> </a>
+                <div class="kurs-down-menu">
+                    <a href="/Admin/KursList">Курстар тізімі</a>
+                    <a href="/Admin/KursCreate">Курс қосу</a>
+                </div>
+                <a href="/Account/Profil" class="swipe-login">
+                    <span>Аккаунт</span>
+                    <i class="fa fa-user-o"></i>
+                </a>
             </div>
-            <a href="#">Басты бет</a>
-            <a href="/Admin/UserList" class="fix-active">Оқушылар</a>
-            <a href="#" class="kurs-down">Курстар <i class="fa fa-angle-right"></i> </a>
-            <div class="kurs-down-menu">
-                <a href="/Admin/KursList">Курстар тізімі</a>
-                <a href="/Admin/KursCreate">Курс қосу</a>
+        }
+        else
+        {
+            <div class="swipe-menu">
+                <div class="close">
+                    <span></span>
+                    <!-- <i class="fa fa-close"></i> -->
+                </div>
+                <a href="/Home/Visitor" class="main-nav">Басты бет</a>
+                <a href="/Account/Profil" class="course-nav fix-active">Менің курстарым</a>
+                <a href="#" class="more-nav">Жаңалықтар</a>
+                <a href="/Account/Profil" class="swipe-login">
+                    <span>Аккаунт</span>
+                    <i class="fa fa-user-o"></i>
+                </a>
             </div>
-            <a href="/Account/Profil" class="swipe-login">
-                <span>Аккаунт</span>
-                <i class="fa fa-user-o"></i>
-            </a>
-        </div>
+        }
         <div class="header">
             <div class="burger">
                 <span></span>
@@ -41,21 +60,42 @@
                 <i class="fa fa-user-o"></i>
                 <div class="user-menu">
                     <i class="fa fa-caret-up"></i>
-                    <a href="/Home/Visitor" class="cart-show"><i class="fa fa-home"></i>Басты бет</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Home/Visitor" class="cart-show"><i class="fa fa-home"></i>Басты бет</a>
+                    }
+                    else
+                    {
+                        <a href="/Account/Profil" class="cart-show"><i class="fa fa-bars"></i>Менің курстарым</a>
+                    }
                     <a href="#"><i class="fa fa-cog"></i>Баптаулар</a>
                     <a href="/Account/Logout"><i class="fa fa-sign-out"></i>Шығу</a>
                 </div>
             </div>
         </div>
-        <div class="sidebar">
-            <a href="/Home/Visitor">Басты бет</a>
-            <a href="/Admin/UserList">Оқушылар</a>
-            <a href="#" class="kurs-down">Курстар <i class="fa fa-angle-right"></i> </a>
-            <div class="kurs-down-menu">
-                <a href="/Admin/KursList">Курстар тізімі</a>
-                <a href="/Admin/KursCreate">Курс қосу</a>
-            </div>
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <div class="sidebar">
+                    <a href="/Home/Visitor">Басты бет</a>
+                    <a href="/Admin/UserList">Оқушылар</a>
+                    <a href="#" class="kurs-down">Курстар <i class="fa fa-angle-right"></i> </a>
+                    <div class="kurs-down-menu">
+                        <a href="/Admin/KursList">Курстар тізімі</a>
+                        <a href="/Admin/KursCreate">Курс қосу</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="sidebar">
+                    <a href="/Home/Visitor">Басты бет</a>
+                    <a href="/Account/Profil">Менің курстарым</a>
+                    <a href="#">Жаңалықтар</a>
+                </div>
+            }
+        }
 
         @RenderBody()
 
@@ -74,9 +114,6 @@
             });
             $('.content').click(function () {
                 $('.user-menu').slideUp(300);
-            });
-            $('.fix-active').click(function (e) {
-                e.preventDefault();
             });
 
             $('.burger').click(function () {

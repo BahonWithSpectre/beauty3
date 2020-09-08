@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using beauty3.DbFolder;
 using beauty3.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace beauty3.Controllers
 {
@@ -99,7 +102,7 @@ namespace beauty3.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    ModelState.AddModelError("", "Құпиясөз және(немесе) логин қате!");
                 }
             }
             return View(model);
@@ -116,35 +119,51 @@ namespace beauty3.Controllers
 
 
         [Authorize]
-        public IActionResult Profil()
+        public async Task<IActionResult> Profil()
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 if (User.IsInRole("Admin"))
                 {
                     return RedirectToAction("UserList", "Admin");
-                    //return RedirectToAction("UserList", "Admin", new { page = 1 });
                 }
                 else
                 {
-                    return View();
+                    var uk = await db.UserKurs.Where(x => x.UserId == user.Id).ToListAsync();
+                    ViewBag.kurses = await db.Kurs.ToListAsync();
+                    return View(uk);
                 }
             }
             return RedirectToAction("Login");
         }
         [Authorize]
-        public IActionResult Video()
+        public async Task<IActionResult> Video(int id, int videoId = 0)
         {
             if (User.Identity.IsAuthenticated)
             {
                 if (User.IsInRole("Admin"))
                 {
                     return RedirectToAction("UserList", "Admin");
-                    //return RedirectToAction("UserList", "Admin", new { page = 1 });
                 }
                 else
                 {
-                    return View();
+                    var kurs = await db.Kurs.FirstOrDefaultAsync(x => x.Id == id);
+                    KursVideo video;
+                    List<KursVideo> otherVideos;
+                    if (videoId == 0)
+                    {
+                        video = await db.KursVideos.FirstOrDefaultAsync(x => x.KursId == kurs.Id);
+                        otherVideos = await db.KursVideos.Where(x => x.Id != video.Id && x.KursId == id).Include(p => p.Kurs).ToListAsync();
+                    }
+                    else
+                    {
+                        video = await db.KursVideos.FirstOrDefaultAsync(x => x.Id == videoId && x.KursId == kurs.Id);
+                        otherVideos = await db.KursVideos.Where(x => x.Id != videoId && x.KursId == id).Include(p => p.Kurs).ToListAsync();
+                    }
+                    ViewBag.OtherVideos = otherVideos;
+
+                    return View(video);
                 }
             }
             return RedirectToAction("Login");

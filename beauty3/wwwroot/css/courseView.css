@@ -26,8 +26,7 @@
    top: 0;
    left: 0;
    z-index: 1;
-   background-size: contain;
-   background-position: 145% 0;
+   background-size: cover;
    background-repeat: no-repeat;
 }
 .main-text{
@@ -394,9 +393,6 @@
       font-size: 16px;
       margin-bottom: 30px;
    }
-   .main-bg {
-      background-position: 20vw 0;
-   }
    .teacher-text > h2{
       font-size: 32px;
    }
@@ -626,10 +622,6 @@
 @media  (max-width: 425px){
    .main{
       height: 100vh;
-   }
-   .main-bg{
-      background-position: 20% 0;
-      background-size: cover;
    }
    .main-text{
       width: 60%;

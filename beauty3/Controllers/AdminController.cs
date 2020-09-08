@@ -41,12 +41,45 @@ namespace beauty3.Controllers
             return View(uv);
         }
 
-        public IActionResult AboutUser(string id)
+        public async Task<IActionResult> AboutUser(string id)
         {
-            var user = db.Users.FirstOrDefault(x => x.Id == id);
-            ViewBag.UserKurses = db.UserKurs.Where(x => x.UserId == id);
+            AboutUserView auv = new AboutUserView()
+            {
+                User = db.Users.FirstOrDefault(x => x.Id == id),
+                Kurs = await db.Kurs.ToListAsync(),
+                UserKurs = await db.UserKurs.Where(x => x.UserId == id).ToListAsync()
+            };
 
-            return View(user);
+            return View(auv);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AboutUser(string userId, int kursId)
+        {
+            if (userId != null && kursId != 0)
+            {
+                var have = await db.UserKurs.FirstOrDefaultAsync(x => x.UserId == userId && x.KursId == kursId);
+                if (have != null)
+                {
+                    db.Remove(have);
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    UserKurs uk = new UserKurs { UserId = userId, KursId = kursId };
+
+                    await db.AddAsync(uk);
+                    await db.SaveChangesAsync();
+                }
+                AboutUserView auv = new AboutUserView()
+                {
+                    User = db.Users.FirstOrDefault(x => x.Id == userId),
+                    Kurs = await db.Kurs.ToListAsync(),
+                    UserKurs = await db.UserKurs.Where(x => x.UserId == userId).ToListAsync()
+                };
+                return View(auv);
+            }
+
+            return RedirectToAction("UserList");
         }
 
 
@@ -64,20 +97,23 @@ namespace beauty3.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> KursCreate(Kurs kurs, IFormFile file)
+        public async Task<IActionResult> KursCreate(Kurs kurs, IFormFileCollection files)
         {
-            if (file == null || file.Length == 0) return Content("Файл не найден!");
-
-            var imgname = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
-
-            string kursImg = "/kurs/" + imgname;
-            using (var stream = new FileStream(env.WebRootPath + kursImg, FileMode.Create))
+            foreach (var file in files)
             {
-                await file.CopyToAsync(stream);
+                if (file == null) return Content("Файл не найден!");
+
+                var img1 = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
+                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + img1, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                };
             }
 
             kurs.CreatDate = DateTime.Now;
-            kurs.PhotoUrl = imgname;
+            kurs.BannerUrl = DateTime.Now.ToString("MMddHHmmss") + files[0].FileName;
+            kurs.PhotoUrl = DateTime.Now.ToString("MMddHHmmss") + files[1].FileName;
+            kurs.AvtorImgUrl = DateTime.Now.ToString("MMddHHmmss") + files[2].FileName;
 
             db.Kurs.Add(kurs);
             db.SaveChanges();
@@ -88,44 +124,47 @@ namespace beauty3.Controllers
         public IActionResult KursEdit(int Id)
         {
             var kurs = db.Kurs.FirstOrDefault(p => p.Id == Id);
+            ViewBag.KursVideos = db.KursVideos.Where(x => x.KursId == Id);
 
             return View(kurs);
         }
         [HttpPost]
-        public async Task<IActionResult> KursEdit(int? kursId, Kurs kurs, IFormFile file)
+        public async Task<IActionResult> KursEdit(Kurs kurs, IFormFile banner, IFormFile fon, IFormFile avtor)
         {
-            if (kursId != null)
+            if (banner != null)
             {
-                var thisKurs = db.Kurs.FirstOrDefault(x => x.Id == kursId);
-                if (file == null || file.Length == 0)
+                var imgname = DateTime.Now.ToString("MMddHHmmss") + banner.FileName;
+                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
                 {
-                    kurs.PhotoUrl = thisKurs.PhotoUrl;
-                }
-                else
-                {
-                    var imgname = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
-
-                    string kursImg = "/kurs/" + imgname;
-                    using (var stream = new FileStream(env.WebRootPath + kursImg, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    kurs.PhotoUrl = imgname;
-                }
-
-                thisKurs.Name = kurs.Name;
-                thisKurs.Info = kurs.Info;
-                thisKurs.AvtorName = kurs.AvtorName;
-                thisKurs.AvtorInfo = kurs.AvtorInfo;
-                thisKurs.Price = kurs.Price;
-                thisKurs.CreatDate = thisKurs.CreatDate;
-                thisKurs.PhotoUrl = kurs.PhotoUrl;
-
-                //db.Kurs.Update(kurs);
-                await db.SaveChangesAsync();
+                    await banner.CopyToAsync(stream);
+                };
+                kurs.BannerUrl = imgname;
             }
-            return RedirectToAction("KursList", "Admin");
+            //photo
+            if (fon != null)
+            {
+                var imgname = DateTime.Now.ToString("MMddHHmmss") + fon.FileName;
+                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                {
+                    await fon.CopyToAsync(stream);
+                };
+                kurs.PhotoUrl = imgname;
+            }
+            //avatar
+            if (avtor != null)
+            {
+                var imgname = DateTime.Now.ToString("MMddHHmmss") + avtor.FileName;
+                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                {
+                    await avtor.CopyToAsync(stream);
+                };
+                kurs.AvtorImgUrl = imgname;
+            }
+
+            db.Kurs.Update(kurs);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("KursList");
         }
 
         public IActionResult DeleteKurs(int? Id)
@@ -147,39 +186,52 @@ namespace beauty3.Controllers
         {
             var kurs = db.Kurs.FirstOrDefault(p => p.Id == Id);
             var count = db.UserKurs.Where(p => p.KursId == Id).ToList().Count;
-            InKursView ikv = new InKursView { Kurs = kurs, KursBuy = count  };
+            InKursView ikv = new InKursView { Kurs = kurs, KursBuy = count };
             return View(ikv);
         }
 
 
 
-        [HttpPost]
-        public async Task<IActionResult> AddVideo(string VideoName, string Info, IFormFile PhotoUrl, string VideoUrl, int KursId)
+        public IActionResult AddVideo(int? Id)
         {
-            KursVideo kv = new KursVideo { VideoName = VideoName, Info = Info, KursId = KursId, VideoUrl = VideoUrl };
+            ViewBag.Kurs = db.Kurs.FirstOrDefault(x => x.Id == Id);
+            return View();
+        }
 
-            if (PhotoUrl == null || PhotoUrl.Length == 0)
+        [HttpPost]
+        public async Task<IActionResult> AddVideo(int kursId, string VideoName, string Info, string VideoUrl, IFormFile PhotoUrl)
+        {
+            if(kursId != 0)
             {
-                return Content("Картинка для видео не найдена!");
+                KursVideo kv = new KursVideo { KursId = kursId, VideoName = VideoName, Info = Info, VideoUrl = VideoUrl };
+
+                if (PhotoUrl == null || PhotoUrl.Length == 0)
+                {
+                    kv.PhotoUrl = "default.jpg";
+                }
+                else
+                {
+                    var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
+                    string path_Root = env.WebRootPath;
+
+                    string path_to_Images = path_Root + "/kursvideo/" + imgname;
+                    using (var stream = new FileStream(path_to_Images, FileMode.Create))
+                    {
+                        await PhotoUrl.CopyToAsync(stream);
+                    }
+
+                    kv.PhotoUrl = imgname;
+                }
+                db.KursVideos.Add(kv);
+                await db.SaveChangesAsync();
+
+                return RedirectToAction("KursEdit", new { Id = kv.KursId });
             }
             else
             {
-                var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
-                string path_Root = env.WebRootPath;
-
-                string path_to_Images = path_Root + "/kurs/" + imgname;
-                using (var stream = new FileStream(path_to_Images, FileMode.Create))
-                {
-                    await PhotoUrl.CopyToAsync(stream);
-                }
-
-                kv.PhotoUrl = imgname;
+                return RedirectToAction("KursList", "Admin");
             }
 
-            db.KursVideos.Add(kv);
-            await db.SaveChangesAsync();
-
-            return RedirectToAction("InKurs", new { Id = kv.KursId });
         }
 
         public IActionResult EditVideo(int Id)
@@ -189,27 +241,43 @@ namespace beauty3.Controllers
             return View(video);
         }
         [HttpPost]
-        public async Task<IActionResult> EditVideo(KursVideo video, IFormFile file)
+        public async Task<IActionResult> EditVideo(int? kursId, int? videoId, KursVideo video, IFormFile PhotoUrl)
         {
-            if (file == null || file.Length == 0) return Content("file not found");
-            else
+            if (kursId != null)
             {
-                var imgname = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
-                string path_Root = env.WebRootPath;
-
-                string path_to_Images = path_Root + "/kursvideo/" + imgname;
-                using (var stream = new FileStream(path_to_Images, FileMode.Create))
+                var thisVideo = db.KursVideos.FirstOrDefault(x => x.Id == videoId);
+                if (PhotoUrl == null || PhotoUrl.Length == 0)
                 {
-                    await file.CopyToAsync(stream);
+                    video.PhotoUrl = thisVideo.PhotoUrl;
+                }
+                else
+                {
+                    var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
+                    string path_Root = env.WebRootPath;
+
+                    string path_to_Images = path_Root + "/kursvideo/" + imgname;
+                    using (var stream = new FileStream(path_to_Images, FileMode.Create))
+                    {
+                        await PhotoUrl.CopyToAsync(stream);
+                    }
+
+                    video.PhotoUrl = imgname;
                 }
 
-                video.PhotoUrl = imgname;
+                thisVideo.VideoName = video.VideoName;
+                thisVideo.Info = video.Info;
+                thisVideo.VideoUrl = video.VideoUrl;
+                thisVideo.PhotoUrl = video.PhotoUrl;
+                thisVideo.KursId = (int)kursId;
+
+                await db.SaveChangesAsync();
+
+                return RedirectToAction("KursEdit", new { Id = video.KursId });
             }
-
-            db.KursVideos.Update(video);
-            db.SaveChanges();
-
-            return RedirectToAction("InKurs", new { Id = video.KursId });
+            else
+            {
+                return RedirectToAction("KursList", "Admin");
+            }
 
         }
 
@@ -221,7 +289,7 @@ namespace beauty3.Controllers
             db.KursVideos.Remove(video);
             db.SaveChanges();
 
-            return RedirectToAction("InKurs", new { Id = video.KursId });
+            return RedirectToAction("KursEdit", new { Id = video.KursId });
         }
 
 

@@ -71,17 +71,6 @@ namespace beauty3
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

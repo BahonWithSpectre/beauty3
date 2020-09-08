@@ -21,12 +21,13 @@ namespace beauty3.ViewModels.AccountViewModels
         public string Email { get; set; }
 
         [Required]
+        [MinLength(6, ErrorMessage = "Құпиясөз 6 символдан кем болмауы тиіс!")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Required]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [Compare("Password", ErrorMessage = "Құпиясөздер сәйкес келмейді!")]
         [DataType(DataType.Password)]
         [Display(Name = "Подтвердить пароль")]
         public string PasswordConfirm { get; set; }
