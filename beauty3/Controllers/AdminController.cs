@@ -25,21 +25,39 @@ namespace beauty3.Controllers
             env = _env;
         }
 
+
         public async Task<IActionResult> UserList(int? page = 1)
         {
-            ViewBag.Count = db.Users.Where(x => x.UserName != "BeautyAdmin").Count();
+            ViewBag.Count = await db.Users.CountAsync();
             ViewBag.Page = page;
 
             var pager = new Pager(ViewBag.Count, page);
 
             UsersView uv = new UsersView
             {
-                Users = await db.Users.Where(x => x.UserName != "BeautyAdmin").Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                Users = await db.Users.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
                 Pager = pager
             };
 
             return View(uv);
         }
+        [HttpPost]
+        public async Task<IActionResult> UserList(string userPhone, int? page = 1)
+        {
+            ViewBag.Count = await db.Users.CountAsync();
+            ViewBag.Page = page;
+
+            Pager pager = new Pager(ViewBag.Count, page);
+
+            UsersView uv = new UsersView
+            {
+                Users = await db.Users.Where(x => x.UserName == userPhone).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                Pager = pager
+            };
+
+            return View(uv);
+        }
+
 
         public async Task<IActionResult> AboutUser(string id)
         {

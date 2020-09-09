@@ -29,7 +29,7 @@
         <input type="text" asp-for="Email" placeholder="Email" required>
         <span asp-validation-for="Email" style="color: red"></span>
 
-        <input type="text" asp-for="PhoneNumber" placeholder="Телефон" required>
+        <input id="phone" type="text" asp-for="PhoneNumber" placeholder="Телефон" required>
         <span asp-validation-for="PhoneNumber" style="color: red"></span>
 
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
@@ -43,3 +43,7 @@
         <button type="submit">Тіркелу</button>
     </form>
 </div>
+<script src="~/js/jquery.maskedinput.min.js"></script>
+<script>$(document).ready(function () {
+        $('#phone').mask('+7 (999) 999 99 99')
+    })</script>

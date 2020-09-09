@@ -19,7 +19,7 @@
 <div class="content">
     <form class="vhod" asp-action="Login">
         <h2>Жүйеде болсаңыз</h2>
-        <input type="text" asp-for="PhoneNumber" placeholder="Телефон номері" required>
+        <input id="phone" type="text" asp-for="PhoneNumber" placeholder="Телефон номері" required>
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
 
         <div class="valid" asp-validation-summary="ModelOnly"></div>
@@ -32,3 +32,9 @@
         <a href="/Account/Register">Тіркелу</a>
     </div>
 </div>
+<script src="~/js/jquery.maskedinput.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#phone').mask('+7 (999) 999 99 99')
+    })
+</script>
