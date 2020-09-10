@@ -42,7 +42,8 @@
                             <span>@c.FirstName</span>
                             <span>@c.LastName</span>
                         </p>
-                        <p>@c.PhoneNumber</p>
+                        <eq-highlight-text text="@ViewBag.Text" value="@c.PhoneNumber" />
+                        @*<p>@c.PhoneNumber</p>*@
                     </div>
                     <a href="/Admin/AboutUser/@c.Id" class="stud-more">Оқушы туралы</a>
                 </div>

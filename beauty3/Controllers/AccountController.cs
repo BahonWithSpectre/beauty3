@@ -71,7 +71,6 @@ namespace beauty3.Controllers
                 if (User.IsInRole("Admin"))
                 {
                     return RedirectToAction("UserList", "Admin");
-                    //return RedirectToAction("UserList", "Admin", new { page = 1 });
                 }
                 else
                 {

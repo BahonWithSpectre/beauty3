@@ -45,9 +45,11 @@ namespace beauty3.Controllers
         public async Task<IActionResult> UserList(string userPhone, int? page = 1)
         {
             ViewBag.Count = await db.Users.CountAsync();
-            ViewBag.Page = page;
 
+            ViewBag.Page = page;
             Pager pager = new Pager(ViewBag.Count, page);
+
+            ViewBag.Text = userPhone;
 
             UsersView uv = new UsersView
             {
