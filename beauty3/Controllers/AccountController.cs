@@ -38,6 +38,8 @@ namespace beauty3.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            model.PhoneNumber = model.PhoneNumber.Replace("+", "")
+                .Replace("(", "").Replace(")", "").Replace(" ", "");
             if (ModelState.IsValid)
             {
                 User user = new User { UserName = model.PhoneNumber, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
@@ -84,6 +86,8 @@ namespace beauty3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            model.PhoneNumber = model.PhoneNumber.Replace("+", "")
+                .Replace("(", "").Replace(")", "").Replace(" ", "");
             if (ModelState.IsValid)
             {
                 var result =

@@ -51,7 +51,7 @@ namespace beauty3.Controllers
 
             UsersView uv = new UsersView
             {
-                Users = await db.Users.Where(x => x.UserName == userPhone).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                Users = await db.Users.Where(x => x.UserName.Contains(userPhone) || x.PhoneNumber.Contains(userPhone)).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
                 Pager = pager
             };
 

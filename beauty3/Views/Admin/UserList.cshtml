@@ -10,7 +10,7 @@
     <div class="main">
         <div class="main-head">
             <form asp-action="UserList" method="post" class="search">
-                <input id="phone" type="search" placeholder="+7 (999) 999 99 99" name="userPhone" required>
+                <input type="search" placeholder="Тел. номер" name="userPhone" required>
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
             <div class="pager">
@@ -69,12 +69,3 @@
         </div>
     </div>
 </div>
-<script src="~/js/jquery.maskedinput.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.page-act').on('click', function (e) {
-            e.preventDefault();
-        });
-        $('#phone').mask('+7 (999) 999 99 99');
-    })
-</script>
