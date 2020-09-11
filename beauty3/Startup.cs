@@ -25,7 +25,7 @@ namespace beauty3
 
             services.AddDbContext<AppDb>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDb>();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDb>().AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
