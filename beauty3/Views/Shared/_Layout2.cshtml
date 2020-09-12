@@ -11,49 +11,60 @@
 </head>
 <body>
     <div class="wrap">
-        @if (User.IsInRole("Admin"))
-        {
+        
             <div class="swipe-menu">
                 <div class="close">
                     <span></span>
-                    <!-- <i class="fa fa-close"></i> -->
                 </div>
-                <a href="#">Басты бет</a>
-                <a href="/Admin/UserList" class="fix-active">Оқушылар</a>
-                <a href="#" class="kurs-down">Курстар <i class="fa fa-angle-right"></i> </a>
-                <div class="kurs-down-menu">
-                    <a href="/Admin/KursList">Курстар тізімі</a>
-                    <a href="/Admin/KursCreate">Курс қосу</a>
-                </div>
-                <a href="/Account/Profil" class="swipe-login">
-                    <span>Аккаунт</span>
-                    <i class="fa fa-user-o"></i>
+                <a href="/Home/Visitor">
+                    <i class="fa fa-home"></i>
+                    <span>Басты бет</span>
+                </a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Admin/UserList">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>Оқушылар</span>
+                    </a>
+                    <a href="#" class="kurs-down">
+                        <i class="fa fa-list"></i>
+                        <span>Курстар</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <div class="kurs-down-menu">
+                        <a href="/Admin/KursList">
+                            <i class="fa fa-list"></i>
+                            <span>Курстар тізімі</span>
+                        </a>
+                        <a href="/Admin/KursCreate">
+                            <i class="fa fa-plus"></i>
+                            <span>Курс қосу</span>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <a href="/Account/Profil">
+                        <i class="fa fa-star"></i>
+                        <span>Менің курстарым</span>
+                    </a>
+                    <a href="/Home/AllKurs">
+                        <i class="fa fa-list"></i>
+                        <span>Барлық курстар</span>
+                    </a>
+                }
+                <a href="/Account/Logout">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Шығу</span>
                 </a>
             </div>
-        }
-        else
-        {
-            <div class="swipe-menu">
-                <div class="close">
-                    <span></span>
-                    <!-- <i class="fa fa-close"></i> -->
-                </div>
-                <a href="/Home/Visitor" class="main-nav">Басты бет</a>
-                <a href="/Account/Profil" class="course-nav fix-active">Менің курстарым</a>
-                <a href="#" class="more-nav">Жаңалықтар</a>
-                <a href="/Account/Profil" class="swipe-login">
-                    <span>Аккаунт</span>
-                    <i class="fa fa-user-o"></i>
-                </a>
-            </div>
-        }
+        
         <div class="header">
             <div class="burger">
                 <span></span>
             </div>
             <a class="logo" href="/Home/Visitor">
                 <img src="~/img/logo.png" alt="BeautyOnline">
-                <!-- Beauty Online -->
             </a>
             <div class="login">
                 <span>@User.Identity.Name</span>
@@ -75,26 +86,46 @@
         </div>
         @if (User.Identity.IsAuthenticated)
         {
-            if (User.IsInRole("Admin"))
-            {
-                <div class="sidebar">
-                    <a href="/Home/Visitor">Басты бет</a>
-                    <a href="/Admin/UserList">Оқушылар</a>
-                    <a href="#" class="kurs-down">Курстар <i class="fa fa-angle-right"></i> </a>
+            <div class="sidebar">
+                <a href="/Home/Visitor">
+                    <i class="fa fa-home"></i>
+                    <span>Басты бет</span>
+                </a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Admin/UserList">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>Оқушылар</span>
+                    </a>
+                    <a href="#" class="kurs-down">
+                        <i class="fa fa-list"></i>
+                        <span>Курстар</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                     <div class="kurs-down-menu">
-                        <a href="/Admin/KursList">Курстар тізімі</a>
-                        <a href="/Admin/KursCreate">Курс қосу</a>
+                        <a href="/Admin/KursList">
+                            <i class="fa fa-list"></i>
+                            <span>Курстар тізімі</span>
+                        </a>
+                        <a href="/Admin/KursCreate">
+                            <i class="fa fa-plus"></i>
+                            <span>Курс қосу</span>
+                        </a>
                     </div>
-                </div>
-            }
-            else
-            {
-                <div class="sidebar">
-                    <a href="/Home/Visitor">Басты бет</a>
-                    <a href="/Account/Profil">Менің курстарым</a>
-                    <a href="#">Жаңалықтар</a>
-                </div>
-            }
+                }
+                else
+                {
+                    <a href="/Account/Profil">
+                        <i class="fa fa-star"></i>
+                        <span>Менің курстарым</span>
+                    </a>
+                    <a href="/Home/AllKurs">
+                        <i class="fa fa-list"></i>
+                        <span>Барлық курстар</span>
+                    </a>
+                }
+            </div>
+            
         }
 
         @RenderBody()
@@ -106,7 +137,7 @@
                 e.preventDefault();
                 $('.kurs-down-menu').slideToggle(100);
                 $(this).toggleClass('act-kurs-down');
-                $(this).children('i').toggleClass('act-down-icon');
+                $(this).children('i.fa-angle-right').toggleClass('act-down-icon');
             });
 
             $('.login').click(function () {

@@ -160,6 +160,7 @@ namespace beauty3.Controllers
                 };
                 kurs.BannerUrl = imgname;
             }
+
             //photo
             if (fon != null)
             {

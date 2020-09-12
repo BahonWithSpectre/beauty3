@@ -45,8 +45,10 @@
    box-shadow: 0 1px 10px var(--main-color);
    transition: 0.3s;
 }
-.logo{
-   width: 175px;
+.logo {
+    width: 175px;
+    display: flex;
+    align-items: center;
 }
 .logo > img{
    width: 100%;

@@ -67,8 +67,10 @@
 .fix-header > .login > *{
    color: #fff;
 }
-.logo{
-   width: 175px;
+.logo {
+    width: 175px;
+    display: flex;
+    align-items: center;
 }
 .logo > img{
    width: 100%;
@@ -139,17 +141,22 @@
    transform: translateX(0);
    background-color: var(--main-color);
 }
-.swipe-menu > a{
-   color: var(--white-color);
-   text-decoration: none;
-   padding: 10px 0;
+
+.swipe-menu > a > * {
+    color: var(--white-color);
+    text-decoration: none;
+    padding: 15px 0;
 }
-.swipe-login > *{
-   font-size: 16px;
-   color: var(--white-color);
+.swipe-menu > a > span {
+    margin-right: 15px;
+    font-size: 18px;
 }
+.swipe-menu > a > i {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
 .close{
-   /* display: none; */
    position: absolute !important;
    right: 7%;
    top: 25px;
@@ -157,14 +164,6 @@
 .swipe-menu, .burger{
    display: none;
 }
-/* .burger,
-.close{
-   padding: 7px;
-   margin-right: -7px;
-} */
-/* .burger > i, .close > i{
-   font-size: 22px;
-} */
 .burger, .close{
    width: 25px;
    height: 20px;
@@ -361,9 +360,6 @@
    }
    .swipe-menu, .burger{
       display: flex;
-   }
-   .swipe-login > *{
-      font-size: 16px !important;
    }
    /* .burger{
       display: block;

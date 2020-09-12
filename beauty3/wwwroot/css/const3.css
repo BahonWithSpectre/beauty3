@@ -48,6 +48,8 @@
 }
 .logo{
   width: 170px;
+  display: flex;
+  align-items: center;
 }
 .logo > img{
   width: 100%;
@@ -123,11 +125,11 @@
 .swipe-menu a{
   color: var(--white-color);
   text-decoration: none;
-  padding: 10px 0;
+  padding: 15px 0;
   position: relative;
 }
-.swipe-menu a > i{
-  font-size: 18px;
+.kurs-down > i.fa-angle-right{
+  font-size: 24px;
   margin-left: 10px;
   position: absolute;
   top: 30%;
@@ -149,9 +151,23 @@
   transform: rotateZ(90deg);
   color: var(--main-color) !important;
 }
-.swipe-login > *{
-  font-size: 16px;
-  color: var(--white-color);
+.swipe-menu > a > * {
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+.swipe-menu > a > span {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.swipe-menu > a > i, .swipe-menu > .kurs-down-menu > a > i {
+    margin-right: 15px;
+    font-size: 20px;
+}
+.sidebar > .kurs-down-menu > a > i {
+    margin-right: 5px;
+    font-size: 16px;
 }
 .close{
   /* display: none; */
@@ -223,15 +239,16 @@
   overflow-y: scroll;
   background-color: var(--white-color);
 }
-.sidebar{
-  width: 15%;
-  left: 0;
-  z-index: 99;
-  display: flex;
-  flex-direction: column;
-  padding: 15px 2%;
-  background-color: var(--pink-color);
-  box-shadow: 1px 0 10px var(--grey-color);
+.sidebar {
+    width: 15%;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 2%;
+    padding-right: 0;
+    background-color: var(--pink-color);
+    box-shadow: 1px 0 10px var(--grey-color);
 }
 .sidebar a{
   display: block;
@@ -242,28 +259,40 @@
   color: var(--brown-color);
 }
 .sidebar a > i{
+    width: 16px;
+  font-size: 16px;
+  margin-right: 5px;
+}
+.sidebar a > i.fa-angle-right{
   font-size: 18px;
   margin-left: 10px;
   position: absolute;
   top: 25%;
-  color: var(--brown-color);
+  color: var(--brown-color) !important;
 }
 .sidebar a:hover, .sidebar a:hover > i{
   color: var(--main-color);
   text-shadow: 0 0 20px var(--grey-color);
 }
 .kurs-down-menu{
-  padding-left: 25px;
+  padding-left: 40px;
   display: none;
+}
+.swipe-menu > .kurs-down-menu {
+    padding-left: 40px;
+}
+.sidebar > .kurs-down-menu {
+    padding-left: 20px;
 }
 /* --- actives --- */
 .act-kurs-down{
   color: var(--main-color) !important;
   text-shadow: 0 0 20px var(--grey-color) !important;
 }
-.act-down-icon{
-  transform: rotateZ(90deg);
-  color: var(--main-color) !important;
+.act-down-icon {
+    width: auto !important;
+    transform: rotateZ(90deg);
+    color: var(--main-color) !important;
 }
 
 
@@ -294,19 +323,16 @@
 }
 @media  (max-width: 768px){
   .content{
-     width: 80%;
+     width: 75%;
   }
   .sidebar{
-     width: 20%;
+     width: 25%;
   }
-  .sidebar a{
-     font-size: 13px;
-  }
-  .sidebar a > i{
+  .sidebar a > *, .sidebar > .kurs-down-menu > a > i{
     font-size: 14px;
   }
   .logo{
-     width: 120px;
+     width: 150px;
   }
   .login > i{
      font-size: 18px;
@@ -345,9 +371,6 @@
   }
   .swipe-menu, .burger{
      display: flex;
-  }
-  .swipe-login > *{
-     font-size: 16px !important;
   }
   .login > span{
      display: none;
