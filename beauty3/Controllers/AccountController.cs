@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using beauty3.DbFolder;
+using beauty3.Models;
 using beauty3.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -86,24 +87,32 @@ namespace beauty3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result =
-                    await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
+                var us = await _userManager.FindByNameAsync(model.PhoneNumber);
+                if(us.Stats == true)
                 {
-                    // проверяем, принадлежит ли URL приложению
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
+                    if (result.Succeeded)
                     {
-                        return Redirect(model.ReturnUrl);
+                        // проверяем, принадлежит ли URL приложению
+                        if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return Redirect(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Profil", "Account");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("Profil", "Account");
+                        ModelState.AddModelError("", "Құпиясөз және(немесе) логин қате!");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Құпиясөз және(немесе) логин қате!");
+
                 }
+
             }
             return View(model);
         }
@@ -137,6 +146,7 @@ namespace beauty3.Controllers
             }
             return RedirectToAction("Login");
         }
+
         [Authorize]
         public async Task<IActionResult> Video(int id, int videoId = 0)
         {
@@ -167,6 +177,42 @@ namespace beauty3.Controllers
                 }
             }
             return RedirectToAction("Login");
+        }
+
+
+
+        public IActionResult News()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public async Task<JsonResult> UserOpen([FromBody] UserStatsClass mod)
+        {
+            var user = await _userManager.FindByNameAsync(mod.Id);
+            if(user != null)
+            {
+                user.Stats = true;
+                await _userManager.UpdateAsync(user);
+                await db.SaveChangesAsync();
+            }
+            return new JsonResult("true");
+        }
+
+
+        [HttpPost]
+        public async Task<JsonResult> UserClose([FromBody] UserStatsClass mod)
+        {
+            var user = await _userManager.FindByNameAsync(mod.Id);
+            if (user != null)
+            {
+                user.Stats = false;
+                await _userManager.UpdateAsync(user);
+                await db.SaveChangesAsync();
+            }
+            return new JsonResult("false");
         }
     }
 }

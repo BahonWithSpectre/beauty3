@@ -56,7 +56,7 @@
                 <!-- Beauty Online -->
             </a>
             <div class="login">
-                <span>@User.Identity.Name</span>
+                <span id="username">@User.Identity.Name</span>
                 <i class="fa fa-user-o"></i>
                 <div class="user-menu">
                     <i class="fa fa-caret-up"></i>
@@ -92,7 +92,8 @@
                 <div class="sidebar">
                     <a href="/Home/Visitor">Басты бет</a>
                     <a href="/Account/Profil">Менің курстарым</a>
-                    <a href="#">Жаңалықтар</a>
+                    <a href="/Account/News">Жаңалықтар</a>
+                    <button onclick="GetUser()">User Name</button>
                 </div>
             }
         }
@@ -100,6 +101,16 @@
         @RenderBody()
 
     </div>
+    <div style="display:none;">
+
+    </div>
+
+    
+
+
+    <script src="~/signalr/dist/browser/signalr.js"></script>
+    <script src="~/signalr/SignBeau.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.kurs-down').click(function (e) {
@@ -123,6 +134,12 @@
                 $('.swipe-menu').removeClass('active-menu')
             })
         });
+    </script>
+    <script>
+        function GetUser() {
+            var dd = document.getElementById("username").innerHTML;
+            UserOpen(dd);
+        }
     </script>
 </body>
 </html>

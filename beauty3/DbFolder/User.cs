@@ -5,5 +5,8 @@ namespace beauty3.DbFolder
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+
+        public bool? Stats    {get;set;}
     }
 }

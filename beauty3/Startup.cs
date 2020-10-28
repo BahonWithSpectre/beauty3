@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using beauty3.Sign;
 
 namespace beauty3
 {
@@ -52,6 +53,8 @@ namespace beauty3
                 options.User.RequireUniqueEmail = false;
             });
 
+            services.AddSignalR();
+
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
@@ -92,6 +95,11 @@ namespace beauty3
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<ChatHub>("/chathub");
+            });
 
             app.UseEndpoints(endpoints =>
             {

@@ -17,15 +17,17 @@
     </a>
 </div>
 <div class="content">
-    <form class="vhod" asp-action="Login">
+    <form class="vhod" asp-action="Login" id="loginform"> 
         <h2>Жүйеде болсаңыз</h2>
         <input id="phone" type="text" asp-for="PhoneNumber" placeholder="Телефон номері" required>
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
 
         <div class="valid" asp-validation-summary="ModelOnly"></div>
-
-        <button type="submit">Жүйеге кіру</button>
+        <button @*id="sendButton"*@ type="submit">Жүйеге кіру</button>
     </form>
+
+    <button id="sendButton" type="submit">SignalR Start</button>
+
     <div class="vhod">
         <h2>BEAUTY ONLINE жүйесіне тіркелу</h2>
         <p>Жалғастыру үшін жүйеге тіркелу міндетті(логин және құпиясөзге ие болу). Бұл тегін.</p>
