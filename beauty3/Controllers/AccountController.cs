@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using beauty3.DbFolder;
@@ -24,21 +25,19 @@ namespace beauty3.Controllers
             _signInManager = signInManager;
             db = _db;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
+        // Register Register Register
 
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            model.PhoneNumber = model.PhoneNumber.Replace("+", "")
+                .Replace("(", "").Replace(")", "").Replace(" ", "");
             if (ModelState.IsValid)
             {
                 User user = new User { UserName = model.PhoneNumber, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
@@ -61,6 +60,7 @@ namespace beauty3.Controllers
             return View(model);
         }
 
+        // Login Login Login
 
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
@@ -70,7 +70,6 @@ namespace beauty3.Controllers
                 if (User.IsInRole("Admin"))
                 {
                     return RedirectToAction("UserList", "Admin");
-                    //return RedirectToAction("UserList", "Admin", new { page = 1 });
                 }
                 else
                 {
@@ -79,12 +78,12 @@ namespace beauty3.Controllers
             }
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            model.PhoneNumber = model.PhoneNumber.Replace("+", "")
+                .Replace("(", "").Replace(")", "").Replace(" ", "");
             if (ModelState.IsValid)
             {
                 var us = await _userManager.FindByNameAsync(model.PhoneNumber);
@@ -116,16 +115,14 @@ namespace beauty3.Controllers
             }
             return View(model);
         }
-
-
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Visitor", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
-
+        // Profil Profil Profil
 
         [Authorize]
         public async Task<IActionResult> Profil()
@@ -178,6 +175,92 @@ namespace beauty3.Controllers
             }
             return RedirectToAction("Login");
         }
+
+        // ForgotPassword ForgotPassword ForgotPassword
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    // пользователь с данным email может отсутствовать в бд
+                    return View("Login");
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account",
+                    new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
+
+                EmailService emailService = new EmailService();
+
+                try
+                {
+                    await emailService.SendEmailAsync(model.Email, "Reset Password",
+                        $"Құпиясөзді ауыстыру үшін сілтемеге өтіңіз: <a style=\"font-size: 18px;\" href='{callbackUrl}'>Құпиясөз ауыстыру</a>");
+                    return View("ForgotPasswordConfirm");
+                }
+                catch (Exception err)
+                {
+                    return Content("err: " + err);
+                }
+
+            }
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirm()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult ResetPassword(string code = null)
+        {
+            return code == null ? View("ForgotPassword") : View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            model.PhoneNumber = model.PhoneNumber
+                .Replace("+", "").Replace(" ", "").Replace("(", "")
+                .Replace(")", "");
+            var user = await _userManager.FindByNameAsync(model.PhoneNumber);
+            if (user == null)
+            {
+                return View("Login");
+            }
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return View("ResetPasswordConfirm");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult ResetPasswordConfirm()
+        {
+            return View();
+        }
+
 
 
 
