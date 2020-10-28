@@ -1,9 +1,10 @@
 
 :root {
-    --main-color: #222;
+    /*    --main-color: #222;*/
+    --main-color: #111;
     --white-color: #fdf5f5;
-    /* --pink-color: #fee; */
-    --brown-color: #4c3d36;
+    /*    --brown-color: #4c3d36;*/
+    --brown-color: #3f1c00;
     --grey-color: #968c88;
     --pink-color: #f3e1e4;
     --red-color: #bb6054;

@@ -1,14 +1,13 @@
 
-:root{
-   --main-color: #222;
-   --white-color: #fdf5f5;
-   --brown-color: #4c3d36;
-   --grey-color: #968c88;
-   /* --pink-color: #f3e1e4; */
-   /* --pink-color: #f4e2e6; */
-   --pink-color: #fae2e5;
-   --red-color: #bb6054;
-   
+:root {
+    /*    --main-color: #222;*/
+    --main-color: #111;
+    --white-color: #fdf5f5;
+    /*    --brown-color: #4c3d36;*/
+    --brown-color: #3f1c00;
+    --grey-color: #968c88;
+    --pink-color: #fae2e5;
+    --red-color: #bb6054;
 }
 @font-face{
    font-family: MyOpenSans;

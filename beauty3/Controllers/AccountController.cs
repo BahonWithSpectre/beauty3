@@ -110,7 +110,7 @@ namespace beauty3.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Visitor", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         // Profil Profil Profil

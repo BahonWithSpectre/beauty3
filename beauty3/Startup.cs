@@ -93,7 +93,7 @@ namespace beauty3
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Visitor}/{id?}");
+                    pattern: "{controller=Account}/{action=Profil}/{id?}");
             });
         }
     }
