@@ -19,5 +19,8 @@ namespace beauty3.DbFolder
 
         public DbSet<KursComment> KursComments { get; set; }
         public DbSet<VideoComment> VideoComments { get; set; }
+
+
+        public DbSet<UserIpList> UserIpLists { get; set; }
     }
 }

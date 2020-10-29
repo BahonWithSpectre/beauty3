@@ -6,6 +6,7 @@ using beauty3.DbFolder;
 using beauty3.Models;
 using beauty3.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,13 +18,15 @@ namespace beauty3.Controllers
         AppDb db;
         UserManager<User> _userManager;
         SignInManager<User> _signInManager;
+        private IHttpContextAccessor _accessor;
 
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, AppDb _db)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, AppDb _db, IHttpContextAccessor accessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             db = _db;
+            _accessor = accessor;
         }
 
         // Register Register Register
@@ -78,12 +81,15 @@ namespace beauty3.Controllers
             }
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             model.PhoneNumber = model.PhoneNumber.Replace("+", "")
                 .Replace("(", "").Replace(")", "").Replace(" ", "");
+
             if (ModelState.IsValid)
             {
                 var us = await _userManager.FindByNameAsync(model.PhoneNumber);
@@ -92,6 +98,15 @@ namespace beauty3.Controllers
                     var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
+
+                        //////////////////// IP Adress ///////////////////////
+                        var ipp = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+
+                        await db.UserIpLists.AddAsync(new UserIpList { UserId = us.Id, Ip = ipp });
+                        await db.SaveChangesAsync();
+
+                        //////////////////////////////////////////////////////
+
                         // проверяем, принадлежит ли URL приложению
                         if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         {
@@ -109,18 +124,22 @@ namespace beauty3.Controllers
                 }
                 else
                 {
-
+                    ViewBag.Stats = "Вы нарушаете правило! В один аккаунт может войти только валделец этого аккаунта";
                 }
 
             }
             return View(model);
         }
+
+
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+
+
 
         // Profil Profil Profil
 
@@ -143,6 +162,8 @@ namespace beauty3.Controllers
             }
             return RedirectToAction("Login");
         }
+
+
 
         [Authorize]
         public async Task<IActionResult> Video(int id, int videoId = 0)
@@ -274,20 +295,28 @@ namespace beauty3.Controllers
         [HttpPost]
         public async Task<JsonResult> UserOpen([FromBody] UserStatsClass mod)
         {
+            mod.Id = mod.Id.Replace("+", "")
+                .Replace("(", "").Replace(")", "").Replace(" ", "");
+
             var user = await _userManager.FindByNameAsync(mod.Id);
             if(user != null)
             {
                 user.Stats = true;
                 await _userManager.UpdateAsync(user);
                 await db.SaveChangesAsync();
+
+                return new JsonResult(mod.Id);
             }
-            return new JsonResult("true");
+            return new JsonResult(null);
         }
 
 
         [HttpPost]
         public async Task<JsonResult> UserClose([FromBody] UserStatsClass mod)
         {
+            mod.Id = mod.Id.Replace("+", "")
+                .Replace("(", "").Replace(")", "").Replace(" ", "");
+
             var user = await _userManager.FindByNameAsync(mod.Id);
             if (user != null)
             {
@@ -297,5 +326,17 @@ namespace beauty3.Controllers
             }
             return new JsonResult("false");
         }
+
+
+
+        [HttpPost]
+        public async Task<JsonResult> NumberRegix([FromBody] UserStatsClass mod)
+        {
+            mod.Id =  mod.Id.Replace("+", "")
+                .Replace("(", "").Replace(")", "").Replace(" ", "");
+
+            return new JsonResult(mod.Id);
+        }
+
     }
 }

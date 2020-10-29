@@ -21,6 +21,12 @@
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
 
         <div class="valid" asp-validation-summary="ModelOnly"></div>
+        @{ 
+            if(ViewBag.Stats != null)
+            {
+                <p style="color:red;">@ViewBag.Stats</p>
+            }
+        }
         <button @*id="sendButton"*@ type="submit">Жүйеге кіру</button>
     </form>
 

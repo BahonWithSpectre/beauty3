@@ -68,12 +68,20 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     })
         .then(function (res) { return res.json(); })
         .then(function (data) {
-            if (data === 'true') {
+            if (data === null) {
 
-                connection.invoke("SendMessage", user).catch(function (err) {
+                
+            }
+            else {
+                connection.invoke("SendMessage", data).catch(function (err) {
                     return console.error(err.toString());
                 });
 
+                /////////////////
+              //  sleep(10000);
+                setTimeout(function () { FormSubmit(); }, 3000);
+             //   FormSubmit();
+                /////////////////
             }
         })
         .catch((error) => { console.log(error) });
@@ -93,11 +101,36 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 connection.on("ReceiveUser", function (user) {
 
     var pageuser = document.getElementById("phone").value;
-    if (user === pageuser) {
-        alert("Аккаунт в онлайне!");
 
-        document.getElementById("loginform").submit();
-    }
+
+
+    const urlFetch = siteurl + '/Account/NumberRegix'
+    fetch(urlFetch, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "Id": pageuser,
+        }),
+    })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+
+
+            if (user === data) {
+                
+                //document.getElementById("loginform").submit();
+            }
+
+        })
+        .catch((error) => { console.log(error) });
+
+
+
+
+
 
 });
 
@@ -157,4 +190,16 @@ function UserClose(e) {
 
         })
         .catch((error) => { console.log(error) });
+}
+
+
+function FormSubmit() {
+    document.getElementById("loginform").submit();
+}
+
+
+function sleep(ms) {
+    return new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
 }
