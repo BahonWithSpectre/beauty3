@@ -149,24 +149,69 @@ namespace beauty3.Controllers
                 else
                 {
                     var kurs = await db.Kurs.FirstOrDefaultAsync(x => x.Id == id);
-                    KursVideo video;
                     List<KursVideo> otherVideos;
+                    VideoViewModel videoView = new VideoViewModel();
                     if (videoId == 0)
                     {
-                        video = await db.KursVideos.FirstOrDefaultAsync(x => x.KursId == kurs.Id);
-                        otherVideos = await db.KursVideos.Where(x => x.Id != video.Id && x.KursId == id).Include(p => p.Kurs).ToListAsync();
+                        videoView.KursVideo = await db.KursVideos.FirstOrDefaultAsync(x => x.KursId == kurs.Id);
+                        otherVideos = await db.KursVideos.Where(x => x.Id != videoView.KursVideo.Id && x.KursId == id).Include(p => p.Kurs).ToListAsync();
                     }
                     else
                     {
-                        video = await db.KursVideos.FirstOrDefaultAsync(x => x.Id == videoId && x.KursId == kurs.Id);
+                        videoView.KursVideo = await db.KursVideos.FirstOrDefaultAsync(x => x.Id == videoId && x.KursId == kurs.Id);
                         otherVideos = await db.KursVideos.Where(x => x.Id != videoId && x.KursId == id).Include(p => p.Kurs).ToListAsync();
                     }
                     ViewBag.OtherVideos = otherVideos;
+                    videoView.VideoComments = await db.VideoComments.Where(x => x.KursVideoId == videoView.KursVideo.Id).ToListAsync();
+                    videoView.Users = await db.Users.ToListAsync();
+                    ViewBag.ComCount = await db.VideoComments.Where(x => x.KursVideoId == videoView.KursVideo.Id).CountAsync();
 
-                    return View(video);
+                    return View(videoView);
                 }
             }
             return RedirectToAction("Login");
+        }
+        //[HttpPost]
+        //public async Task<IActionResult> Comment(int videoId, int kursId, string userName, string text)
+        //{
+        //    var user = await _userManager.FindByNameAsync(userName);
+        //    if(user != null)
+        //    {
+        //        VideoComment comment = new VideoComment()
+        //        {
+        //            User = user,
+        //            UserId = user.Id,
+        //            KursVideoId = videoId,
+        //            Text = text,
+        //            //DateTime = DateTime.Now.ToLocalTime()
+        //        };
+        //        await db.VideoComments.AddAsync(comment);
+        //        await db.SaveChangesAsync();
+
+        //        return RedirectToAction("Profil");
+        //    }
+        //    return RedirectToAction("Profil");
+        //}
+
+        public async Task<IActionResult> CommentJS(int videoId, string userName, string dateTime, string text)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user != null)
+            {
+                VideoComment comment = new VideoComment()
+                {
+                    User = user,
+                    UserId = user.Id,
+                    KursVideoId = videoId,
+                    Text = text,
+                    DateTime = dateTime
+                };
+                await db.VideoComments.AddAsync(comment);
+                await db.SaveChangesAsync();
+
+                return Json(comment);
+            }
+            return RedirectToAction("Profil");
         }
 
         // ForgotPassword ForgotPassword ForgotPassword
