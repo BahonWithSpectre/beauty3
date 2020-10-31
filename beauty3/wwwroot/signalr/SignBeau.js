@@ -1,6 +1,7 @@
 ﻿
-var siteurl = 'https://localhost:44356';
+//var siteurl = 'http://beautyful-001-site3.atempurl.com';
 
+var siteurl = 'https://localhost:5001';
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
@@ -15,9 +16,8 @@ connection.on("ReceiveMessage", function (user) {
   //  document.getElementById("messagesList").appendChild(li);
 
     var pageuser = document.getElementById("username").innerHTML;
+
     if (user === pageuser) {
-
-
         const urlFetch = siteurl + '/Account/UserClose'
         fetch(urlFetch, {
             method: 'POST',
@@ -29,18 +29,13 @@ connection.on("ReceiveMessage", function (user) {
                 "Id": user,
             }),
         })
-            .then(function (res) { return res.json(); })
-            .then(function (data) {
-                if (data === 'false') {
-                    HopUser(user);
-                }
-            })
-            .catch((error) => { console.log(error) });
-
-
-
-
-        
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (data === 'false') {
+                HopUser(user);
+            }
+        })
+        .catch((error) => { console.log(error) });
     }
 
 });
@@ -54,7 +49,8 @@ connection.start().then(function () {
 document.getElementById("sendButton").addEventListener("click", function (event) {
 
     var user = document.getElementById("phone").value;
-
+    $(this).css('display', 'none');
+    $('#loadBtn').css('display', 'block');
     const urlFetch = siteurl + '/Account/UserOpen'
     fetch(urlFetch, {
         method: 'POST',
@@ -66,25 +62,25 @@ document.getElementById("sendButton").addEventListener("click", function (event)
             "Id": user,
         }),
     })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-            if (data === null) {
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+        if (data === null) {
 
                 
-            }
-            else {
-                connection.invoke("SendMessage", data).catch(function (err) {
-                    return console.error(err.toString());
-                });
+        }
+        else {
+            connection.invoke("SendMessage", data).catch(function (err) {
+                return console.error(err.toString());
+            });
 
-                /////////////////
-              //  sleep(10000);
-                setTimeout(function () { FormSubmit(); }, 3000);
-             //   FormSubmit();
-                /////////////////
-            }
-        })
-        .catch((error) => { console.log(error) });
+            /////////////////
+            //  sleep(10000);
+            setTimeout(function () { FormSubmit(); }, 500);
+            //   FormSubmit();
+            /////////////////
+        }
+    })
+    .catch((error) => { console.log(error) });
 
 
     

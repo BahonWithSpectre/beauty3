@@ -10,6 +10,11 @@ namespace beauty3.DbFolder
         public int Id { get; set; }
 
         public string Ip { get; set; }
+        public string Ip2 { get; set; }
+        public string Ip3 { get; set; }
+        public string Ip4 { get; set; }
+
+        public bool Ban { get; set; }
 
 
         public string UserId { get; set; }

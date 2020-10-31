@@ -16,7 +16,7 @@
                 <div class="close">
                     <span></span>
                 </div>
-                <a href="/Home/Visitor">
+                <a href="/Account/Profil">
                     <i class="fa fa-home"></i>
                     <span>Басты бет</span>
                 </a>
@@ -63,7 +63,7 @@
             <div class="burger">
                 <span></span>
             </div>
-            <a class="logo" href="/Home/Visitor">
+            <a class="logo" href="/Account/Profil">
                 <img src="~/img/logo.png" alt="BeautyOnline">
             </a>
             <div class="login">
@@ -73,7 +73,7 @@
                     <i class="fa fa-caret-up"></i>
                     @if (User.IsInRole("Admin"))
                     {
-                        <a href="/Home/Visitor" class="cart-show"><i class="fa fa-home"></i>Басты бет</a>
+                        <a href="/Account/Profil" class="cart-show"><i class="fa fa-home"></i>Басты бет</a>
                     }
                     else
                     {
@@ -86,46 +86,43 @@
         </div>
         @if (User.Identity.IsAuthenticated)
         {
+    <div class="sidebar">
+        <a href="/Account/Profil">
+            <i class="fa fa-home"></i>
+            <span>Басты бет</span>
+        </a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="/Admin/UserList">
+                <i class="fa fa-graduation-cap"></i>
+                <span>Оқушылар</span>
+            </a>
+            <a href="/Admin/BanUser">
+                <i class="fa fa-graduation-cap"></i>
+                <span>Ban User</span>
+            </a>
+            <a href="#" class="kurs-down">
+                <i class="fa fa-list"></i>
+                <span>Курстар</span>
+                <i class="fa fa-angle-right"></i>
+            </a>
+
+            <div class="kurs-down-menu">
+                <a href="/Admin/KursList">Курстар тізімі</a>
+                <a href="/Admin/KursCreate">Курс қосу</a>
+            </div>
+
+        }
+        else
+        {
             <div class="sidebar">
-                <a href="/Home/Visitor">
-                    <i class="fa fa-home"></i>
-                    <span>Басты бет</span>
-                </a>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a href="/Admin/UserList">
-                        <i class="fa fa-graduation-cap"></i>
-                        <span>Оқушылар</span>
-                    </a>
-                    <a href="#" class="kurs-down">
-                        <i class="fa fa-list"></i>
-                        <span>Курстар</span>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                    <div class="kurs-down-menu">
-                        <a href="/Admin/KursList">Курстар тізімі</a>
-                        <a href="/Admin/KursCreate">Курс қосу</a>
-                    </div>
-                
-            }
-            else
-            {
-                <div class="sidebar">
-                    <a href="/Home/Visitor">Басты бет</a>
-                    <a href="/Account/Profil">Менің курстарым</a>
-                    <a href="/Account/News">Жаңалықтар</a>
-                    <button onclick="GetUser()">User Name</button>
-                </div>
-            }
-                        <a href="/Admin/KursList">
-                            <i class="fa fa-list"></i>
-                            <span>Курстар тізімі</span>
-                        </a>
-                        <a href="/Admin/KursCreate">
-                            <i class="fa fa-plus"></i>
-                            <span>Курс қосу</span>
-                        </a>
-                    </div>
+                <a href="/Account/Profil">Басты бет</a>
+                <a href="/Account/Profil">Менің курстарым</a>
+                <a href="/Account/News">Жаңалықтар</a>
+                @*<button onclick="GetUser()">User Name</button>*@
+            </div>
+        }
+    </div>
                 }
                 else
                 {
