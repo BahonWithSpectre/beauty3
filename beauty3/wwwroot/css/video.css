@@ -7,10 +7,8 @@
    width: 100%;
    padding-top: 15px;
    padding-bottom: 100px;
-}
-.video-section {
-    display: flex;
-    justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
 }
 .video-block{
    width: 70%;
@@ -34,10 +32,6 @@
 }
 .video-text > h1{
    font-size: 26px;
-    margin-bottom: 4px;
-}
-.vinfo {
-    margin-top: 7px;
 }
 
 
@@ -45,7 +39,7 @@
 
 /* -----------video-titles---------- */
 .video-titles{
-   width: 28%;
+   width: 30%;
 /*   height: 90vh;*/
    margin-left: 15px;
 /*   overflow-y: scroll;*/
@@ -91,85 +85,6 @@
    color: var(--grey-color);
 }
 
-/*------------COMMENT----------------*/
-
-.comment-block{
-   width: 70%;
-   background-color: #fff;
-   margin-top: 20px;
-   padding: 35px 25px;
-   border-radius: 3px;
-   border: 1px solid #ccc;
-}
-.comment-block > h3{
-   font-size: 18px;
-}
-.user-comment{
-   margin: 25px 0;
-   text-align: right;
-}
-.user-comment > textarea{
-   width: 100%;
-   resize: none;
-   line-height: 24px;
-   outline: none;
-   border: none;
-   border-bottom: 1px solid #aaa;
-}
-.user-comment > textarea:focus{
-   border-bottom: 2px solid var(--brown-color);
-}
-.user-comment > button{
-   background-color: var(--brown-color);
-   color: #fff;
-   cursor: pointer;
-   margin-top: 15px;
-   padding: 5px 15px;
-   border-radius: 2px;
-   border-color: transparent;
-}
-.user-comment > button:focus{
-	box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-	border-radius: 0;
-	outline: none;
-}
-
-.comment-item{
-   display: flex;
-   flex-direction: column;
-   align-items: flex-end;
-   padding: 12px 10px;
-   margin-bottom: 20px;
-   background-color: var(--white-color);
-   border-radius: 3px;
-   border: 1px solid #ccc;
-}
-.comment-item:last-child{
-    margin-bottom: 0;
-}
-.comment-item > h3{
-   width: 100%;
-   font-weight: bold;
-   margin-bottom: 5px;
-}
-.date-text, .comment-text{
-   width: 100%;
-   font-size: 14px;
-}
-.comment-text{
-   margin: 15px 0;
-   padding-bottom: 15px;
-   border-bottom: 1px solid #ccc;
-}
-
-.answer-btn {
-    font-size: 14px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 0 10px;
-}
 
 
 
@@ -188,14 +103,6 @@
     .video-title {
         height: 85px;
     }
-    .comment-block {
-        padding: 25px 15px;
-    }
-}
-@media (max-width: 1024px){
-    .comment-block {
-        padding: 25px 15px;
-    }
 }
 
 @media (min-width: 880px) and (max-width: 1024px) {
@@ -205,11 +112,11 @@
     .video-text > h1 {
         font-size: 22px;
     }
-   .video-block, .comment-block{
+   .video-block{
       width: 65%;
    }
    .video-titles{
-      width: 33%;
+      width: 35%;
    }
    .title-text > h3{
       font-size: 14px;
@@ -222,12 +129,12 @@
     }
 }
 @media (max-width: 880px) {
-    .video-section {
+    .main {
         flex-direction: column;
     }
-    .main > *, .video-section > * {
-        width: 100%;
-    }
+   .main > *{
+      width: 100%;
+   }
    .video {
 /*      height: 380px;*/
    }
@@ -266,12 +173,6 @@
     .video-title{
         height: 110px;
     }
-    .user-comment{
-        margin: 15px 0;
-    }
-    .user-comment > button {
-        margin-top: 5px;
-    }
 }
 @media  (max-width: 640px){
    .main{
@@ -290,14 +191,14 @@
    .title-text > p, .title-text > span, .title-text > span > i {
       font-size: 15px;
    }
-    .content {
-        padding-bottom: 90px;
-    }
 }
 @media  (max-width: 550px){
    .video {
 /*      height: 310px;*/
    }
+    .video-titles {
+        padding-bottom: 70px;
+    }
    .video-title {
       height: 100px;
   }

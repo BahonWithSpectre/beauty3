@@ -58,7 +58,117 @@
 .main-text > .btn:hover{
    background-color: var(--main-color);
 }
+/*––––––––––––––––––*/
 
+
+
+.modal-screen {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 122;
+}
+.modal-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 123;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-window {
+    background-color: var(--white-color);
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    z-index: 125;
+}
+.modal-section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--main-color);
+    border-radius: 7px;
+    position: relative;
+    padding: 50px;
+}
+.modal-section > p{
+	font-size: 24px;
+	margin-bottom: 25px;
+    color:  var(--brown-color);
+}
+.modal-section > .submit{
+	width: 75%;
+	background-color: #24ce61;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	padding: 15px;
+	margin-top: 10px;
+	border-radius: 5px;
+    box-shadow: 0 0 15px #24ce61;
+    transition: 0.2s;
+}
+.modal-section > .submit:hover{
+    box-shadow: 0 0 5px #24ce61;
+}
+.close-mod {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    z-index: 1005;
+    border: 2px solid var(--brown-color);
+    border-radius: 25%;
+    top: 6px;
+    right: 6px;
+    cursor: pointer;
+    background-color: #fff;
+}
+.close-mod:hover{
+  box-shadow: 0 0 10px var(--brown-color);
+}
+.close-mod span{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.close-mod span::after, .close-mod span::before{
+  width: 16px;
+  height: 2px;
+  display: block;
+  content: '';
+  background-color: var(--brown-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -1px;
+  margin-left: -8px;
+  border-radius: 5px;
+}
+.close-mod span::after{
+  transform: rotateZ(45deg);
+}
+.close-mod span::before{
+  transform: rotateZ(-45deg);
+}
+
+
+
+
+
+/*––––––––––––––––––*/
 
 
 /* ––––––––––––––––––– */
@@ -560,6 +670,9 @@
    .main, .teacher{
       height: 425px;
    }
+    .main-bg {
+        background-position-x: center;
+    }
    .teacher-text > h2{
       font-size: 22px;
    }

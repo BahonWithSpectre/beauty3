@@ -11,53 +11,52 @@
 </head>
 <body>
     <div class="wrap">
-        
-            <div class="swipe-menu">
-                <div class="close">
-                    <span></span>
-                </div>
-                <a href="/Account/Profil">
-                    <i class="fa fa-home"></i>
-                    <span>Басты бет</span>
-                </a>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a href="/Admin/UserList">
-                        <i class="fa fa-graduation-cap"></i>
-                        <span>Оқушылар</span>
-                    </a>
-                    <a href="#" class="kurs-down">
-                        <i class="fa fa-list"></i>
-                        <span>Курстар</span>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                    <div class="kurs-down-menu">
-                        <a href="/Admin/KursList">
-                            <i class="fa fa-list"></i>
-                            <span>Курстар тізімі</span>
-                        </a>
-                        <a href="/Admin/KursCreate">
-                            <i class="fa fa-plus"></i>
-                            <span>Курс қосу</span>
-                        </a>
-                    </div>
-                }
-                else
-                {
-                    <a href="/Account/Profil">
-                        <i class="fa fa-star"></i>
-                        <span>Менің курстарым</span>
-                    </a>
-                    <a href="/Home/AllKurs">
-                        <i class="fa fa-list"></i>
-                        <span>Барлық курстар</span>
-                    </a>
-                }
-                <a href="/Account/Logout">
-                    <i class="fa fa-sign-out"></i>
-                    <span>Шығу</span>
-                </a>
+        <div class="swipe-menu">
+            <div class="close">
+                <span></span>
             </div>
+            @*<a href="/Account/Profil">
+                <i class="fa fa-home"></i>
+                <span>Басты бет</span>
+            </a>*@
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Admin/UserList">
+                    <i class="fa fa-graduation-cap"></i>
+                    <span>Оқушылар</span>
+                </a>
+                <a href="#" class="kurs-down">
+                    <i class="fa fa-list"></i>
+                    <span>Курстар</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <div class="kurs-down-menu">
+                    <a href="/Admin/KursList">
+                        <i class="fa fa-list"></i>
+                        <span>Курстар тізімі</span>
+                    </a>
+                    <a href="/Admin/KursCreate">
+                        <i class="fa fa-plus"></i>
+                        <span>Курс қосу</span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <a href="/Account/Profil">
+                    <i class="fa fa-star"></i>
+                    <span>Менің курстарым</span>
+                </a>
+                <a href="/Home/AllKurs">
+                    <i class="fa fa-list"></i>
+                    <span>Барлық курстар</span>
+                </a>
+            }
+            <a href="/Account/Logout">
+                <i class="fa fa-sign-out"></i>
+                <span>Шығу</span>
+            </a>
+        </div>
         
         <div class="header">
             <div class="burger">
@@ -84,45 +83,35 @@
                 </div>
             </div>
         </div>
+
         @if (User.Identity.IsAuthenticated)
         {
-    <div class="sidebar">
-        <a href="/Account/Profil">
-            <i class="fa fa-home"></i>
-            <span>Басты бет</span>
-        </a>
-        @if (User.IsInRole("Admin"))
-        {
-            <a href="/Admin/UserList">
-                <i class="fa fa-graduation-cap"></i>
-                <span>Оқушылар</span>
-            </a>
-            <a href="/Admin/BanUser">
-                <i class="fa fa-graduation-cap"></i>
-                <span>Ban User</span>
-            </a>
-            <a href="#" class="kurs-down">
-                <i class="fa fa-list"></i>
-                <span>Курстар</span>
-                <i class="fa fa-angle-right"></i>
-            </a>
-
-            <div class="kurs-down-menu">
-                <a href="/Admin/KursList">Курстар тізімі</a>
-                <a href="/Admin/KursCreate">Курс қосу</a>
-            </div>
-
-        }
-        else
-        {
             <div class="sidebar">
-                <a href="/Account/Profil">Басты бет</a>
-                <a href="/Account/Profil">Менің курстарым</a>
-                <a href="/Account/News">Жаңалықтар</a>
-                @*<button onclick="GetUser()">User Name</button>*@
-            </div>
-        }
-    </div>
+                @*<a href="/Account/Profil">
+                    <i class="fa fa-home"></i>
+                    <span>Басты бет</span>
+                </a>*@
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Admin/UserList">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>Оқушылар</span>
+                    </a>
+                    <a href="/Admin/BanUser">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>Ban User</span>
+                    </a>
+                    <a href="#" class="kurs-down">
+                        <i class="fa fa-list"></i>
+                        <span>Курстар</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+
+                    <div class="kurs-down-menu">
+                        <a href="/Admin/KursList">Курстар тізімі</a>
+                        <a href="/Admin/KursCreate">Курс қосу</a>
+                    </div>
+
                 }
                 else
                 {
@@ -141,11 +130,12 @@
 
         @RenderBody()
 
-    <div style="display:none;">
+        <div style="display:none;">
 
-    </div>
+        </div>
 
     
+    </div>
 
 
     <script src="~/signalr/dist/browser/signalr.js"></script>

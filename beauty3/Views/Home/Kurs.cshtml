@@ -10,13 +10,25 @@
     <div class="close">
         <span></span>
     </div>
-    <a href="#" class="main-nav fix-active">Басты бет</a>
-    <a href="#" class="teacher-nav">Спикер жайлы</a>
-    <a href="#" class="about-nav">Курс жайлы</a>
-    <a href="#" class="more-nav">Қосымша</a>
-    <a href="/Account/Profil" class="swipe-login">
-        <span>Жеке кабинет</span>
+    <a href="#" class="main-nav">
+        <i class="fa fa-home"></i>
+        <span>Басты бет</span>
+    </a>
+    <a href="#" class="teacher-nav">
+        <i class="fa fa-list"></i>
+        <span>Спикер жайлы</span>
+    </a>
+    <a href="#" class="about-nav">
+        <i class="fa fa-laptop"></i>
+        <span>Курс жайлы</span>
+    </a>
+    <a href="#" class="more-nav">
+        <i class="fa fa-phone"></i>
+        <span>Қосымша</span>
+    </a>
+    <a href="/Account/Profil">
         <i class="fa fa-user-o"></i>
+        <span>Жеке кабинет</span>
     </a>
 </div>
 <div class="header">
@@ -45,11 +57,26 @@
             <h2>@Model.Name</h2>
             <p>@Model.Info</p>
             @*<h2>Cұлулық сырлары</h2>
-        <p>Научитесь самостоятельно создавать макияж любой сложности за 7 уроков</p>*@
-            <a href="#" class="btn">Үйрену</a>
+                <p>Научитесь самостоятельно создавать макияж любой сложности за 7 уроков</p>*@
+            <a href="#" class="btn buy-btn">Сатып алу</a>
         </div>
         <div class="main-bg" style="background-image: url(/kurs/@Model.BannerUrl);"></div>
     </div>
+
+
+    @* MODAL *@
+    <div class="modal-screen">
+        <div class="modal-bg"></div>
+        <div class="modal-window">
+            <div class="modal-section">
+                <div class="close-mod"><span></span></div>
+                <p style="color:black!important;">Бұл курсты сатып алу үшін WhatsApp нөмеріне жазыңыз.</p>
+                <a href="https://wa.me/77081162775" style="color:black!important;" class="submit">Жазу</a>
+            </div>
+        </div>
+    </div>
+    @* MODAL *@
+
     <div id="teacher" class="teacher">
         <div class="teacher-bg"></div>
         <div class="teacher-img">
@@ -60,12 +87,12 @@
             <p>@Model.AvtorInfo</p>
             @*<h2>Пәленшеева Түгенше</h2>*@
             @*<p>
-            Пәленшеева Түгенше - это ключ к успеху в современном мире.
-            Именно поэтому я предлагаю уникальный и, пожалуй,
-            самый удобный формат обучения в сфере beauty.
-            Получайте новые знания и достигайте своих целей находясь
-            в любой точке мира в комфортной для вас обстановке.
-        </p>*@
+                    Пәленшеева Түгенше - это ключ к успеху в современном мире.
+                    Именно поэтому я предлагаю уникальный и, пожалуй,
+                    самый удобный формат обучения в сфере beauty.
+                    Получайте новые знания и достигайте своих целей находясь
+                    в любой точке мира в комфортной для вас обстановке.
+                </p>*@
         </div>
     </div>
 
@@ -98,9 +125,9 @@
                         <li>@Model.Kimge5</li>
                     }
                     @*<li>15 минутта өзін бояндырып үйренгісі келетін кез-келген қыз-келіншектерге;</li>
-                    <li>Кез-келген жаста әдемі болып, бет күтіміне ерекше мән беретін жандарға;</li>
-                    <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>
-                    <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>*@
+                        <li>Кез-келген жаста әдемі болып, бет күтіміне ерекше мән беретін жандарға;</li>
+                        <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>
+                        <li>Салонға жиі ақша құртпау үшін, техникалары мен оңай жолын үйренгісі келетін әйел адамдарға арналады.</li>*@
                 </ul>
             </div>
             <div class="course-block">
@@ -125,10 +152,10 @@
                     </div>
                     <p>@Model.What1</p>
                     @*<p>
-                        Узнаете все о самых актуальных и востребованных техниках в
-                        макияже и научитесь работать с различными особенностями:
-                        нависшее веко, проблемная кожа, лифтинг макияж
-                    </p>*@
+                            Узнаете все о самых актуальных и востребованных техниках в
+                            макияже и научитесь работать с различными особенностями:
+                            нависшее веко, проблемная кожа, лифтинг макияж
+                        </p>*@
                 </div>
                 <div class="learn-block">
                     <div class="img-block">
@@ -136,10 +163,10 @@
                     </div>
                     <p>@Model.What2</p>
                     @*<p>
-                        Благодаря обширному блоку самой актуальной теоретической
-                        информации научитесь на профессиональном уровне разбираться
-                        в многообразии косметических продуктов
-                    </p>*@
+                            Благодаря обширному блоку самой актуальной теоретической
+                            информации научитесь на профессиональном уровне разбираться
+                            в многообразии косметических продуктов
+                        </p>*@
                 </div>
                 <div class="learn-block">
                     <div class="img-block">
@@ -159,9 +186,9 @@
                     <li>@counter. @c.VideoName</li>
                 }
                 @*<li>Тақырып 2</li>
-                <li>Тақырып 3</li>
-                <li>Тақырып 4</li>
-                <li>Тақырып 5</li>*@
+                    <li>Тақырып 3</li>
+                    <li>Тақырып 4</li>
+                    <li>Тақырып 5</li>*@
             </ul>
         </div>
     </div>
@@ -263,6 +290,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.buy-btn').click(function (e) {
+            e.preventDefault();
+            $('.modal-screen').css('display', 'flex');
+        })
+        $('.close-mod, .modal-bg').click(function () {
+            $('.modal-screen').css('display', 'none');
+        })
+
         $('.burger').hover(function () {
             $('.swipe-menu').toggleClass('active-menu')
         })

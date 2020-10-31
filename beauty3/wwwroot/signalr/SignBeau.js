@@ -3,6 +3,8 @@
 
 var siteurl = 'https://localhost:5001';
 
+//var siteurl = 'http://beautyonline.kz';
+
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 //Disable send button until connection is established

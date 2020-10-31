@@ -10,8 +10,8 @@ using beauty3.DbFolder;
 namespace beauty3.Migrations
 {
     [DbContext(typeof(AppDb))]
-    [Migration("20201028162126_mig5")]
-    partial class mig5
+    [Migration("20201030092815_baha-mig-88")]
+    partial class bahamig88
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,32 +215,6 @@ namespace beauty3.Migrations
                     b.ToTable("Kurs");
                 });
 
-            modelBuilder.Entity("beauty3.DbFolder.KursComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("KursId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("KursId");
-
-                    b.ToTable("KursComments");
-                });
-
             modelBuilder.Entity("beauty3.DbFolder.KursVideo", b =>
                 {
                     b.Property<int>("Id")
@@ -270,6 +244,34 @@ namespace beauty3.Migrations
                     b.ToTable("KursVideos");
                 });
 
+            modelBuilder.Entity("beauty3.DbFolder.PodComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DateTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("VideoCommentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("VideoCommentId");
+
+                    b.ToTable("PodComments");
+                });
+
             modelBuilder.Entity("beauty3.DbFolder.User", b =>
                 {
                     b.Property<string>("Id")
@@ -277,6 +279,9 @@ namespace beauty3.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Ban")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -321,6 +326,9 @@ namespace beauty3.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("Stats")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -339,6 +347,38 @@ namespace beauty3.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("beauty3.DbFolder.UserIpList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ban")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Ip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ip2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ip3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ip4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserIpLists");
                 });
 
             modelBuilder.Entity("beauty3.DbFolder.UserKurs", b =>
@@ -379,8 +419,8 @@ namespace beauty3.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DateTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("KursVideoId")
                         .HasColumnType("int");
@@ -451,7 +491,7 @@ namespace beauty3.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("beauty3.DbFolder.KursComment", b =>
+            modelBuilder.Entity("beauty3.DbFolder.KursVideo", b =>
                 {
                     b.HasOne("beauty3.DbFolder.Kurs", "Kurs")
                         .WithMany()
@@ -460,13 +500,24 @@ namespace beauty3.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("beauty3.DbFolder.KursVideo", b =>
+            modelBuilder.Entity("beauty3.DbFolder.PodComment", b =>
                 {
-                    b.HasOne("beauty3.DbFolder.Kurs", "Kurs")
+                    b.HasOne("beauty3.DbFolder.User", "User")
                         .WithMany()
-                        .HasForeignKey("KursId")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("beauty3.DbFolder.VideoComment", "VideoComment")
+                        .WithMany()
+                        .HasForeignKey("VideoCommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("beauty3.DbFolder.UserIpList", b =>
+                {
+                    b.HasOne("beauty3.DbFolder.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("beauty3.DbFolder.UserKurs", b =>

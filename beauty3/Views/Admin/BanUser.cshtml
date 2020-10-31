@@ -1,0 +1,64 @@
+﻿@model IEnumerable<beauty3.DbFolder.UserIpList>
+
+@{
+    ViewData["Title"] = "BanUser";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<link href="~/css/cabinet.css" rel="stylesheet">
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+
+<div class="content">
+
+    <h2 style="margin: 20px 0;">Бан Юзеров</h2>
+
+    <table class="table table-bordered" style="padding:20px!important;">
+        <thead>
+            <tr style="background-color: cadetblue; color:white;">
+                <th>Юзер</th>
+                <th>Номер</th>
+                <th>Ипользовано IP- адресов</th>
+                <th>Статус</th>
+                <th>Заблокировать</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.User.FirstName</td>
+                    <td>@d.User.UserName</td>
+                    <td>
+                        <span>@d.Ip</span> <br />
+                        <span>@d.Ip2</span> <br />
+                        <span>@d.Ip3</span> <br />
+                        <span>@d.Ip4</span> <br />
+                    </td>
+                    @if(d.Ban == true){
+                        <td style="color:red;">
+                            Нет доступа
+                        </td>
+                    }
+                    else{
+                        <td style="color:green;">
+                            Есть доступ
+                        </td>
+                    }
+                    <td>
+                        @if(d.Ban == true){
+                            <a class="btn btn-success" href="/Admin/BlockOpen/@d.UserId">Open</a>
+                        }
+                        else{
+                            <a class="btn btn-warning" href="/Admin/Block/@d.UserId">Block @d.User.FirstName</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+  

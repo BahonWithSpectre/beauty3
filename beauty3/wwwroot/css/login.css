@@ -10,6 +10,9 @@
 	padding-bottom: 150px;
 	background-color: var(--pink-color);
 	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
 	display: flex;
 	justify-content: space-around;
 }
@@ -17,8 +20,14 @@
 	width: 40%;
 	padding: 25px 50px;
 	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
 	display: flex;
 	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
    flex-direction: column;
    justify-content: center;
    background-color: var(--white-color);
@@ -36,7 +45,6 @@
    text-align: center;
 }
 .vhod > input{
-	width: 100%;
 	padding: 15px;
 	border-radius: 2px;
 	border: none;
@@ -84,10 +92,10 @@
    .content{
 		justify-content: space-between;
 	}
-	.vhod > h2 {
+	.vhod > h2{
 		font-size: 20px;
 	}
-	.vhod > input, .vhod > button {
+	.vhod > input, .vhod > button{
 		padding: 10px 15px;
 	}
 }
@@ -99,7 +107,9 @@
 @media  (max-width: 425px){
    .content{
 		-webkit-flex-direction: column;
+		-moz-flex-direction: column;
 		-ms-flex-direction: column;
+		-o-flex-direction: column;
 		flex-direction: column;
 		padding-top: 100px;
 		padding-bottom: 20px;
