@@ -1,4 +1,5 @@
 @import url('const3.css');
+@import url('videoPadding.css');
 
 
 /* –––––––––––––––STUDENTS–––––––––––––– */
@@ -81,19 +82,21 @@
 }
 
 
-.student{
-   width: 350px;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   padding: 15px 20px;
-   margin-bottom: 15px;
-   background-color: var(--pink-color);
-   border-radius: 2px;
-   box-shadow: 0 0 3px var(--grey-color);
+.student {
+       width: 350px;
+    margin-bottom: 20px;
+    background-color: var(--pink-color);
+    border-radius: 2px;
+    box-shadow: 0 0 1px var(--main-color);
 }
 .student:hover{
-   box-shadow: 0 0 5px var(--grey-color);
+   box-shadow: 0 0 5px var(--main-color);
+}
+.stud-head {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .stud-data{
    width: 60%;
@@ -118,6 +121,55 @@
 }
 .stud-more:hover{
    box-shadow: 0 0 7px var(--brown-color);
+}
+
+
+.student table {
+    width: 100%;
+    border-collapse: collapse;
+    /*   box-shadow: 0 0 3px var(--main-color);*/
+    transition: 0.2s;
+    background-color: var(--white-color);
+}
+.student table tr:first-child > th{
+   color: var(--main-color);
+/*   box-shadow: 0 0 1px var(--main-color);*/
+   padding: 10px;
+}
+.student table th{
+   font-weight: bold;
+   color: var(--main-color);
+}
+.student table td, .student table th{
+   padding: 10px 15px;
+   text-align: center;
+   box-shadow: 0 0 1px var(--main-color);
+}
+
+
+.red-btn, .green-btn{
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 3px;
+    box-shadow: 0 0 3px #aaa;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+}
+.red-btn:focus, .green-btn:focus {
+    border: none;
+    outline: none;
+}
+.red-btn {
+    background-color: red;
+}
+.green-btn {
+    background-color: green;
+}
+.red-btn:hover, .green-btn:hover {
+    filter: brightness(0.8);
 }
 
 
@@ -147,6 +199,9 @@
       width: 70%;
       font-size: 14px;
    }
+    .student table td, .student table td > *, .student table th {
+        font-size: 14px;
+    }
 }
 @media  (max-width: 425px){
    
@@ -155,12 +210,18 @@
     .stud-more{
         padding: 7px;
     }
+    .stud-data {
+        width: 55%;
+    }
 }
 @media  (max-width: 320px){
    .search > button, .pager > a{
       padding: 4px 8px;
    }
-   .student{
+    .student {
+        overflow-x: scroll;
+    }
+   .stud-head{
       padding: 10px;
    }
    .stud-data > p > span{

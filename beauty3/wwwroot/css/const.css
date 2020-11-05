@@ -80,13 +80,15 @@
 }
 .nav > a, .go-back > a{
    text-decoration: none;
-   margin: 0 10px;
-   padding: 5px;
+   margin: 0;
+   margin-right: 10px;
+   padding: 3px 0;
    transition: 0.3s;
    position: relative;
 }
 .go-back > a{
    margin: 0;
+   padding-left: 5px;
    font-weight: bold;
    /* font-size: 20px; */
 }
@@ -273,13 +275,21 @@
 .social > a:hover i{
    color: var(--white-color);
 }
-.social > a:first-child:hover i{
-   border-color: #24ce61;
-   background-color: #24ce61;
+.social > a.soc1:hover i {
+    border-color: #24ce61;
+    background-color: #24ce61;
 }
-.social > a:last-child:hover i{
+.social > a.soc2:hover i{
    border-color: #fdf497;
    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%) !important;
+}
+.social > a.soc3:hover i {
+    border-color: red;
+    background-color: red;
+}
+.social > a.soc4:hover i {
+    border-color: black;
+    background-color: black;
 }
 
 /* -----fCenter----- */
@@ -325,7 +335,6 @@
    }
    .nav > a{
       font-size: 14px;
-      margin: 0 5px;
    }
    .nav > a::before{
       height: 1px;

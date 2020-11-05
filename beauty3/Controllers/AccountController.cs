@@ -93,9 +93,9 @@ namespace beauty3.Controllers
             if (ModelState.IsValid)
             {
                 var us = await _userManager.FindByNameAsync(model.PhoneNumber);
-                if(us.Ban == true)
+                if (us.Ban == true)
                 {
-                    ViewBag.Stats = "Ваш аккаунт заблокировано. Обратитесь к Администратору! +7(708) 927 00 00(Whats'App)";
+                    ViewBag.Stats = "Бұл аккаунт бұғатталған(қара тізімде). Толық ақпаратты білу үшін Администратормен байланысыңыз! +7 (708) 116 27 75 (What'sApp)";
                     return View(model);
                 }
                 if(us.Stats == true)
@@ -103,7 +103,6 @@ namespace beauty3.Controllers
                     var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
-
                         //////////////////// IP Adress ///////////////////////
                         var ipp = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
                         var ipreg = await db.UserIpLists.Where(p => p.User.UserName == model.PhoneNumber).SingleOrDefaultAsync();
@@ -120,9 +119,7 @@ namespace beauty3.Controllers
                                     if (ipreg.Ip3 != null && ipreg.Ip3 != ipp)
                                     {
                                         if (ipreg.Ip4 != null && ipreg.Ip4 != ipp)
-                                        {
-                                            ///////////   hueva tebe   ///////////
-                                        }
+                                        {}
                                         else
                                         {
                                             ipreg.Ip4 = ipp;
@@ -139,11 +136,8 @@ namespace beauty3.Controllers
                                 }
                                 db.UserIpLists.Update(ipreg);
                             }
-                            
                         }
-
                         await db.SaveChangesAsync();
-
                         //////////////////////////////////////////////////////
 
                         // проверяем, принадлежит ли URL приложению
@@ -163,9 +157,8 @@ namespace beauty3.Controllers
                 }
                 else
                 {
-                    ViewBag.Stats = "Вы нарушаете правило! В один аккаунт может войти только валделец этого аккаунта";
+                    ViewBag.Stats = "Ережені бұзбаңыз! Дәл қазір бұл аккаунт қолданыс үстінде, аккаунтты тек иесі ғана қолданады!";
                 }
-
             }
             return View(model);
         }

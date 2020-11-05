@@ -1,14 +1,14 @@
 ﻿
 //var siteurl = 'http://beautyful-001-site3.atempurl.com';
 
-var siteurl = 'https://localhost:5001';
+//var siteurl = 'https://localhost:5001';
 
-//var siteurl = 'http://beautyonline.kz';
+var siteurl = 'http://beautyonline.kz';
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 //Disable send button until connection is established
-document.getElementById("sendButton").disabled = true;
+//document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user) {
   //  var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -39,13 +39,12 @@ connection.on("ReceiveMessage", function (user) {
         })
         .catch((error) => { console.log(error) });
     }
-
 });
 
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
-    return console.error(err.toString());
+    return console.log(err.toString());
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
@@ -83,10 +82,6 @@ document.getElementById("sendButton").addEventListener("click", function (event)
         }
     })
     .catch((error) => { console.log(error) });
-
-
-    
-    
     event.preventDefault();
 });
 
@@ -100,8 +95,6 @@ connection.on("ReceiveUser", function (user) {
 
     var pageuser = document.getElementById("phone").value;
 
-
-
     const urlFetch = siteurl + '/Account/NumberRegix'
     fetch(urlFetch, {
         method: 'POST',
@@ -113,29 +106,21 @@ connection.on("ReceiveUser", function (user) {
             "Id": pageuser,
         }),
     })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-
-
-            if (user === data) {
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+        if (user === data) {
                 
-                //document.getElementById("loginform").submit();
-            }
+            //document.getElementById("loginform").submit();
+        }
 
-        })
-        .catch((error) => { console.log(error) });
-
-
-
-
-
-
+    })
+    .catch((error) => { console.log(error) });
 });
 
 function HopUser(e) {
     var user = e;
     connection.invoke("SendUser", user).catch(function (err) {
-        return console.error(err.toString());
+        return console.log(err.toString());
     });
 }
 

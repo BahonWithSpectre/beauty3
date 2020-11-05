@@ -9,9 +9,8 @@
 <div class="swipe-menu">
     <div class="close">
         <span></span>
-        <!-- <i class="fa fa-close"></i> -->
     </div>
-    <a href="" class="main-nav">
+    @*<a href="" class="main-nav">
         <i class="fa fa-home"></i>
         <span>Басты бет</span>
     </a>
@@ -20,37 +19,33 @@
         <span>Біз жайлы</span>
     </a>
     <a href="#" class="course-nav fix-active">
-        <i class="fa fa-laptop"></i>
+        <i class="fa fa-list"></i>
         <span>Курстар</span>
-    </a>
-    <a href="#" class="more-nav">
+    </a>*@
+    @*<a href="#" class="foot-nav">
         <i class="fa fa-phone"></i>
-        <span>Қосымша</span>
-    </a>
+        <span>Байланыс</span>
+    </a>*@
     <a href="/Account/Profil">
-        <i class="fa fa-user-o"></i>
+        <i class="fa fa-user"></i>
         <span>Жеке кабинет</span>
     </a>
 </div>
 <div class="header">
     <div class="logo">
         <img src="~/img/logo.png" alt="BeautyOnline">
-        <!-- Beauty Online -->
     </div>
-    <div class="nav">
+    @*<div class="nav">
         <a href="/Home/Visitor" class="main-nav">Басты бет</a>
         <a href="/Home/Visitor#about" class="about-nav">Біз жайлы</a>
         <a href="#" class="course-nav fix-active">Курстар</a>
-        <a href="#" class="more-nav">Қосымша</a>
-    </div>
+    </div>*@
     <a href="/Account/Profil" class="login">
         <span>Жеке кабинет</span>
-        <i class="fa fa-user-o"></i>
+        <i class="fa fa-user"></i>
     </a>
     <div class="burger">
         <span></span>
-        <!-- <i class="fa fa-bars"></i> -->
-        <!-- <i class="fa fa-close"></i> -->
     </div>
 </div>
 <div class="content">
@@ -90,6 +85,5 @@
                 $('.header').removeClass('fix-header');
             }
         });
-
     });
 </script>

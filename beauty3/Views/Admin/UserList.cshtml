@@ -36,16 +36,65 @@
         <div class="students">
             @foreach (var c in Model.Users)
             {
+                var us = Model.UserIpLists.FirstOrDefault(x => x.UserId == c.Id);
                 <div class="student">
-                    <div class="stud-data">
-                        <p>
-                            <span>@c.FirstName</span>
-                            <span>@c.LastName</span>
-                        </p>
-                        <eq-highlight-text text="@ViewBag.Text" value="@c.PhoneNumber" />
-                        @*<p>@c.PhoneNumber</p>*@
+                    <div class="stud-head">
+                        <div class="stud-data">
+                            <p>
+                                <span>@c.FirstName</span>
+                                <span>@c.LastName</span>
+                            </p>
+                            <eq-highlight-text text="@ViewBag.Text" value="@c.PhoneNumber" />
+                            @*<p>@c.PhoneNumber</p>*@
+                        </div>
+                        <a href="/Admin/AboutUser/@c.Id" class="stud-more">Оқушы туралы</a>
                     </div>
-                    <a href="/Admin/AboutUser/@c.Id" class="stud-more">Оқушы туралы</a>
+                    @if (us != null)
+                    {
+                        <table>
+                            <tr>
+                                <th>IP-адрестер</th>
+                                <th>Статус</th>
+                                <th>Блоктау</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if(us.Ip != null){
+                                        <span>@us.Ip</span> <br />
+                                    }
+                                    @if(us.Ip2 != null){
+                                        <span>@us.Ip2</span> <br />
+                                    }
+                                    @if(us.Ip3 != null){
+                                        <span>@us.Ip3</span> <br />
+                                    }
+                                    @if(us.Ip4 != null){
+                                        <span>@us.Ip4</span> <br />
+                                    }
+                                </td>
+                                @if(us.Ban == true){
+                                    <td style="color:red;">
+                                        <i class="fa fa-lock"></i>
+                                        Блок
+                                    </td>
+                                }
+                                else{
+                                    <td style="color:green;">
+                                        <i class="fa fa-unlock"></i>
+                                        Ашық
+                                    </td>
+                                }
+                                <td>
+                                    @if(us.Ban == true){
+                                        <a class="green-btn" href="/Admin/BlockOpen/@us.UserId">Open</a>
+                                    }
+                                    else{
+                                        <a class="red-btn" href="/Admin/Block/@us.UserId">Block</a>
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    }
                 </div>
             }
         </div>

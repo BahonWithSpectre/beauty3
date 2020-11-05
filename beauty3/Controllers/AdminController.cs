@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using beauty3.DbFolder;
-using beauty3.Models;
 using beauty3.ViewModels.AdminViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +20,6 @@ namespace beauty3.Controllers
         public IWebHostEnvironment env;
 
         public UserManager<User> um;
-
 
         public AdminController(AppDb _db, IWebHostEnvironment _env, UserManager<User> _um)
         {
@@ -42,6 +39,7 @@ namespace beauty3.Controllers
             UsersView uv = new UsersView
             {
                 Users = await db.Users.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                UserIpLists = await db.UserIpLists.ToListAsync(),
                 Pager = pager
             };
 
@@ -62,6 +60,7 @@ namespace beauty3.Controllers
             UsersView uv = new UsersView
             {
                 Users = await db.Users.Where(x => x.UserName.Contains(userPhone) || x.PhoneNumber.Contains(userPhone)).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                UserIpLists = await db.UserIpLists.ToListAsync(),
                 Pager = pager
             };
 
@@ -329,47 +328,6 @@ namespace beauty3.Controllers
         {
 
             var date = await db.UserIpLists.Include(o=>o.User).ToListAsync();
-            
-
-            #region
-            //var users = await (from b in db.Users
-            //             select new BanModels
-            //             {
-            //                 UserName = b.FirstName + b.LastName,
-            //                 Number = b.UserName,
-            //                 Count = 0
-            //             }).ToListAsync();
-
-
-            //foreach (var f in date)
-            //{
-            //    foreach (var f2 in date2)
-            //    {
-            //        if(f.User.UserName == f2.User.UserName)
-            //        {
-            //            if(f.Ip != f2.Ip)
-            //            {
-            //                foreach (var t in users)
-            //                {
-            //                    if (f.User.UserName == t.Number)
-            //                    {
-            //                        t.Count += 1;
-            //                    }
-            //                }
-
-            //            }
-            //            else
-            //            {
-            //                date2.Remove(f2);
-            //            }
-            //        }
-
-            //    }
-
-
-            //}
-            #endregion
-
 
             return View(date);
         }
@@ -391,7 +349,7 @@ namespace beauty3.Controllers
             db.Users.Update(user);
             db.SaveChanges();
 
-            return RedirectToAction("BanUser");
+            return RedirectToAction("UserList");
         }
 
         public IActionResult BlockOpen(string Id)
@@ -408,7 +366,7 @@ namespace beauty3.Controllers
             db.Users.Update(user);
             db.SaveChanges();
 
-            return RedirectToAction("BanUser");
+            return RedirectToAction("UserList");
         }
     }
 }
