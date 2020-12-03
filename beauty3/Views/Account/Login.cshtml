@@ -17,7 +17,7 @@
 <div class="content">
     <form class="vhod" asp-action="Login" id="loginform">
         <h2>Жүйеде болсаңыз</h2>
-        <input id="phone" type="text" asp-for="PhoneNumber" placeholder="Телефон номері" required>
+        <input id="phone" type="tel" asp-for="PhoneNumber" placeholder="Телефон номері" required>
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
 
         <div class="valid" asp-validation-summary="ModelOnly"></div>
@@ -46,6 +46,7 @@
     </div>
 </div>
 <script src="~/js/jquery.maskedinput.min.js"></script>
+@*<script src="~/js/jquery.mask.min.js"></script>*@
 <script>
     $(document).ready(function () {
         $('#phone').mask('+7 (999) 999 99 99')

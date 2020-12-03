@@ -132,7 +132,7 @@ namespace beauty3.Controllers
                 if (file == null) return Content("Файл не найден!");
 
                 var img1 = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + img1, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + img1, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 };
@@ -162,7 +162,7 @@ namespace beauty3.Controllers
             if (banner != null)
             {
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + banner.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + imgname, FileMode.Create))
                 {
                     await banner.CopyToAsync(stream);
                 };
@@ -173,7 +173,7 @@ namespace beauty3.Controllers
             if (fon != null)
             {
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + fon.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + imgname, FileMode.Create))
                 {
                     await fon.CopyToAsync(stream);
                 };
@@ -183,7 +183,7 @@ namespace beauty3.Controllers
             if (avtor != null)
             {
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + avtor.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + imgname, FileMode.Create))
                 {
                     await avtor.CopyToAsync(stream);
                 };
@@ -243,7 +243,7 @@ namespace beauty3.Controllers
                     var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
                     string path_Root = env.WebRootPath;
 
-                    string path_to_Images = path_Root + "/kursvideo/" + imgname;
+                    string path_to_Images = path_Root + "\\kursvideo\\" + imgname;
                     using (var stream = new FileStream(path_to_Images, FileMode.Create))
                     {
                         await PhotoUrl.CopyToAsync(stream);
@@ -284,7 +284,7 @@ namespace beauty3.Controllers
                     var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
                     string path_Root = env.WebRootPath;
 
-                    string path_to_Images = path_Root + "/kursvideo/" + imgname;
+                    string path_to_Images = path_Root + "\\kursvideo\\" + imgname;
                     using (var stream = new FileStream(path_to_Images, FileMode.Create))
                     {
                         await PhotoUrl.CopyToAsync(stream);

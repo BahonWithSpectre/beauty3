@@ -222,9 +222,11 @@ namespace beauty3.Controllers
                         otherVideos = await db.KursVideos.Where(x => x.Id != videoId && x.KursId == id).Include(p => p.Kurs).ToListAsync();
                     }
                     ViewBag.OtherVideos = otherVideos;
-                    videoView.VideoComments = await db.VideoComments.Where(x => x.KursVideoId == videoView.KursVideo.Id).ToListAsync();
-                    videoView.Users = await db.Users.ToListAsync();
-                    ViewBag.ComCount = await db.VideoComments.Where(x => x.KursVideoId == videoView.KursVideo.Id).CountAsync();
+                    var vc = await db.VideoComments.Where(x => x.KursVideoId == videoView.KursVideo.Id).Include(x => x.User).ToListAsync();
+
+                    //videoView.Users = await db.Users.ToListAsync();
+                    videoView.VideoComments = vc;
+                    ViewBag.ComCount = vc.Count();
 
                     return View(videoView);
                 }
