@@ -1,12 +1,11 @@
 ﻿@model beauty3.ViewModels.AccountViewModels.VideoViewModel
 @{
     Layout = "~/Views/Shared/_Layout2.cshtml";
-    ViewData["Title"] = "Video";
+    ViewData["Title"] = Model.KursVideo.VideoName;
     int counter = 0;
 }
 <link href="~/css/video.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
-
 
 
 <div class="content">
@@ -20,7 +19,8 @@
                                 gyroscope;
                                 allowfullscreen
                                 allow="autoplay"
-                                controls></iframe>
+                                controls>
+                        </iframe>
                     </div>
                 </div>
                 <div class="video-text">
@@ -29,7 +29,6 @@
                     <p class="vinfo">
                         @Model.KursVideo.Info
                     </p>
-
                 </div>
             </div>
             <div class="video-titles">
@@ -61,10 +60,9 @@
             @foreach (var c in Model.VideoComments)
             {
                 counter++;
-                var user = Model.Users.FirstOrDefault(x => x.Id == c.UserId);
 
                 <div class="comment-item">
-                    <h3>@user.FirstName @user.LastName</h3>
+                    <h3>@c.User.FirstName @c.User.LastName</h3>
                     <p class="date-text">@c.DateTime</p>
                     <p class="comment-text">@c.Text</p>
                     <button class="answer-btn">
@@ -94,8 +92,9 @@
             let videoId = $('#videoId').val();
             let text = $('#text').val();
 
-            let response = await fetch(`https://localhost:44356/Account/CommentJS?userName=${userName}&videoId=${videoId}&text=${text}&dateTime=${dateTime}`, {
+            let response = await fetch(`http://beautyonline.kz/Account/CommentJS?userName=${userName}&videoId=${videoId}&text=${text}&dateTime=${dateTime}`, {
 
+            @*let response = await fetch(`https://localhost:5001/Account/CommentJS?userName=${userName}&videoId=${videoId}&text=${text}&dateTime=${dateTime}`, {*@
                 header: {
                     "Content-Type": "application/json",
                     "Accept": "application/json"

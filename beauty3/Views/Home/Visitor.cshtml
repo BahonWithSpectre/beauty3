@@ -22,12 +22,12 @@
         <i class="fa fa-list"></i>
         <span>Курстар</span>
     </a>
-    <a href="#" class="more-nav">
+    <a href="#" class="foot-nav">
         <i class="fa fa-phone"></i>
         <span>Байланыс</span>
     </a>
     <a href="/Account/Profil">
-        <i class="fa fa-user-o"></i>
+        <i class="fa fa-user"></i>
         <span>Жеке кабинет</span>
     </a>
 </div>
@@ -39,11 +39,11 @@
         <a href="#" class="main-nav fix-active">Басты бет</a>
         <a href="#" class="about-nav">Біз жайлы</a>
         <a href="#" class="course-nav">Курстар</a>
-        <a href="#" class="more-nav">Қосымша</a>
+        <a href="#" class="foot-nav">Байланыс</a>
     </div>
     <a href="/Account/Profil" class="login">
         <span>Жеке кабинет</span>
-        <i class="fa fa-user-o"></i>
+        <i class="fa fa-user"></i>
     </a>
     <div class="burger">
         <span></span>
@@ -245,6 +245,15 @@
             $('.about-nav').addClass('fix-active');
             $('html, body').animate({
                 scrollTop: $('#about').offset().top
+            }, 1000);
+            return false;
+        });
+        $('.foot-nav').click(function () {
+            var offset = 0;
+            $('a.fix-active').removeClass('fix-active');
+            $('.foot-nav').addClass('fix-active');
+            $('html, body').animate({
+                scrollTop: $('#footer').offset().top
             }, 1000);
             return false;
         });

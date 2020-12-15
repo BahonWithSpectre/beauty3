@@ -1,7 +1,7 @@
 ﻿@model beauty3.ViewModels.AccountViewModels.RegisterViewModel
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Регистрация";
 }
 
 
@@ -9,16 +9,13 @@
 
 
 <div class="header">
-    <a class="logo" href="/Home/Visitor">
+    <a class="logo" href="/Account/Profil">
         <img src="~/img/logo.png" alt="BeautyOnline">
-        <!-- Beauty Online -->
     </a>
     <a href="/Account/Profil" class="login">
         <span>Жеке кабинет</span>
-        <i class="fa fa-user-o"></i>
-        <!-- <a href="#">Кіру / Тіркелу</a> -->
+        <i class="fa fa-user"></i>
     </a>
-    <!-- <div class="menu"></div> -->
 </div>
 <div class="content">
     <form class="vhod" asp-action="Register">
@@ -29,7 +26,7 @@
         <input type="text" asp-for="Email" placeholder="Email" required>
         <span asp-validation-for="Email" style="color: red"></span>
 
-        <input id="phone" type="text" asp-for="PhoneNumber" placeholder="Телефон" required>
+        <input id="phone" type="tel" asp-for="PhoneNumber" placeholder="Телефон" required>
         <span asp-validation-for="PhoneNumber" style="color: red"></span>
 
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
@@ -44,6 +41,9 @@
     </form>
 </div>
 <script src="~/js/jquery.maskedinput.min.js"></script>
-<script>$(document).ready(function () {
+@*<script src="~/js/jquery.mask.min.js"></script>*@
+<script>
+    $(document).ready(function () {
         $('#phone').mask('+7 (999) 999 99 99')
-    })</script>
+    })
+</script>

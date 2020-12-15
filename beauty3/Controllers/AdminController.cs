@@ -23,7 +23,6 @@ namespace beauty3.Controllers
 
         public UserManager<User> um;
 
-
         public AdminController(AppDb _db, IWebHostEnvironment _env, UserManager<User> _um)
         {
             db = _db;
@@ -42,6 +41,7 @@ namespace beauty3.Controllers
             UsersView uv = new UsersView
             {
                 Users = await db.Users.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                UserIpLists = await db.UserIpLists.ToListAsync(),
                 Pager = pager
             };
 
@@ -62,6 +62,7 @@ namespace beauty3.Controllers
             UsersView uv = new UsersView
             {
                 Users = await db.Users.Where(x => x.UserName.Contains(userPhone) || x.PhoneNumber.Contains(userPhone)).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToListAsync(),
+                UserIpLists = await db.UserIpLists.ToListAsync(),
                 Pager = pager
             };
 
@@ -133,7 +134,7 @@ namespace beauty3.Controllers
                 if (file == null) return Content("Файл не найден!");
 
                 var img1 = DateTime.Now.ToString("MMddHHmmss") + file.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + img1, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + img1, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 };
@@ -163,7 +164,7 @@ namespace beauty3.Controllers
             if (banner != null)
             {
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + banner.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + imgname, FileMode.Create))
                 {
                     await banner.CopyToAsync(stream);
                 };
@@ -174,7 +175,7 @@ namespace beauty3.Controllers
             if (fon != null)
             {
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + fon.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + imgname, FileMode.Create))
                 {
                     await fon.CopyToAsync(stream);
                 };
@@ -184,7 +185,7 @@ namespace beauty3.Controllers
             if (avtor != null)
             {
                 var imgname = DateTime.Now.ToString("MMddHHmmss") + avtor.FileName;
-                using (var stream = new FileStream(env.WebRootPath + "/kurs/" + imgname, FileMode.Create))
+                using (var stream = new FileStream(env.WebRootPath + "\\kurs\\" + imgname, FileMode.Create))
                 {
                     await avtor.CopyToAsync(stream);
                 };
@@ -244,7 +245,7 @@ namespace beauty3.Controllers
                     var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
                     string path_Root = env.WebRootPath;
 
-                    string path_to_Images = path_Root + "/kursvideo/" + imgname;
+                    string path_to_Images = path_Root + "\\kursvideo\\" + imgname;
                     using (var stream = new FileStream(path_to_Images, FileMode.Create))
                     {
                         await PhotoUrl.CopyToAsync(stream);
@@ -285,7 +286,7 @@ namespace beauty3.Controllers
                     var imgname = DateTime.Now.ToString("MMddHHmmss") + PhotoUrl.FileName;
                     string path_Root = env.WebRootPath;
 
-                    string path_to_Images = path_Root + "/kursvideo/" + imgname;
+                    string path_to_Images = path_Root + "\\kursvideo\\" + imgname;
                     using (var stream = new FileStream(path_to_Images, FileMode.Create))
                     {
                         await PhotoUrl.CopyToAsync(stream);
@@ -323,92 +324,5 @@ namespace beauty3.Controllers
         }
 
 
-
-
-        public async Task<IActionResult> BanUser()
-        {
-
-            var date = await db.UserIpLists.Include(o=>o.User).ToListAsync();
-            
-
-            #region
-            //var users = await (from b in db.Users
-            //             select new BanModels
-            //             {
-            //                 UserName = b.FirstName + b.LastName,
-            //                 Number = b.UserName,
-            //                 Count = 0
-            //             }).ToListAsync();
-
-
-            //foreach (var f in date)
-            //{
-            //    foreach (var f2 in date2)
-            //    {
-            //        if(f.User.UserName == f2.User.UserName)
-            //        {
-            //            if(f.Ip != f2.Ip)
-            //            {
-            //                foreach (var t in users)
-            //                {
-            //                    if (f.User.UserName == t.Number)
-            //                    {
-            //                        t.Count += 1;
-            //                    }
-            //                }
-
-            //            }
-            //            else
-            //            {
-            //                date2.Remove(f2);
-            //            }
-            //        }
-
-            //    }
-
-
-            //}
-            #endregion
-
-
-            return View(date);
-        }
-
-
-
-
-        public IActionResult Block(string Id)
-        {
-            var user = db.Users.SingleOrDefault(p => p.Id == Id);
-
-            user.Ban = true;
-
-            var ip = db.UserIpLists.SingleOrDefault(o => o.UserId == Id);
-
-            ip.Ban = true;
-
-            db.UserIpLists.Update(ip);
-            db.Users.Update(user);
-            db.SaveChanges();
-
-            return RedirectToAction("BanUser");
-        }
-
-        public IActionResult BlockOpen(string Id)
-        {
-            var user = db.Users.SingleOrDefault(p => p.Id == Id);
-
-            user.Ban = false;
-
-            var ip = db.UserIpLists.SingleOrDefault(o => o.UserId == Id);
-
-            ip.Ban = false;
-
-            db.UserIpLists.Update(ip);
-            db.Users.Update(user);
-            db.SaveChanges();
-
-            return RedirectToAction("BanUser");
-        }
     }
 }

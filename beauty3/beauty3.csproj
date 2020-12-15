@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\font-awesome\" />
     <Folder Include="wwwroot\kurs\" />
     <Folder Include="wwwroot\kursvideo\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 

@@ -6,11 +6,13 @@ namespace beauty3.ViewModels.AdminViewModels
     public class UsersView
     {
         public List<User> Users { get; set; }
+        public List<UserIpList> UserIpLists { get; set; }
         public Pager Pager { get; set; }
 
         public UsersView()
         {
             Users = new List<User>();
+            UserIpLists = new List<UserIpList>();
         }
     }
     public class Pager

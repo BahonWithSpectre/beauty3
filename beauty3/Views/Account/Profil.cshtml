@@ -1,13 +1,9 @@
 ﻿@model IEnumerable<beauty3.DbFolder.UserKurs>
 @{
     Layout = "~/Views/Shared/_Layout2.cshtml";
-    ViewData["Title"] = "Profil";
+    ViewData["Title"] = "Жеке кабинет";
 }
-
-
 <link href="~/css/cabinet.css" rel="stylesheet">
-
-
 
 <div class="content">
     <div id="courses" class="courses">
@@ -36,21 +32,10 @@
                     }
                 }
             }
-
-
-
-           
-
-
-
         </div>
     </div>
 </div>
-<input type="button" id="sendButton" style="display:none;" value="Send Message" />
-
-
-
-
+@*<input type="button" id="sendButton" style="display:none;" value="Send Message" />*@
 
 
 <script>
@@ -62,7 +47,7 @@
                     '<h1 style="margin: 25px 0; color: var(--red-color);">' +
                         'Ешқандай курс сатып алынбаған!' +
                     '</h1 >' +
-                    '<a href="/Home/Visitor#courses">' +
+                    '<a href="/Home/AllKurs">' +
                         'Курстарды көру' +
                     '</a > ' +
                 '</div > '
