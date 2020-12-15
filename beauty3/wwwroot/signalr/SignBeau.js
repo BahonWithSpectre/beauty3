@@ -1,5 +1,5 @@
 ﻿
-var siteurl = 'https://localhost:44356';
+var siteurl = 'http://beautyful-001-site3.atempurl.com';
 
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();

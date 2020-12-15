@@ -94,9 +94,8 @@
             let videoId = $('#videoId').val();
             let text = $('#text').val();
 
-            let response = await fetch(`https://localhost:5001/Account/CommentJS?userName=${userName}&videoId=${videoId}&text=${text}&dateTime=${dateTime}`, {
+            let response = await fetch(`https://localhost:44356/Account/CommentJS?userName=${userName}&videoId=${videoId}&text=${text}&dateTime=${dateTime}`, {
 
-            @*let response = await fetch(`http://vmeste-zko.kz/Home/Search?city=${city}&type=${type}`, {*@
                 header: {
                     "Content-Type": "application/json",
                     "Accept": "application/json"

@@ -93,6 +93,11 @@ namespace beauty3.Controllers
             if (ModelState.IsValid)
             {
                 var us = await _userManager.FindByNameAsync(model.PhoneNumber);
+                if(us.Ban == true)
+                {
+                    ViewBag.Stats = "Ваш аккаунт заблокировано. Обратитесь к Администратору! +7(708) 927 00 00(Whats'App)";
+                    return View(model);
+                }
                 if(us.Stats == true)
                 {
                     var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
@@ -101,8 +106,42 @@ namespace beauty3.Controllers
 
                         //////////////////// IP Adress ///////////////////////
                         var ipp = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+                        var ipreg = await db.UserIpLists.Where(p => p.User.UserName == model.PhoneNumber).SingleOrDefaultAsync();
+                        if(ipreg == null)
+                        {
+                            await db.UserIpLists.AddAsync(new UserIpList { UserId = us.Id, Ip = ipp });
+                        }
+                        else
+                        {
+                            if(ipreg.Ip != ipp)
+                            {
+                                if(ipreg.Ip2 != null && ipreg.Ip2 != ipp)
+                                {
+                                    if (ipreg.Ip3 != null && ipreg.Ip3 != ipp)
+                                    {
+                                        if (ipreg.Ip4 != null && ipreg.Ip4 != ipp)
+                                        {
+                                            ///////////   hueva tebe   ///////////
+                                        }
+                                        else
+                                        {
+                                            ipreg.Ip4 = ipp;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ipreg.Ip3 = ipp;
+                                    }
+                                }
+                                else
+                                {
+                                    ipreg.Ip2 = ipp;
+                                }
+                                db.UserIpLists.Update(ipreg);
+                            }
+                            
+                        }
 
-                        await db.UserIpLists.AddAsync(new UserIpList { UserId = us.Id, Ip = ipp });
                         await db.SaveChangesAsync();
 
                         //////////////////////////////////////////////////////
@@ -199,6 +238,11 @@ namespace beauty3.Controllers
             }
             return RedirectToAction("Login");
         }
+
+
+
+        #region Comment
+
         //[HttpPost]
         //public async Task<IActionResult> Comment(int videoId, int kursId, string userName, string text)
         //{
@@ -221,6 +265,10 @@ namespace beauty3.Controllers
         //    return RedirectToAction("Profil");
         //}
 
+        #endregion
+
+
+
         public async Task<IActionResult> CommentJS(int videoId, string userName, string dateTime, string text)
         {
             var user = await _userManager.FindByNameAsync(userName);
@@ -228,7 +276,6 @@ namespace beauty3.Controllers
             {
                 VideoComment comment = new VideoComment()
                 {
-                    User = user,
                     UserId = user.Id,
                     KursVideoId = videoId,
                     Text = text,

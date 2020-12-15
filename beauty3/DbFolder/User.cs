@@ -8,5 +8,6 @@ namespace beauty3.DbFolder
 
 
         public bool? Stats    {get;set;}
+        public bool Ban { get; set; } = false;
     }
 }

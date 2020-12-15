@@ -278,6 +278,9 @@ namespace beauty3.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Ban")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -351,7 +354,19 @@ namespace beauty3.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ban")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Ip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ip2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ip3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ip4")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

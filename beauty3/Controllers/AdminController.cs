@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using beauty3.DbFolder;
+using beauty3.Models;
 using beauty3.ViewModels.AdminViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,11 +21,14 @@ namespace beauty3.Controllers
         public readonly AppDb db;
         public IWebHostEnvironment env;
 
+        public UserManager<User> um;
 
-        public AdminController(AppDb _db, IWebHostEnvironment _env)
+
+        public AdminController(AppDb _db, IWebHostEnvironment _env, UserManager<User> _um)
         {
             db = _db;
             env = _env;
+            um = _um;
         }
 
 
@@ -41,6 +47,8 @@ namespace beauty3.Controllers
 
             return View(uv);
         }
+
+
         [HttpPost]
         public async Task<IActionResult> UserList(string userPhone, int? page = 1)
         {
@@ -72,6 +80,7 @@ namespace beauty3.Controllers
 
             return View(auv);
         }
+
         [HttpPost]
         public async Task<IActionResult> AboutUser(string userId, int kursId)
         {
@@ -314,5 +323,92 @@ namespace beauty3.Controllers
         }
 
 
+
+
+        public async Task<IActionResult> BanUser()
+        {
+
+            var date = await db.UserIpLists.Include(o=>o.User).ToListAsync();
+            
+
+            #region
+            //var users = await (from b in db.Users
+            //             select new BanModels
+            //             {
+            //                 UserName = b.FirstName + b.LastName,
+            //                 Number = b.UserName,
+            //                 Count = 0
+            //             }).ToListAsync();
+
+
+            //foreach (var f in date)
+            //{
+            //    foreach (var f2 in date2)
+            //    {
+            //        if(f.User.UserName == f2.User.UserName)
+            //        {
+            //            if(f.Ip != f2.Ip)
+            //            {
+            //                foreach (var t in users)
+            //                {
+            //                    if (f.User.UserName == t.Number)
+            //                    {
+            //                        t.Count += 1;
+            //                    }
+            //                }
+
+            //            }
+            //            else
+            //            {
+            //                date2.Remove(f2);
+            //            }
+            //        }
+
+            //    }
+
+
+            //}
+            #endregion
+
+
+            return View(date);
+        }
+
+
+
+
+        public IActionResult Block(string Id)
+        {
+            var user = db.Users.SingleOrDefault(p => p.Id == Id);
+
+            user.Ban = true;
+
+            var ip = db.UserIpLists.SingleOrDefault(o => o.UserId == Id);
+
+            ip.Ban = true;
+
+            db.UserIpLists.Update(ip);
+            db.Users.Update(user);
+            db.SaveChanges();
+
+            return RedirectToAction("BanUser");
+        }
+
+        public IActionResult BlockOpen(string Id)
+        {
+            var user = db.Users.SingleOrDefault(p => p.Id == Id);
+
+            user.Ban = false;
+
+            var ip = db.UserIpLists.SingleOrDefault(o => o.UserId == Id);
+
+            ip.Ban = false;
+
+            db.UserIpLists.Update(ip);
+            db.Users.Update(user);
+            db.SaveChanges();
+
+            return RedirectToAction("BanUser");
+        }
     }
 }
