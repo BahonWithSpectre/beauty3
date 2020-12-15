@@ -1,7 +1,7 @@
 ﻿
-var siteurl = 'http://beautyful-001-site3.atempurl.com';
+//var siteurl = 'http://beautyful-001-site3.atempurl.com';
 
-var siteurl = 'https://localhost:5001';
+var siteurl = 'https://localhost:44356';
 
 //var siteurl = 'http://beautyonline.kz';
 
@@ -67,7 +67,9 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     .then(function (data) {
         if (data === null) {
 
-                
+            document.getElementById("redtext").innerHTML = 'Бұл номер тіркелмеген. Жүйеге тіркеліңіз';
+            $('#loadBtn').css('display', 'none');
+            $('#sendButton').css('display', 'block');
         }
         else {
             connection.invoke("SendMessage", data).catch(function (err) {

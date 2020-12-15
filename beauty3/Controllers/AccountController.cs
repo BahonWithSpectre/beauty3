@@ -242,6 +242,8 @@ namespace beauty3.Controllers
             }
             return RedirectToAction("Login");
         }
+
+        #region
         //[HttpPost]
         //public async Task<IActionResult> Comment(int videoId, int kursId, string userName, string text)
         //{

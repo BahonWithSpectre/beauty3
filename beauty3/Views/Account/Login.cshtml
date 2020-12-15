@@ -11,12 +11,14 @@
     </a>
     <a href="/Account/Profil" class="login">
         <span>Жеке кабинет</span>
+        
         <i class="fa fa-user"></i>
     </a>
 </div>
 <div class="content">
     <form class="vhod" asp-action="Login" id="loginform">
         <h2>Жүйеде болсаңыз</h2>
+
         <input id="phone" type="tel" asp-for="PhoneNumber" placeholder="Телефон номері" required>
         <input type="password" asp-for="Password" placeholder="Құпиясөз" required>
 
@@ -25,14 +27,11 @@
         {
             <p style="color:red;">@ViewBag.Stats</p>
         }
+        <p style="color:red;" id="redtext"></p>
         <button id="sendButton">Жүйеге кіру</button>
-        <button
-            id="loadBtn"
-            style="padding:0; display: none; background-color: #fff; border-color: var(--brown-color);"
-        >
-            <span
-                style="height: 45px; display: flex; justify-content: center; align-items: center; overflow: hidden; "
-            >
+        <button id="loadBtn"
+                style="padding:0; display: none; background-color: #fff; border-color: var(--brown-color);">
+            <span style="height: 45px; display: flex; justify-content: center; align-items: center; overflow: hidden; ">
                 <img style="width:60%; " src="~/img/loader.gif" />
             </span>
         </button>
