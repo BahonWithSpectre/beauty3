@@ -93,71 +93,80 @@ namespace beauty3.Controllers
             if (ModelState.IsValid)
             {
                 var us = await _userManager.FindByNameAsync(model.PhoneNumber);
-                if (us.Ban == true)
+                if (us != null)
                 {
-                    ViewBag.Stats = "Бұл аккаунт бұғатталған(қара тізімде). Толық ақпаратты білу үшін Администратормен байланысыңыз! +7 (708) 116 27 75 (What'sApp)";
-                    return View(model);
-                }
-                if(us.Stats == true)
-                {
-                    var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
-                    if (result.Succeeded)
+                    if (us.Ban == true)
                     {
-                        //////////////////// IP Adress ///////////////////////
-                        var ipp = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
-                        var ipreg = await db.UserIpLists.Where(p => p.User.UserName == model.PhoneNumber).SingleOrDefaultAsync();
-                        if(ipreg == null)
+                        ViewBag.Stats = "Бұл аккаунт бұғатталған(қара тізімде). Толық ақпаратты білу үшін Администратормен байланысыңыз! +7 (700) 497 6277 (WhatsApp)";
+                        return View(model);
+                    }
+                    if (us.Stats == true)
+                    {
+                        var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
+                        if (result.Succeeded)
                         {
-                            await db.UserIpLists.AddAsync(new UserIpList { UserId = us.Id, Ip = ipp });
-                        }
-                        else
-                        {
-                            if(ipreg.Ip != ipp)
+                            //////////////////// IP Adress ///////////////////////
+                            var ipp = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+                            var ipreg = await db.UserIpLists.Where(p => p.User.UserName == model.PhoneNumber).FirstOrDefaultAsync();
+                            if (ipreg == null)
                             {
-                                if(ipreg.Ip2 != null && ipreg.Ip2 != ipp)
+                                await db.UserIpLists.AddAsync(new UserIpList { UserId = us.Id, Ip = ipp });
+                            }
+                            else
+                            {
+                                if (ipreg.Ip != ipp)
                                 {
-                                    if (ipreg.Ip3 != null && ipreg.Ip3 != ipp)
+                                    if (ipreg.Ip2 != null && ipreg.Ip2 != ipp)
                                     {
-                                        if (ipreg.Ip4 != null && ipreg.Ip4 != ipp)
-                                        {}
+                                        if (ipreg.Ip3 != null && ipreg.Ip3 != ipp)
+                                        {
+                                            if (ipreg.Ip4 != null && ipreg.Ip4 != ipp)
+                                            { }
+                                            else
+                                            {
+                                                ipreg.Ip4 = ipp;
+                                            }
+                                        }
                                         else
                                         {
-                                            ipreg.Ip4 = ipp;
+                                            ipreg.Ip3 = ipp;
                                         }
                                     }
                                     else
                                     {
-                                        ipreg.Ip3 = ipp;
+                                        ipreg.Ip2 = ipp;
                                     }
+                                    db.UserIpLists.Update(ipreg);
                                 }
-                                else
-                                {
-                                    ipreg.Ip2 = ipp;
-                                }
-                                db.UserIpLists.Update(ipreg);
                             }
-                        }
-                        await db.SaveChangesAsync();
-                        //////////////////////////////////////////////////////
+                            await db.SaveChangesAsync();
+                            //////////////////////////////////////////////////////
 
-                        // проверяем, принадлежит ли URL приложению
-                        if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                        {
-                            return Redirect(model.ReturnUrl);
+                            // проверяем, принадлежит ли URL приложению
+                            if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                            {
+                                return Redirect(model.ReturnUrl);
+                            }
+                            else
+                            {
+                                return RedirectToAction("Profil", "Account");
+                            }
                         }
                         else
                         {
-                            return RedirectToAction("Profil", "Account");
+                            //ModelState.AddModelError("", "Құпиясөз және(немесе) логин қате!");
+                            ModelState.AddModelError("", "Құпиясөз дұрыс емес!");
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Құпиясөз және(немесе) логин қате!");
+                        ViewBag.Stats = "Ережені бұзбаңыз! Дәл қазір бұл аккаунт қолданыс үстінде, аккаунтты тек иесі ғана қолданады!";
                     }
                 }
                 else
                 {
-                    ViewBag.Stats = "Ережені бұзбаңыз! Дәл қазір бұл аккаунт қолданыс үстінде, аккаунтты тек иесі ғана қолданады!";
+                    //ModelState.AddModelError("", "Бұл номер жүйеде тіркелмеген! Тіркелу үшін <a href=\"/Account/Register\">тіркелу бетіне</a> өтіңіз!");
+                    ModelState.AddModelError("", "Бұл номер жүйеде тіркелмеген!");
                 }
             }
             return View(model);
@@ -269,7 +278,8 @@ namespace beauty3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
+                //var user = await _userManager.FindByEmailAsync(model.Email);
+                var user = await db.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
                 if (user == null)
                 {
                     // пользователь с данным email может отсутствовать в бд

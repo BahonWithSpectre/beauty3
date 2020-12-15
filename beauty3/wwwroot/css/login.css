@@ -3,6 +3,8 @@
 /* ----------------CONTENT------------------ */
 .valid *{
 	color: red;
+	list-style: none;
+	text-align: center;
 }
 .content {
 	width: 100%;

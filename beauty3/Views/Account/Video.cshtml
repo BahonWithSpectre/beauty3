@@ -1,7 +1,7 @@
 ﻿@model beauty3.ViewModels.AccountViewModels.VideoViewModel
 @{
     Layout = "~/Views/Shared/_Layout2.cshtml";
-    ViewData["Title"] = "Video";
+    ViewData["Title"] = Model.KursVideo.VideoName;
     int counter = 0;
 }
 <link href="~/css/video.css" rel="stylesheet">
@@ -29,7 +29,6 @@
                     <p class="vinfo">
                         @Model.KursVideo.Info
                     </p>
-
                 </div>
             </div>
             <div class="video-titles">

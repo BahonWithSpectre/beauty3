@@ -11,7 +11,7 @@ namespace beauty3.DbFolder
 
             //emailMessage.From.Add(new MailboxAddress("Администрация сайта", "nurbakyt0970@gmail.com"));
             emailMessage.From.Add(new MailboxAddress("Администрация сайта", "beautyonline.kz@mail.ru"));
-            emailMessage.From.Add(new MailboxAddress("Администрация сайта", "beauty_online@mail.ru"));
+            //emailMessage.From.Add(new MailboxAddress("Администрация сайта", "beauty_online@mail.ru"));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new BodyBuilder()

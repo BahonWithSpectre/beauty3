@@ -1,9 +1,9 @@
 ﻿
 //var siteurl = 'http://beautyful-001-site3.atempurl.com';
 
-//var siteurl = 'https://localhost:5001';
+var siteurl = 'https://localhost:5001';
 
-var siteurl = 'http://beautyonline.kz';
+//var siteurl = 'http://beautyonline.kz';
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
@@ -20,7 +20,7 @@ connection.on("ReceiveMessage", function (user) {
     var pageuser = document.getElementById("username").innerHTML;
 
     if (user === pageuser) {
-        const urlFetch = siteurl + '/Account/UserClose'
+        const urlFetch = siteurl + '/Account/UserClose';
         fetch(urlFetch, {
             method: 'POST',
             headers: {
