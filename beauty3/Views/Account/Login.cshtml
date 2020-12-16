@@ -16,7 +16,8 @@
     </a>
 </div>
 <div class="content">
-    <form class="vhod" asp-action="Login" id="loginform">
+    @*<form class="vhod" asp-action="Login" id="loginform">*@
+    <form class="vhod" asp-action="Login">
         <h2>Жүйеде болсаңыз</h2>
 
         <input id="phone" type="tel" asp-for="PhoneNumber" placeholder="Телефон номері" required>
@@ -28,13 +29,14 @@
             <p style="color:red;">@ViewBag.Stats</p>
         }
         <p style="color:red;" id="redtext"></p>
-        <button id="sendButton">Жүйеге кіру</button>
+        <button>Жүйеге кіру</button>
+        @*<button id="sendButton">Жүйеге кіру</button>
         <button id="loadBtn"
                 style="padding:0; display: none; background-color: #fff; border-color: var(--brown-color);">
             <span style="height: 45px; display: flex; justify-content: center; align-items: center; overflow: hidden; ">
                 <img style="width:60%; " src="~/img/loader.gif" />
             </span>
-        </button>
+        </button>*@
         @*<p><a href="/Account/ForgotPassword">Пароль ұмытып калдым</a></p>*@
         <p><a href="https://wa.me/77003223366?text=Сәлеметсіз%20бе,%20мен%20паролімді%20ұмытып%20калдым,%20жаңа%20пароль%20берсеңіз???">Пароль ұмытып калдым???</a></p>
     </form>
