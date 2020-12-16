@@ -100,7 +100,7 @@ namespace beauty3.Controllers
                         ViewBag.Stats = "Бұл аккаунт бұғатталған(қара тізімде). Толық ақпаратты білу үшін Администратормен байланысыңыз! +7 (700) 497 6277 (WhatsApp)";
                         return View(model);
                     }
-                    if (us.Stats == true)
+                    if (us.Stats == true || us.Stats == false)
                     {
                         var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
                         if (result.Succeeded)
