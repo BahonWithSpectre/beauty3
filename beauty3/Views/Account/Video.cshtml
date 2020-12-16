@@ -95,7 +95,7 @@
             let response = await fetch(`http://beautyonline.kz/Account/CommentJS?userName=${userName}&videoId=${videoId}&text=${text}&dateTime=${dateTime}`, {
 
             @*let response = await fetch(`https://localhost:5001/Account/CommentJS?userName=${userName}&videoId=${videoId}&text=${text}&dateTime=${dateTime}`, {*@
-                header: {
+                headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },

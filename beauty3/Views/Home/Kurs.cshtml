@@ -22,10 +22,10 @@
         <i class="fa fa-laptop"></i>
         <span>Курс жайлы</span>
     </a>
-    <a href="#" class="packages-nav">
+    @*<a href="#" class="packages-nav">
         <i class="fa fa-phone"></i>
         <span>Пакеттер</span>
-    </a>
+    </a>*@
     <a href="/Account/Profil">
         <i class="fa fa-user"></i>
         <span>Жеке кабинет</span>
@@ -40,7 +40,7 @@
         <a href="#" class="main-nav fix-active">Басты бет</a>
         <a href="#" class="teacher-nav">Спикер жайлы</a>
         <a href="#" class="about-nav">Курс жайлы</a>
-        <a href="#" class="packages-nav">Пакеттер</a>
+        @*<a href="#" class="packages-nav">Пакеттер</a>*@
     </div>
     <a href="/Account/Profil" class="login">
         <span>Жеке кабинет</span>
@@ -113,10 +113,22 @@
                 </div>
                 <h2>КУРС ҚАЛАЙ ӨТЕДІ?</h2>
                 <ul>
-                    <li>Жабық инстаграм парақшада сторис, пост, видео, IGTV-толық форматында 30-40 минуттық видео-сабақтар салынады.</li>
+
+                    <li>@Model.How1</li>
+                    <li>@Model.How2</li>
+                    <li>@Model.How3</li>
+                    @if (@Model.How4 != null)
+                    {
+                        <li>@Model.How4</li>
+                    }
+                    @if (@Model.How5 != null)
+                    {
+                        <li>@Model.How5</li>
+                    }
+                    @*<li>Жабық инстаграм парақшада сторис, пост, видео, IGTV-толық форматында 30-40 минуттық видео-сабақтар салынады.</li>
                     <li>Арнайы Тапсырмалар беріліп тексеріледі</li>
                     <li>Бонус кітапша "Сұлулық Сырлары" беріледі</li>
-                    <li>Cоңғы күні Тікелей эфирде сұрақ-жауап болады</li>
+                    <li>Cоңғы күні Тікелей эфирде сұрақ-жауап болады</li>*@
                 </ul>
             </div>
         </div>
@@ -155,7 +167,7 @@
         </div>
     </div>
 
-    <div class="packages">
+    <!--<div class="packages">
         <div class="packages-bg"></div>
         <h1>Оқу түрлері</h1>
         <div class="packs">
@@ -191,34 +203,10 @@
                             <span>@Model.Pack5</span>
                         </p>
                     }
-                    @*<p>
-                        <i class="fa fa-check"></i>
-                        <span>Учебные материалы в формате видеоуроков FullHD</span>
-                    </p>
-                    <p>
-                        <i class="fa fa-check"></i>
-                        <span>Личный кабинет с постоянным доступом к материалам обучения</span>
-                    </p>
-                    <p>
-                        <i class="fa fa-check"></i>
-                        <span>Раздаточный материал со списком косметики и инструментами</span>
-                    </p>
-                    <p>
-                        <i class="fa fa-check"></i>
-                        <span>Рабочая тетрадь для конспектирования и записей</span>
-                    </p>
-                    <p>
-                        <i class="fa fa-check"></i>
-                        <span>Возможность занятий в любое удобное время и месте</span>
-                    </p>
-                    <p>
-                        <i class="fa fa-check"></i>
-                        <span>Выдача сертификата после завершения обучения</span>
-                    </p>*@
                 </div>
-                <div class="pack-price">
+                <div class="pack-price">-->
                     @*<span class="old-price">6 990 тг</span>*@
-                    <span class="new-price">@Model.Price1 тг</span>
+                    <!--<span class="new-price">@Model.Price1 тг</span>
                 </div>
                 <a class="start-btn" href="#">Бастау</a>
                 <p class="sale-text">действует скидка 30% до 12 июля</p>
@@ -273,15 +261,15 @@
                         </p>
                     }
                 </div>
-                <div class="pack-price">
+                <div class="pack-price">-->
                     @*<span class="old-price">8 990 тг</span>*@
-                    <span class="new-price">@Model.Price2 тг</span>
+                    <!--<span class="new-price">@Model.Price2 тг</span>
                 </div>
                 <a class="start-btn" href="#">Бастау</a>
                 <p class="sale-text">действует скидка 30% до 12 июля</p>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 
 
