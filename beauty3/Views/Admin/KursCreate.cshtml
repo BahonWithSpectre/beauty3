@@ -22,23 +22,32 @@
                 <label for="avtor-info">Автор туралы инфо:</label>
                 <textarea asp-for="AvtorInfo" id="avtor-info" rows="8" required></textarea>
 
-                <label for="kurs-info">Курс кімдерге арналады:</label>
+                <label>Курс кімдерге арналады:</label>
                 <textarea asp-for="Kimge1" id="kimge1" rows="2" required></textarea>
                 <textarea asp-for="Kimge2" id="kimge2" rows="2" required></textarea>
                 <textarea asp-for="Kimge3" id="kimge3" rows="2" required></textarea>
                 <textarea asp-for="Kimge4" id="kimge4" rows="2"></textarea>
                 <textarea asp-for="Kimge5" id="kimge5" rows="2"></textarea>
 
-                <label for="kurs-info">Курста не үйренеді:</label>
+                <label>Курста не үйренеді:</label>
                 <textarea asp-for="What1" id="what1" rows="2" required></textarea>
                 <textarea asp-for="What2" id="what2" rows="2" required></textarea>
                 <textarea asp-for="What3" id="what3" rows="2" required></textarea>
             </div>
             <div class="form-block">
-                <label for="avtor">ПАКЕТ-1 қалай аталады:</label>
+                
+                <label>Курс қалай өтеді:</label>
+                <textarea asp-for="How1" rows="2" required></textarea>
+                <textarea asp-for="How2" rows="2" required></textarea>
+                <textarea asp-for="How3" rows="2"></textarea>
+                <textarea asp-for="How4" rows="2"></textarea>
+                <textarea asp-for="How5" rows="2"></textarea>
+
+
+                @*<label for="avtor">ПАКЕТ-1 қалай аталады:</label>
                 <input asp-for="PackName1" type="text" required>
 
-                <label for="kurs-info">ПАКЕТ-1 қамтиды:</label>
+                <label>ПАКЕТ-1 қамтиды:</label>
                 <textarea asp-for="Pack1" rows="2" required></textarea>
                 <textarea asp-for="Pack2" rows="2" required></textarea>
                 <textarea asp-for="Pack3" rows="2" required></textarea>
@@ -48,7 +57,7 @@
                 <label for="avtor">ПАКЕТ-2 қалай аталады:</label>
                 <input asp-for="PackName2" type="text" required>
 
-                <label for="kurs-info">ПАКЕТ-2 артықшылықтары:</label>
+                <label>ПАКЕТ-2 артықшылықтары:</label>
                 <textarea asp-for="Pack21" rows="2" required></textarea>
                 <textarea asp-for="Pack22" rows="2" required></textarea>
                 <textarea asp-for="Pack23" rows="2"></textarea>
@@ -57,7 +66,7 @@
                 <input asp-for="Price1" id="price1" type="number" required>
 
                 <label for="price">ПАКЕТ-2 бағасы:</label>
-                <input asp-for="Price2" id="price2" type="number" required>
+                <input asp-for="Price2" id="price2" type="number" required>*@
             </div>
             <div class="form-block">
                 <label for="photo">Курс фоны(фото, jpg, png => 350 x 230):</label>

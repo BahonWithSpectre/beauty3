@@ -21,6 +21,12 @@ namespace beauty3.DbFolder
         public string Kimge4 { get; set; }
         public string Kimge5 { get; set; }
 
+        public string How1 { get; set; }
+        public string How2 { get; set; }
+        public string How3 { get; set; }
+        public string How4 { get; set; }
+        public string How5 { get; set; }
+
 
         public string PackName1 { get; set; }
         public string PackName2 { get; set; }

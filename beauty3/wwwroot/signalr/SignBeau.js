@@ -1,9 +1,9 @@
 ﻿
 //var siteurl = 'http://beautyful-001-site3.atempurl.com';
 
-var siteurl = 'https://localhost:44356';
+//var siteurl = 'https://localhost:5001';
 
-//var siteurl = 'http://beautyonline.kz';
+var siteurl = 'http://beautyonline.kz';
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
@@ -24,7 +24,7 @@ connection.on("ReceiveMessage", function (user) {
         fetch(urlFetch, {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -56,7 +56,7 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     fetch(urlFetch, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -101,7 +101,7 @@ connection.on("ReceiveUser", function (user) {
     fetch(urlFetch, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -137,20 +137,20 @@ function UserOpen(e) {
     fetch(urlFetch, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             "Id": user,
         }),
     })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-            if (data === 'true') {
-                alert("True");
-            }
-        })
-        .catch((error) => { console.log(error) });
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+        if (data === 'true') {
+            alert("True");
+        }
+    })
+    .catch((error) => { console.log(error) });
 }
 
 
@@ -163,18 +163,18 @@ function UserClose(e) {
     fetch(urlFetch, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             "Id": user,
         }),
     })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
 
-        })
-        .catch((error) => { console.log(error) });
+    })
+    .catch((error) => { console.log(error) });
 }
 
 

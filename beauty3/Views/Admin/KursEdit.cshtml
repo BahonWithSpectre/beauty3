@@ -40,7 +40,15 @@
                 <textarea asp-for="What3" id="what3" rows="2" value="@Model.What3"></textarea>
             </div>
             <div class="form-block">
-                <label for="avtor">ПАКЕТ-1 қалай аталады:</label>
+                
+                <label>Курс қалай өтеді:</label>
+                <textarea asp-for="How1" value="@Model.How1" rows="2"></textarea>
+                <textarea asp-for="How2" value="@Model.How2" rows="2"></textarea>
+                <textarea asp-for="How3" value="@Model.How3" rows="2"></textarea>
+                <textarea asp-for="How4" value="@Model.How4" rows="2"></textarea>
+                <textarea asp-for="How5" value="@Model.How5" rows="2"></textarea>
+
+                @*<label for="avtor">ПАКЕТ-1 қалай аталады:</label>
                 <input asp-for="PackName1" type="text" required>
 
                 <label for="kurs-info">ПАКЕТ-1 қамтиды:</label>
@@ -62,7 +70,7 @@
                 <input asp-for="Price1" id="price1" type="number" required>
 
                 <label for="price">ПАКЕТ-2 бағасы:</label>
-                <input asp-for="Price2" id="price2" type="number" required>
+                <input asp-for="Price2" id="price2" type="number" required>*@
             </div>
             <div class="form-block">
                 <label for="photo">Курс Баннер(фото, jpg, png):</label>

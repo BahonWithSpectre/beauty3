@@ -105,6 +105,9 @@
 	.vhod{
 		width: 46%;
 	}
+	.login{
+		display: block !important;
+	}
 }
 @media  (max-width: 425px){
    .content{
