@@ -49,7 +49,7 @@ namespace beauty3.Controllers
                 if (result.Succeeded)
                 {
                     // установка куки
-                    await _signInManager.SignInAsync(user, false);
+                    await _signInManager.SignInAsync(user, true);
                     return RedirectToAction("Profil", "Account");
                 }
                 else
@@ -100,9 +100,9 @@ namespace beauty3.Controllers
                         ViewBag.Stats = "Бұл аккаунт бұғатталған(қара тізімде). Толық ақпаратты білу үшін Администратормен байланысыңыз! +7 (700) 497 6277 (WhatsApp)";
                         return View(model);
                     }
-                    if (us.Stats == true || us.Stats == false)
-                    {
-                        var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, false);
+                    //if (us.Stats == true || us.Stats == false || us.Stats == null)
+                    //{
+                        var result = await _signInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, true, true);
                         if (result.Succeeded)
                         {
                             //////////////////// IP Adress ///////////////////////
@@ -157,11 +157,11 @@ namespace beauty3.Controllers
                             //ModelState.AddModelError("", "Құпиясөз және(немесе) логин қате!");
                             ModelState.AddModelError("", "Құпиясөз дұрыс емес!");
                         }
-                    }
-                    else
-                    {
-                        ViewBag.Stats = "Ережені бұзбаңыз! Дәл қазір бұл аккаунт қолданыс үстінде, аккаунтты тек иесі ғана қолданады!";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    ViewBag.Stats = "Ережені бұзбаңыз! Дәл қазір бұл аккаунт қолданыс үстінде, аккаунтты тек иесі ғана қолданады!";
+                    //}
                 }
                 else
                 {

@@ -59,36 +59,44 @@
                             </tr>
                             <tr>
                                 <td>
-                                    @if(us.Ip != null){
+                                    @if (us.Ip != null)
+                                    {
                                         <span>@us.Ip</span> <br />
                                     }
-                                    @if(us.Ip2 != null){
+                                    @if (us.Ip2 != null)
+                                    {
                                         <span>@us.Ip2</span> <br />
                                     }
-                                    @if(us.Ip3 != null){
+                                    @if (us.Ip3 != null)
+                                    {
                                         <span>@us.Ip3</span> <br />
                                     }
-                                    @if(us.Ip4 != null){
+                                    @if (us.Ip4 != null)
+                                    {
                                         <span>@us.Ip4</span> <br />
                                     }
                                 </td>
-                                @if(us.Ban == true){
+                                @if (us.Ban == true)
+                                {
                                     <td style="color:red;">
                                         <i class="fa fa-lock"></i>
                                         Блок
                                     </td>
                                 }
-                                else{
+                                else
+                                {
                                     <td style="color:green;">
                                         <i class="fa fa-unlock"></i>
                                         Ашық
                                     </td>
                                 }
                                 <td>
-                                    @if(us.Ban == true){
+                                    @if (us.Ban == true)
+                                    {
                                         <a class="green-btn" href="/Admin/BlockOpen/@us.UserId">Open</a>
                                     }
-                                    else{
+                                    else
+                                    {
                                         <a class="red-btn" href="/Admin/Block/@us.UserId">Block</a>
                                     }
                                 </td>

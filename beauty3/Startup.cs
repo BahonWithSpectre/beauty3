@@ -30,6 +30,17 @@ namespace beauty3
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDb>().AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                //options.ExpireTimeSpan = TimeSpan.FromDays(1);
+
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -42,7 +53,7 @@ namespace beauty3
 
                 // Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(1);
-                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.MaxFailedAccessAttempts = 20;
                 options.Lockout.AllowedForNewUsers = true;
 
                 // User settings.
@@ -55,17 +66,6 @@ namespace beauty3
 
             services.AddHttpContextAccessor();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-
-            services.ConfigureApplicationCookie(options =>
-            {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromDays(1);
-
-                options.LoginPath = "/Account/Login";
-                options.AccessDeniedPath = "/Account/AccessDenied";
-                options.SlidingExpiration = true;
-            });
 
             services.AddControllersWithViews();
         }
