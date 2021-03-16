@@ -1,7 +1,6 @@
 @import url('const3.css');
 @import url('videoPadding.css');
 
-
 /* ––––––––––––––– KursEdit –––––––––––––– */
 
 .create{
@@ -10,7 +9,11 @@
    padding-bottom: 100px;
    display: flex;
    flex-direction: column;
-   align-items: center;
+/*   align-items: center;*/
+}
+.create > h1 {
+    font-size: 18px;
+    margin-bottom: 15px;
 }
 .form-blocks{
    width: 100%;
@@ -33,6 +36,7 @@
 	border-radius: 2px;
 	border: none;
    box-shadow: 0 0 3px var(--grey-color);
+   resize: vertical;
 }
 .form-block > input:focus, .form-block > textarea:focus{
 	outline: 2px solid var(--brown-color);

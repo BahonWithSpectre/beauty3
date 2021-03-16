@@ -263,28 +263,45 @@ namespace beauty3.Controllers
 
 
         #endregion
-
-
-
-        public async Task<IActionResult> CommentJS(int videoId, string userName, string dateTime, string text)
+        [HttpPost]
+        public async Task<JsonResult> CommentJS([FromBody] CommentViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(userName);
+            var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null)
             {
                 VideoComment comment = new VideoComment()
                 {
                     UserId = user.Id,
-                    KursVideoId = videoId,
-                    Text = text,
-                    DateTime = dateTime
+                    KursVideoId = model.VideoId,
+                    Text = model.Text,
+                    DateTime = model.Datagoi
                 };
                 await db.VideoComments.AddAsync(comment);
                 await db.SaveChangesAsync();
 
                 return Json(comment);
             }
-            return RedirectToAction("Profil");
+            return Json("error");
         }
+        //public async Task<IActionResult> CommentJS(int videoId, string userName, string dateTime, string text)
+        //{
+        //    var user = await _userManager.FindByNameAsync(model.UserName);
+        //    if (user != null)
+        //    {
+        //        VideoComment comment = new VideoComment()
+        //        {
+        //            UserId = user.Id,
+        //            KursVideoId = videoId,
+        //            Text = text,
+        //            DateTime = dateTime
+        //        };
+        //        await db.VideoComments.AddAsync(comment);
+        //        await db.SaveChangesAsync();
+
+        //        return Json(comment);
+        //    }
+        //    return RedirectToAction("Profil");
+        //}
 
         // ForgotPassword ForgotPassword ForgotPassword
 

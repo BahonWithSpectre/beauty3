@@ -8,6 +8,7 @@
 
 <div class="content">
     <form asp-action="KursEdit" class="create" enctype="multipart/form-data">
+        <h1>Курсты өзгерту</h1>
         <div class="form-blocks">
             <div class="form-block">
                 <input type="hidden" asp-for="Id">
@@ -40,7 +41,7 @@
                 <textarea asp-for="What3" id="what3" rows="2" value="@Model.What3"></textarea>
             </div>
             <div class="form-block">
-                
+
                 <label>Курс қалай өтеді:</label>
                 <textarea asp-for="How1" value="@Model.How1" rows="2"></textarea>
                 <textarea asp-for="How2" value="@Model.How2" rows="2"></textarea>

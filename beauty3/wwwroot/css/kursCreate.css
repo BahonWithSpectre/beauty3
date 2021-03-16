@@ -42,6 +42,7 @@
 	border-radius: 2px;
 	border: none;
    box-shadow: 0 0 3px var(--grey-color);
+   resize: vertical;
 }
 .form-block > input:focus, .form-block > textarea:focus{
 	outline: 2px solid var(--brown-color);
